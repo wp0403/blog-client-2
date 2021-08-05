@@ -4,7 +4,7 @@
  * @Author: 王鹏
  * @Date: 2021-07-31 08:21:12
  * @LastEditors: 王鹏
- * @LastEditTime: 2021-08-02 11:30:52
+ * @LastEditTime: 2021-08-05 21:28:40
  */
 import Axios from '../utils/httpAxios';
 /*
@@ -23,7 +23,7 @@ const res = dirdata.keys().reduce((val, item) => {
 
     val[newSpaces] = Object.keys(apis).reduce((val, key) => {
 		val[key] = (data = {}) => {
-			if(data?.params != {} && apis[key].method === 'get'){
+			if(data?.params !== {} && apis[key].method === 'get'){
 				return Axios({ ...apis[key], params:data.params });
 			}else{
 				return Axios({ ...apis[key], data });

@@ -4,7 +4,7 @@
  * @Author: 王鹏
  * @Date: 2021-08-03 11:23:10
  * @LastEditors: 王鹏
- * @LastEditTime: 2021-08-05 16:03:21
+ * @LastEditTime: 2021-08-05 21:59:44
  */
 import React, { Component } from 'react';//66d85548fa61463f4daac625965e1e08
 import "./map.scss";
@@ -181,13 +181,6 @@ class Map extends Component {
             !search_flag && AMap.plugin(['AMap.PlaceSearch', 'AMap.AutoComplete'], searchLngLat('searchBox_inp_input', 'searchLocation'));
             //搜索关键字
             AMap.plugin(['AMap.PlaceSearch', 'AMap.AutoComplete'], searchLngLat('keywordBox_inp', 'endLngLat'));
-
-            // AMap.plugin(['AMap.CitySearch'], () => {
-            //     let cityLocation = new AMap.CitySearch();
-            //     cityLocation.getLocalCity((status,result)=>{
-            //         console.log(result);
-            //     })
-            // });
         }).catch((e) => {
             console.error(e);
         });
@@ -268,7 +261,7 @@ class Map extends Component {
                 });
                 this.map.addControl(geolocation);
                 geolocation.getCurrentPosition((status, result) => {
-                    if (status == 'complete') {
+                    if (status === 'complete') {
                         let { lng, lat } = result.position;
                         //设置自身当前经纬度
                         this.setState({
@@ -365,6 +358,9 @@ class Map extends Component {
 
     //点击切换搜索类型
     clickSearchType = (value) => {
+        //清除上次规划
+        this.driving && this.driving.clear();
+        
         this.searInp.value = "";
         this.setState({
             curSearch: value
@@ -415,6 +411,9 @@ class Map extends Component {
 
     //点击切换功能
     typeBoxClick = (value) => {
+        //清除上次规划
+        this.driving && this.driving.clear();
+
         this.setState({ activeType: value, keyword: "" });
 
         //清除搜索结果

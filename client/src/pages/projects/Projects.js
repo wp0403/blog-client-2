@@ -4,7 +4,7 @@
  * @Author: 王鹏
  * @Date: 2021-08-03 23:07:39
  * @LastEditors: 王鹏
- * @LastEditTime: 2021-08-04 17:07:22
+ * @LastEditTime: 2021-08-05 21:29:18
  */
 import './projects.scss';
 import Nav from '../../components/nav';
@@ -13,6 +13,7 @@ import React, { Component } from 'react';
 import ProjectItem from './components/projectItem';
 
 @inject('project')
+@observer
 class Projects extends Component {
     state = {
         homeRouter: [],  //定义路由列表
