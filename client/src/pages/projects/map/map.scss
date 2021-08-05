@@ -1,0 +1,300 @@
+.map {
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    #container {
+        width: 100%;
+        height: 100%;
+    }
+
+    .typeBox {
+        position: absolute;
+        padding-left: 50px;
+        left: 20px;
+        top: 20px;
+        z-index: 10;
+        background-color: #fff;
+        width: 600px;
+        height: 60px;
+        display: none;
+        justify-content: space-around;
+        align-items: center;
+        box-shadow: 0 1px 3px 3px #999;
+
+        .typeItem {
+            margin: 0 10px;
+            flex: 1;
+            height: 40px;
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+    }
+
+    .typeBox#typeBox_block {
+        display: flex;
+    }
+
+    #navigationBox_block,
+    #searchBox_block,
+    #keywordBox_block,
+    #areaBox_block {
+        display: block;
+    }
+
+    .mapLabel {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 10;
+        display: none;
+    }
+
+    .mapLabel#mapLabel_block {
+        display: block;
+    }
+
+    .startLocation {
+        position: absolute;
+        left: 20px;
+        top: 20px;
+        width: 200px;
+        height: 50px;
+        background-color: #fff;
+
+        input {
+            padding: 0 15px;
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: none;
+            overflow: hidden;
+            outline-color: #f90;
+            box-shadow: 0 1px 3px 3px #999;
+            font-size: 18px;
+
+            &::placeholder {
+                color: #333;
+            }
+        }
+    }
+
+    .endLocation {
+        position: absolute;
+        left: 20px;
+        top: 80px;
+        width: 200px;
+        height: 50px;
+        background-color: #fff;
+
+        input {
+            padding: 0 15px;
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: none;
+            overflow: hidden;
+            outline-color: #f90;
+            box-shadow: 0 1px 3px 3px #999;
+            font-size: 18px;
+
+            &::placeholder {
+                color: #333;
+            }
+        }
+    }
+
+    .buttonLocation {
+        position: absolute;
+        left: 20px;
+        top: 140px;
+        width: 200px;
+        height: 50px;
+        background-color: #09f;
+        box-shadow: 0 1px 3px 3px #999;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+        cursor: pointer;
+    }
+
+    #locator {
+        position: absolute;
+        right: 50px;
+        top: 50px;
+        z-index: 99;
+        width: 400px;
+        height: 200px;
+        padding: 50px;
+        background-color: #fff;
+        box-shadow: 0 0 3px 3px #666;
+        display: none;
+        transition: 1s;
+    }
+
+    #locator.active {
+        display: block;
+    }
+
+    #locationBox {
+        position: absolute;
+        right: 15px;
+        bottom: 15px;
+        z-index: 9;
+        font-size: 25px;
+        padding: 10px;
+        background-color: #fff;
+        box-shadow: 0 0 3px 2px #999;
+        border-radius: 15px;
+    }
+
+    .searchBox {
+        position: absolute;
+        left: 20px;
+        top: 20px;
+        z-index: 3;
+        background-color: #fff;
+        width: 460px;
+        max-height: 1248px;
+        box-shadow: 0 1px 3px 3px #999;
+        padding: 30px;
+
+        .searchBox_inp {
+            width: 100%;
+            height: 50px;
+            box-shadow: 0 0 5px 1px #ccc;
+            position: relative;
+
+            #searchBox_inp_icon {
+                position: absolute;
+                z-index: 4;
+                left: 30px;
+                top: 16px;
+                font-size: 20px;
+                color: #09f;
+                cursor: pointer;
+            }
+
+            input {
+                padding: 0 70px 0 70px;
+                width: 100%;
+                height: 100%;
+                border: none;
+                outline: none;
+                background: none;
+                font-size: 16px;
+            }
+
+            #searchBox_inp_Swap {
+                position: absolute;
+                z-index: 4;
+                right: 30px;
+                top: 16px;
+                font-size: 20px;
+                color: #09f;
+                cursor: pointer;
+            }
+        }
+
+        .searchBox_type {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            height: 100px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .searchItem {
+                width: 80px;
+                height: 80px;
+                padding: 10px 0;
+                background-color: navajowhite;
+                border-radius: 20px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                color: #fff;
+                cursor: pointer;
+
+                .searchItem_icon {
+                    font-size: 30px;
+                    flex: 2;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                }
+
+                .searchItem_text {
+                    font-size: 14px;
+                    flex: 1;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                }
+
+            }
+        }
+
+        #panel {
+            width: 100%;
+        }
+
+        .searchBox_goSite {
+            width: 100%;
+            height: 50px;
+            background-color: #09f;
+            color: #fff;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            cursor: pointer;
+        }
+    }
+
+    #goProject {
+        position: absolute;
+        left: 25px;
+        font-size: 20px;
+    }
+
+    .keywordBox {
+        position: absolute;
+        left: 20px;
+        top: 20px;
+        z-index: 3;
+        background-color: #fff;
+        width: 460px;
+        max-height: 1248px;
+        box-shadow: 0 1px 3px 3px #999;
+        padding: 30px;
+        .inp_box{
+            width: 100%;
+            height: 50px;
+            box-shadow: 0 0 5px 1px #ccc;
+        }
+
+        input {
+            padding: 0 70px 0 70px;
+            width: 100%;
+            height: 100%;
+            border: none;
+            outline: none;
+            background: none;
+            font-size: 16px;
+
+            &::placeholder {
+                color: #333;
+            }
+        }
+    }
+}

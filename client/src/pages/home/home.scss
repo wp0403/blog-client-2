@@ -1,0 +1,72 @@
+.home {
+    width: 100%;
+    position: relative;
+
+    .bg {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: #000022;
+    }
+
+    .topNav {
+        position: fixed;
+        z-index: 999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 70px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #fff;
+        font-weight: 900;
+        font-size: 20px;
+    }
+    
+    .topNav.active {
+        background-color: rgba(0, 0, 0, 0.8);
+        color: #333;
+    }
+
+    .header {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .main {
+        width: 100%;
+        background-color: #fff;
+        background: url(https://wp-1302605407.cos.ap-beijing.myqcloud.com/img/src%3Dhttp_%252F%252Fn.sinaimg.cn%252Fsinakd20115%252F600%252Fw1920h1080%252F20210601%252F7b68-kquziik1524154.jpg%26refer%3Dhttp_%252F%252Fn.sinaimg.jpg) no-repeat;
+        background-size: 100% 100%;
+        background-attachment: fixed;
+        min-height: 100vh;
+    }
+
+    .footer {
+        width: 100%;
+        background-color: #000;
+        min-height: 200px;
+    }
+
+    .goTop {
+        cursor: pointer;
+        position: fixed;
+        bottom: 50px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        display: none;
+        background-color: rgba(255, 255, 255, 0.7);
+        font-size: 25px;
+        z-index: 999;
+    }
+
+    .goTop.active {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

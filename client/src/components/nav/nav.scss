@@ -1,0 +1,46 @@
+.goHome {
+    margin-left: 20px;
+    cursor: pointer;
+
+    a {
+        color: #fff;
+        text-decoration: none;
+
+        &:hover {
+            color: #09f;
+        }
+    }
+
+    a.active {
+        color: #a9f;
+    }
+}
+
+.topNav_right {
+    display: flex;
+    align-items: center;
+    height: 100%;
+
+    .topNav_item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 30px;
+        height: 100%;
+        cursor: pointer;
+
+
+        a {
+            color: #fff;
+            text-decoration: none;
+
+            &:hover {
+                color: #09f;
+            }
+        }
+
+        a.active {
+            color: #a9f;
+        }
+    }
+}
