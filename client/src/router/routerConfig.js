@@ -4,7 +4,7 @@
  * @Author: 张三
  * @Date: 2021-07-30 22:34:59
  * @LastEditors: 王鹏
- * @LastEditTime: 2021-08-03 23:06:41
+ * @LastEditTime: 2021-08-13 09:40:46
  */
 import Loadable from 'react-loadable';
 
@@ -30,6 +30,11 @@ const Map = Loadable({
     loading: Loading,
 });
 
+const Classify = Loadable({
+    loader: () => import('../pages/classify'),
+    loading: Loading,
+});
+
 let routerList = [
     {
         path: "/home",
@@ -42,6 +47,10 @@ let routerList = [
     {
         path:"/projects",
         component:Projects
+    },
+    {
+        path:"/classify",
+        component:Classify
     },
     {
         path:"/map",

@@ -4,13 +4,13 @@
  * @Author: 王鹏
  * @Date: 2021-08-02 22:03:00
  * @LastEditors: 王鹏
- * @LastEditTime: 2021-08-04 10:57:07
+ * @LastEditTime: 2021-08-10 17:52:23
  */
 import { observable, action, makeAutoObservable } from 'mobx';
 import api from '../../api';
 import { message } from 'antd';
 
-let { detail } = api;
+let { detail,project } = api;
 
 class UIStore {
     @observable x = 0;
@@ -21,6 +21,7 @@ class UIStore {
 class DomainStore {
     @observable titleList = [];
     @observable essayObj = {};
+    @observable homeRouter = [];  //主页路由
 
     @action getTitleList = async () => {
         let { data } = await detail._getList();
@@ -39,6 +40,18 @@ class DomainStore {
 
         if (data.code === 200) {
             this.essayObj = data.data;
+            // message.success(data.msg);
+        } else {
+            console.log(data.data);
+            message.error(data.msg);
+        }
+    }
+
+    @action setProjectRouter = async () => {
+        let { data } = await project._getProjectRouter();
+
+        if (data.code === 200) {
+            this.homeRouter = data.data;
             // message.success(data.msg);
         } else {
             console.log(data.data);

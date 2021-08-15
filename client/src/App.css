@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family:'方正卡通简体','微软雅黑','华文新魏','方正静蕾简体',  Calibri, 'Trebuchet MS', sans-serif;
 }
 
 html,body,#root,.App{

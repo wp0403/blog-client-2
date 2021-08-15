@@ -4,120 +4,193 @@
  * @Author: 王鹏
  * @Date: 2021-08-02 14:40:19
  * @LastEditors: 王鹏
- * @LastEditTime: 2021-08-03 14:35:33
+ * @LastEditTime: 2021-08-15 15:52:59
  */
 import React, { Component } from 'react';
-import { inject,observer } from 'mobx-react';
+import { inject, observer } from 'mobx-react';
 import './detail.scss';
-import { BankOutlined } from '@ant-design/icons';
-import {Link} from 'react-router-dom';
+import ReactMarkdown from 'react-markdown'
+import { CalendarOutlined, ProfileOutlined } from '@ant-design/icons';
+import Nav from '../../components/nav';
+import Footer from '../../components/footer';
+// import '../../css/mint.css';
 
-@observer
 @inject('detail')
+@observer
 class Detail extends Component {
     state = {
+        homeRouter: [],  //定义路由列表
+        homeName: {},    //定义博客名称
         id: "",
-        leftList: [],
-        essayObj: {}
+        essayList: [],
+        essayObj: {},
+        tabInd: 0
     }
     componentDidMount() {
         this.init();
     }
 
     async init() {
-        let id = this.props.location.state?.id?this.props.location.state.id:'1';
+        window.addEventListener('scroll', this.handleScroll);
+
+        let id = this.props.location.state?.id ? this.props.location.state.id : '1';
 
         let { domainStore } = this.props.detail;
 
         await domainStore.getTitleList();
+        await domainStore.setProjectRouter();
+        await domainStore.getEssayObj({ id });
 
-        await domainStore.getEssayObj({id});
+        let { titleList, essayObj } = domainStore;
 
-        let {titleList,essayObj} = domainStore;
+        let ind = titleList.findIndex(item => item.id === essayObj.id);
 
         this.setState({
             id,
             essayObj,
-            leftList: titleList
+            essayList: titleList,
+            tabInd: ind
         });
+
+        if (domainStore.homeRouter.length) {
+            let homeRouter = domainStore.homeRouter.slice(0, domainStore.homeRouter.length - 1);
+            let homeName = domainStore.homeRouter[domainStore.homeRouter.length - 1];
+
+            this.setState({
+                homeRouter,
+                homeName
+            })
+        }
     }
 
     changeId = async (id) => {
+        document.documentElement.scrollTop = 0;
+
         let { domainStore } = this.props.detail;
 
-        await domainStore.getEssayObj({id});
+        await domainStore.getEssayObj({ id });
 
-        let {essayObj} = domainStore;
+        let { essayObj, titleList } = domainStore;
+        let ind = titleList.findIndex(item => item.id === essayObj.id);
 
         this.setState({
             id,
-            essayObj
+            essayObj,
+            tabInd: ind
+        })
+    }
+
+    //监听scroll事件，判断回到顶部的显示隐藏
+    handleScroll = () => {
+        // console.log(document.documentElement.scrollTop, "top");
+        if (document.documentElement.scrollTop > 200) {
+            this.topNav.className = "topNav active";
+        } else {
+            this.topNav.className = "topNav";
+        }
+    }
+
+    componentWillUnmount() {
+        this.removeWinEvent();
+    }
+
+    //清除绑定事件
+    removeWinEvent = () => {
+        window.removeEventListener('scroll', this.handleScroll)
+    }
+
+    goClassify = (id) => {
+        this.removeWinEvent();
+        this.props.history.push({
+            pathname: '/classify',
+            state: { id }
         })
     }
 
     render() {
-        let { id, essayObj, leftList } = this.state;
+        let { essayObj, essayList, tabInd, homeRouter, homeName } = this.state;
 
         return (
-            <div className="detaill">
-                <div className="detaill_header">
-                    <BankOutlined />
-                    <Link to="/"><span className="navItem">Home</span></Link>/
-                    <span className="navItem">detaill</span>/
-                    <span className="navItem">{id}</span>
-                </div>
-                <div className="detaill_main">
-                    <div className="detaill_left">
-                        <div className="detaill_left_top">
-                            目&emsp;录
-                        </div>
-                        <div className="detaill_left_certer">
-                            <ul>
-                                {
-                                    leftList[0] && leftList.map(item => (
-                                        <li
-                                            onClick={() => this.changeId(item.id)}
-                                            className={item.id === id ? 'active' : ''}
-                                            key={item.id}
+            <>
+                <nav className="topNav" ref={c => this.topNav = c}>
+                    <Nav homeRouter={homeRouter} homeName={homeName} />
+                </nav>
+                <div className="detail">
+                    <div className="detail_header">
+                        <div className="detail_header_back" style={{ backgroundImage: `url(${essayObj.img})` }} />
+                        <div className="detail_header_content">
+                            {
+                                essayObj.title && (<>
+                                    <div className="detail_header_content_title">
+                                        {essayObj.title}
+                                    </div>
+                                    <div className="detail_header_content_xinxi">
+                                        <span><CalendarOutlined />{essayObj.dataTime}</span>|
+                                    <span
+                                            className="detail_header_content_xinxi_class"
+                                            onClick={() => this.goClassify(essayObj.class)}
                                         >
-                                            {item.title}
-                                        </li>
-                                    ))
-                                }
-                            </ul>
+                                            <ProfileOutlined />
+                                            {essayObj.className}
+                                        </span>
+                                    </div>
+                                    <div className="detail_header_time">
+                                        发布时间：{essayObj.dataTime}
+                                    </div>
+                                </>)
+                            }
                         </div>
-                        <div className="detaill_left_bottom"></div>
+                        <div className="detail_header_box"></div>
                     </div>
-                    <div className="detaill_center">
-                        {
-                            essayObj.id && (<div ref={c => this.center = c}>
-                                <div className="detaill_main_title">
-                                    <div className="title">{essayObj.title}</div>
-                                    <div className="type">{essayObj.className}</div>
-                                </div>
-                                <div className="detaill_main_content">
-                                    <div className="_html" dangerouslySetInnerHTML={{ __html: essayObj.conText }} />
-                                </div>
-                                <div className="img">
-                                    <img src={essayObj.img} alt="" />
-                                </div>
-                                <div className="detaill_main_time">
-                                    {essayObj.dataTime}
-                                </div>
-                            </div>)
-                        }
-                        <div className="detaill_main_bottom">
+                    <div className="detail_main">
+                        <div className="detail_center">
+                            {
+                                essayObj.id && (<div ref={c => this.center = c}>
+                                    <div className="detail_main_content">
+                                        {
+                                            essayObj.fileType === 'html'
+                                            && <div className="_html" dangerouslySetInnerHTML={{ __html: essayObj.conText }} />
+                                        }
+                                        {
+                                            essayObj.fileType === 'md'
+                                            && <ReactMarkdown>{essayObj.conText}</ReactMarkdown>
+                                        }
+                                    </div>
 
+                                </div>)
+                            }
+                            {
+                                !essayObj.id && <div>暂无数据</div>
+                            }
+                        </div>
+                        <div className="detail_main_nav">
+                            {
+                                essayList[tabInd - 1] &&
+                                <div className="detail_main_nav_left" onClick={() => this.changeId(essayList[tabInd - 1].id)}>
+                                    <span className="detail_main_nav_item">上一篇</span>
+                                    <span className="detail_main_nav_item_title">{essayList[tabInd - 1].title}</span>
+                                </div>
+                            }
+                            {
+                                !essayList[tabInd - 1] && <span className="detail_main_nav_item_title">已是首篇</span>
+                            }
+                            {
+                                essayList[tabInd + 1] &&
+                                <div className="detail_main_nav_right" onClick={() => this.changeId(essayList[tabInd + 1].id)}>
+                                    <span className="detail_main_nav_item">下一篇</span>
+                                    <span className="detail_main_nav_item_title">{essayList[tabInd + 1].title}</span>
+                                </div>
+                            }
+                            {
+                                !essayList[tabInd + 1] && <span className="detail_main_nav_item_title">已是最后一篇</span>
+                            }
                         </div>
                     </div>
-                    <div className="detaill_right">
-
+                    <div className="detail_footer">
+                        <Footer />
                     </div>
                 </div>
-                <div className="detaill_footer">
-
-                </div>
-            </div>
+            </>
         )
     }
 }

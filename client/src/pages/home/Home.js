@@ -4,14 +4,14 @@
  * @Author: 张三
  * @Date: 2021-07-08 09:23:32
  * @LastEditors: 王鹏
- * @LastEditTime: 2021-08-04 09:35:33
+ * @LastEditTime: 2021-08-15 15:51:21
  */
 import React, { Component } from 'react';
 import "./home.scss";
 import { ArrowUpOutlined } from '@ant-design/icons';
 import Header from './components/header';
 import Main from './components/main';
-import Footer from './components/footer';
+import Footer from '../../components/footer';
 import Nav from '../../components/nav';
 import Bg from '../../components/bg/Home_backfround2';
 import { inject } from 'mobx-react';
@@ -30,6 +30,7 @@ class Home extends Component {
     }
     componentDidMount() {
         this.getInit();
+        document.documentElement.scrollTop = 0;
     }
 
     //初始化
@@ -53,6 +54,7 @@ class Home extends Component {
     //监听scroll事件，判断回到顶部的显示隐藏
     handleScroll = () => {
         // console.log(document.documentElement.scrollTop, "top");
+        // console.log( this.goTop,this.topNav);
         if (document.documentElement.scrollTop > 200) {
             this.goTop.className = "goTop active";
             this.topNav.className = "topNav active";
@@ -104,20 +106,27 @@ class Home extends Component {
     render() {
         let { homeRouter, homeName } = this.state;
         return (
-            <div className="home">
-                <div className="bg">
-                    <Bg />
+            <>
+                <div className="home">
+                    <div className="bg">
+                        <Bg />
+                    </div>
+
+                    <Header goMain={this.goMain} />
+                    <Main removeWinEvent={this.removeWinEvent} />
+                    <div className="main_footer">
+                        <Footer />
+                        <div className="main_footer_bg"></div>
+                    </div>
+
                 </div>
                 <nav className="topNav" ref={c => this.topNav = c} onClick={this.removeWinEvent}>
                     <Nav homeRouter={homeRouter} homeName={homeName} />
                 </nav>
-                <Header goMain={this.goMain} />
-                <Main removeWinEvent={this.removeWinEvent} />
-                <Footer />
                 <div className="goTop" ref={b => this.goTop = b} onClick={this.goHeader}>
                     <ArrowUpOutlined />
                 </div>
-            </div>
+            </>
         );
     }
 }

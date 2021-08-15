@@ -4,7 +4,7 @@
  * @Author: 张三
  * @Date: 2021-07-09 07:10:58
  * @LastEditors: 王鹏
- * @LastEditTime: 2021-08-04 10:27:41
+ * @LastEditTime: 2021-08-13 16:36:43
  */
 import React, { Component } from 'react';
 import "./main.scss";
@@ -61,7 +61,8 @@ class Main extends Component {
             this.setState({
                 list,
                 listNum,
-            })
+            });
+            document.documentElement.scrollTop = 0;
         }
     }
     //跳转详情
