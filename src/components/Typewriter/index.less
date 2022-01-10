@@ -1,0 +1,47 @@
+.text_input {
+  width: 70%;
+  min-height: 140px;
+  color: #000;
+  padding: 15px 70px;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
+
+  .text_box {
+    display: inline-block;
+    line-height: 40px;
+    font-size: 20px;
+    text-align: center;
+
+    .text_focus {
+      display: inline-block;
+      width: 0;
+      height: 40px;
+      position: relative;
+
+      &::before {
+        content: '';
+        width: 0;
+        height: 40px;
+        position: absolute;
+        right: 0;
+        top: 12px;
+        left: 5px;
+        border-right: solid 3px;
+        animation: heart 300ms alternate ease infinite;
+      }
+    }
+  }
+}
+
+@keyframes heart {
+  0% {
+    opacity: 0.1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
