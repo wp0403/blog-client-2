@@ -4,9 +4,9 @@
  * @Author: WangPeng
  * @Date: 2021-12-27 15:32:24
  * @LastEditors: WangPeng
- * @LastEditTime: 2021-12-31 10:38:40
+ * @LastEditTime: 2022-01-11 11:43:32
  */
-// 获取路由列表
+// 获取路由权限列表
 export const _getAuthority = {
   url: '/api/getAuthority',
   method: 'get',
