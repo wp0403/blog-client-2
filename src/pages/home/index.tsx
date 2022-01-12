@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2021-12-23 16:28:08
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-01-11 18:22:46
+ * @LastEditTime: 2022-01-12 18:19:24
  */
 import React, { useEffect, useRef, useState } from 'react';
 import { useSize } from 'ahooks';
@@ -12,7 +12,7 @@ import { setBg, bindHandleScroll, removeScroll } from '@/utils/utils';
 import Typewriter from '@/components/Typewriter';
 import SysIcon from '@/components/SysIcon';
 import AboutMe from './components/AboutMe';
-import CarouselHome from './components/CarouselHome';
+import CarouselHome from './components/Graphic';
 import styles from './index.less';
 
 const Home = () => {
