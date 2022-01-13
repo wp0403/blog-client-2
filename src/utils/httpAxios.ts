@@ -1,3 +1,12 @@
+/*
+ * @Descripttion: 此utils进行axios二次封装
+ * @version:
+ * @Author: WangPeng
+ * @Date: 2022-01-13 11:29:46
+ * @LastEditors: WangPeng
+ * @LastEditTime: 2022-01-13 11:29:46
+ */
+
 import axios from 'axios';
 
 const httpAxios = axios.create();

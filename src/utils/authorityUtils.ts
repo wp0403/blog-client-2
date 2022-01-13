@@ -1,3 +1,12 @@
+/*
+ * @Descripttion: 此utils存放全局的登录和用户权限以及路由权限的校验方法函数
+ * @version:
+ * @Author: WangPeng
+ * @Date: 2022-01-13 11:29:46
+ * @LastEditors: WangPeng
+ * @LastEditTime: 2022-01-13 11:29:46
+ */
+
 import { cloneDeep } from 'lodash';
 import type { Route } from '@/models/connect';
 import api from '@/api';

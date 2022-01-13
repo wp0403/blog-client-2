@@ -11,7 +11,7 @@ import { history } from 'umi';
 import { Drawer } from 'antd';
 import { useSize } from 'ahooks';
 import { MenuOutlined } from '@ant-design/icons';
-import { authRouterFilter, filterNoName } from '@/utils/authorityUtil';
+import { authRouterFilter, filterNoName } from '@/utils/authorityUtils';
 import { removeLayoutNavStyle } from '@/utils/utils';
 import SysIcon from '@/components/SysIcon';
 import styles from './index.less';

@@ -4,7 +4,7 @@ import { cloneDeep } from 'lodash';
  * 将字符串中的\n \r\n 空格 替换为html可识别的代码
  * 在需要的标签上添加如下属性
  * dangerouslySetInnerHTML={{__html: str ? stringReplace(str) : '',}}
- * @param str
+ * @param {string} str
  */
 export const stringReplace = (str: string) => {
   let newStr = cloneDeep(str);
@@ -21,7 +21,7 @@ export const stringReplace = (str: string) => {
 
 /**
  * 去掉所有的空格、回车换行符
- * @param str
+ * @param {string} str
  */
 export const stringRemove = (str: string) => {
   let newStr = cloneDeep(str);
@@ -38,7 +38,7 @@ export const stringRemove = (str: string) => {
 
 /**
  * 阻止冒泡
- * @param e
+ * @param {Event} e
  */
 export const stopPropagation = (e: Event) => {
   e = e || window.event;
@@ -49,13 +49,3 @@ export const stopPropagation = (e: Event) => {
     e.cancelBubble = true; // IE阻止冒泡方法
   }
 };
-
-function debounce(fn, wait) {
-  var timer = null;
-  return function () {
-    if (timer !== null) {
-      clearTimeout(timer);
-    }
-    timer = setTimeout(fn, wait);
-  };
-}
