@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-01-13 11:42:16
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-01-14 13:55:00
+ * @LastEditTime: 2022-01-14 18:13:16
  */
 
 import raf from 'rc-util/lib/raf';
@@ -58,7 +58,7 @@ export const getScroll = (
 };
 
 /**
- * 回到顶部事件
+ * 回到顶部事件 还可以滚动到指定位置
  * @param {number} y
  * @param options
  */

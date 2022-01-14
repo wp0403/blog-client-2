@@ -31,14 +31,19 @@ const LayoutPage = (props: any) => {
     }
   };
 
+  const switchTheme = () => {
+    document.documentElement.classList.toggle('dark');
+  };
+
   useEffect(() => {
+    switchTheme();
     getLayoutDom();
   });
 
   return (
     <div className={style.pro_layout}>
       <Bg />
-      <Nav {...props} />
+      <Nav {...props} switchTheme={switchTheme} />
       <div className={style.pro_layout_content} id="pro_layout_content">
         {Authorized()}
       </div>

@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2021-12-23 16:28:08
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-01-14 14:49:09
+ * @LastEditTime: 2022-01-14 17:57:31
  */
 import React, { useEffect, useRef, useState } from 'react';
 import { useSize } from 'ahooks';
@@ -14,6 +14,7 @@ import {
   removeScroll,
   layoutContent,
 } from '@/utils/utils';
+import { scrollTo, getScroll } from '@/utils/elementUtils';
 import Typewriter from '@/components/Typewriter';
 import SysIcon from '@/components/SysIcon';
 import AboutMe from './components/AboutMe';
@@ -30,7 +31,7 @@ const Home = () => {
 
   const goAbout = () => {
     const aboutMeTop = aboutMeDom.current.offsetTop;
-    layoutContent.scrollTop = aboutMeTop;
+    scrollTo(aboutMeTop, { getContainer: () => layoutContent });
   };
   // 初始化
   useEffect(() => {

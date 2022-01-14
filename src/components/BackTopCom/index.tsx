@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-01-07 17:34:37
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-01-14 14:52:09
+ * @LastEditTime: 2022-01-14 17:29:30
  */
 import React, { useEffect, useState } from 'react';
 import addEventListener from 'rc-util/lib/Dom/addEventListener';
@@ -104,7 +104,10 @@ const BackTopCom = (props: Props) => {
       style={style}
       onClick={scrollToTop}
     >
-      <SysIcon type={icon ? icon : 'icon-a-zhidingdingbu'} />
+      <SysIcon
+        className={styles.icon}
+        type={icon ? icon : 'icon-a-zhidingdingbu'}
+      />
     </div>
   );
 };

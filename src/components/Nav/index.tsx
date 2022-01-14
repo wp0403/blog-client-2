@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2021-12-23 18:13:58
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-01-10 16:30:35
+ * @LastEditTime: 2022-01-14 16:05:44
  */
 import React, { useState, useEffect } from 'react';
 import { history } from 'umi';
@@ -131,7 +131,11 @@ const Nav = (props: any) => {
   const pcNav = (
     <div className={styles.nav_pc}>
       <div className={styles.nav_pc_left}>
-        <SysIcon className={styles.pc_icon} type="icon-a-weixiaobiaoqing" />
+        <SysIcon
+          className={styles.pc_icon}
+          type="icon-a-weixiaobiaoqing"
+          onClick={props.switchTheme}
+        />
         <div>{JSON.stringify(scroll)}</div>
       </div>
       <div className={styles.nav_pc_right}>{renderRouter(routes)}</div>
