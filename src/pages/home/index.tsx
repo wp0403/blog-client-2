@@ -4,16 +4,22 @@
  * @Author: WangPeng
  * @Date: 2021-12-23 16:28:08
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-01-12 18:19:24
+ * @LastEditTime: 2022-01-14 14:49:09
  */
 import React, { useEffect, useRef, useState } from 'react';
 import { useSize } from 'ahooks';
-import { setBg, bindHandleScroll, removeScroll } from '@/utils/utils';
+import {
+  setBg,
+  bindHandleScroll,
+  removeScroll,
+  layoutContent,
+} from '@/utils/utils';
 import Typewriter from '@/components/Typewriter';
 import SysIcon from '@/components/SysIcon';
 import AboutMe from './components/AboutMe';
 import CarouselHome from './components/Graphic';
 import styles from './index.less';
+import BackTopCom from '@/components/BackTopCom';
 
 const Home = () => {
   const aboutMeDom = useRef<any>(null);
@@ -23,9 +29,8 @@ const Home = () => {
   const [classType, setClassType] = useState<number>(1);
 
   const goAbout = () => {
-    const target = document.getElementById('pro_layout_content') as any;
     const aboutMeTop = aboutMeDom.current.offsetTop;
-    target.scrollTop = aboutMeTop;
+    layoutContent.scrollTop = aboutMeTop;
   };
   // 初始化
   useEffect(() => {
@@ -73,6 +78,7 @@ const Home = () => {
       <div className={styles.carousel}>
         <CarouselHome />
       </div>
+      <BackTopCom visibilityHeight={100} target={() => layoutContent} />
     </div>
   );
 };

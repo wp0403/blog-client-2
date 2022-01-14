@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Redirect } from 'umi';
-import BackTopCom from '@/components/BackTopCom';
 import Nav from '@/components/Nav';
 import Bg from '@/components/Bg/Img';
 import * as authorityUtils from '@/utils/authorityUtils';
@@ -32,20 +31,17 @@ const LayoutPage = (props: any) => {
     }
   };
 
-  const backTop = useRef(null);
-
   useEffect(() => {
     getLayoutDom();
   });
 
   return (
-    <div className={style.pro_layout} ref={backTop}>
+    <div className={style.pro_layout}>
       <Bg />
       <Nav {...props} />
       <div className={style.pro_layout_content} id="pro_layout_content">
         {Authorized()}
       </div>
-      <BackTopCom target={() => backTop.current as any} visibilityHeight={50} />
     </div>
   );
 };
