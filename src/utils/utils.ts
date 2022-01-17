@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-01-13 11:29:46
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-01-14 14:42:03
+ * @LastEditTime: 2022-01-17 17:43:41
  */
 
 // 页面背景盒子
@@ -12,7 +12,7 @@ let bgDom: any = null;
 // 全局滚动的盒子
 export let layoutContent: any = null;
 // 全局导航盒子
-let layoutNav: any = null;
+export let layoutNav: any = null;
 
 // 初始化获取全局元素
 export const getLayoutDom = () => {

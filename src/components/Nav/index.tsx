@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2021-12-23 18:13:58
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-01-17 17:37:11
+ * @LastEditTime: 2022-01-17 17:55:29
  */
 import React, { useState, useEffect } from 'react';
 import { history } from 'umi';
@@ -12,7 +12,7 @@ import { Drawer } from 'antd';
 import { useSize } from 'ahooks';
 import { MenuOutlined } from '@ant-design/icons';
 import { authRouterFilter, filterNoName } from '@/utils/authorityUtils';
-import { removeLayoutNavStyle } from '@/utils/utils';
+import { removeLayoutNavStyle, layoutNav } from '@/utils/utils';
 import SysIcon from '@/components/SysIcon';
 import styles from './index.less';
 
@@ -32,10 +32,12 @@ const Nav = (props: any) => {
   // 显示抽屉
   const showDrawer = () => {
     setVisible(true);
+    layoutNav.style.display = 'none';
   };
   // 隐藏抽屉
   const onClose = () => {
     setVisible(false);
+    layoutNav.style.display = 'flex';
   };
   // 获取当前窗口大小
   const size = useSize(document.body);
@@ -163,10 +165,10 @@ const Nav = (props: any) => {
         placement="right"
         onClose={onClose}
         visible={visible}
+        width={240}
+        className={styles.nav_mobile_drawer}
       >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+        {renderRouter(routes)}
       </Drawer>
     </div>
   );
