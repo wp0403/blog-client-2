@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2021-12-23 18:13:58
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-01-14 16:05:44
+ * @LastEditTime: 2022-01-17 17:37:11
  */
 import React, { useState, useEffect } from 'react';
 import { history } from 'umi';
@@ -146,7 +146,11 @@ const Nav = (props: any) => {
   const mobileNav = (
     <div className={styles.nav_mobile}>
       <div className={styles.nav_mobile_left}>
-        <SysIcon className={styles.mobile_icon} type="icon-a-weixiaobiaoqing" />
+        <SysIcon
+          className={styles.mobile_icon}
+          type="icon-a-weixiaobiaoqing"
+          onClick={props.switchTheme}
+        />
         <div>{JSON.stringify(scroll)}</div>
       </div>
       <div className={styles.nav_mobile_right}>
