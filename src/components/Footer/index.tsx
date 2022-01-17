@@ -4,7 +4,7 @@
  * @Author: 张三
  * @Date: 2021-07-09 07:11:30
  * @LastEditors: WangPeng
- * @LastEditTime: 2021-12-27 15:02:53
+ * @LastEditTime: 2022-01-17 10:01:10
  */
 import React, { useState, useEffect } from 'react';
 import { Carousel, message } from 'antd';
@@ -25,7 +25,6 @@ const Footer = () => {
       setExcerptList(excerpt);
       setFooterRouter(footerRouter);
     } else {
-      console.log(data.data);
       message.error(data.msg);
     }
   };
@@ -56,7 +55,6 @@ const Footer = () => {
             ))}
         </div>
       </div>
-      <div className={style.footer_bg} />
     </div>
   );
 };

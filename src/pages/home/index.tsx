@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2021-12-23 16:28:08
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-01-14 17:57:31
+ * @LastEditTime: 2022-01-17 10:41:16
  */
 import React, { useEffect, useRef, useState } from 'react';
 import { useSize } from 'ahooks';
@@ -17,10 +17,11 @@ import {
 import { scrollTo, getScroll } from '@/utils/elementUtils';
 import Typewriter from '@/components/Typewriter';
 import SysIcon from '@/components/SysIcon';
+import BackTopCom from '@/components/BackTopCom';
+import Footer from '@/components/Footer';
 import AboutMe from './components/AboutMe';
 import CarouselHome from './components/Graphic';
 import styles from './index.less';
-import BackTopCom from '@/components/BackTopCom';
 
 const Home = () => {
   const aboutMeDom = useRef<any>(null);
@@ -78,6 +79,9 @@ const Home = () => {
       </div>
       <div className={styles.carousel}>
         <CarouselHome />
+      </div>
+      <div className={styles.footer}>
+        <Footer />
       </div>
       <BackTopCom visibilityHeight={100} target={() => layoutContent} />
     </div>
