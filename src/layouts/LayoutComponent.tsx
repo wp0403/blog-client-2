@@ -3,6 +3,7 @@ import { Redirect } from 'umi';
 import Nav from '@/components/Nav';
 import Bg from '@/components/Bg/Img';
 import * as authorityUtils from '@/utils/authorityUtils';
+import { isFlagGetGlobalData, initGlobalData } from '@/utils/globalDataUtils';
 import { getLayoutDom } from '@/utils/utils';
 import style from './index.less';
 
@@ -15,6 +16,9 @@ const LayoutPage = (props: any) => {
   // 初始化获取权限
   !authorityUtils.getGlobalAuthorityModule() &&
     authorityUtils.initGlobalAuthority();
+
+  // 初始化获取全局资源
+  !isFlagGetGlobalData() && initGlobalData({});
 
   const checkAuth = authorityUtils.matchingRoute(pathname, route) || '/404';
 

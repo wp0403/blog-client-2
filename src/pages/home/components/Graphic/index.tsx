@@ -4,12 +4,16 @@
  * @Author: WangPeng
  * @Date: 2022-01-11 18:19:11
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-01-17 17:33:25
+ * @LastEditTime: 2022-01-18 17:59:43
  */
 import React, { useState, useEffect } from 'react';
 import { useSize } from 'ahooks';
+import { message } from 'antd';
 import CarouselCom from '@/components/CarouselCom';
+import api from '@/api';
 import styles from './index.less';
+
+const { home } = api;
 
 const list = [
   {
@@ -54,8 +58,10 @@ interface Item {
   id: number | string;
   title: string;
   desc: string;
-  timeStr: string;
+  time_str: string;
+  last_edit_time: string;
   img: string;
+  author: string;
   classify: string;
   classifyId: string | number;
 }
@@ -63,9 +69,11 @@ interface Item {
 const Graphic = () => {
   // 样式类型
   const [classType, setClassType] = useState<number>(1);
+  // 轮播列表数据
+  const [swiperList, setSwiperList] = useState<Item[]>([]);
   // 获取当前窗口大小
   const size = useSize(document.body);
-  // 监听页面宽度，设置导航样式
+  // 监听页面宽度，设置轮播盒子样式
   useEffect(() => {
     if (size?.width && size?.width < 700) {
       setClassType(1);
@@ -74,6 +82,7 @@ const Graphic = () => {
       setClassType(0);
     }
   }, [size?.width]);
+
   // 轮播渲染函数
   const renderItem = (item: Item) => {
     const flag = Math.random() >= 0.5;
@@ -87,8 +96,10 @@ const Graphic = () => {
     const txtBox = (item: Item) => (
       <div className={styles.carouselComItem_right}>
         <div className={styles.carouselComItem_title}>{item.title}</div>
-        <div className={styles.carouselComItem_time}>{item.timeStr}</div>
-        <div className={styles.carouselComItem_desc}>{item.desc}</div>
+        <div className={styles.carouselComItem_time}>{item.time_str}</div>
+        <div className={styles.carouselComItem_desc}>
+          <div className={styles.desc_content}>{item.desc}</div>
+        </div>
       </div>
     );
 
@@ -114,14 +125,34 @@ const Graphic = () => {
       </div>
     );
   };
+
+  // 获取轮播博文列表
+  const getSwiperList = async () => {
+    await home
+      ._getSwiperBowenList()
+      .then(({ data }) => {
+        if (data.code === 200) {
+          setSwiperList(data.data);
+        }
+      })
+      .catch((e) => {
+        message.error(e);
+      });
+  };
+
+  // 初始化
+  useEffect(() => {
+    getSwiperList();
+  }, []);
+
   return (
     <div className={styles.graphic}>
       <div className={styles.title}>朝花夕拾</div>
       <div className={styles.border} />
       <div className={classType ? styles.contentMobile : styles.content}>
         <CarouselCom
-          config={{ autoplay: false, autoplaySpeed: 5000 }}
-          list={list}
+          config={{ autoplay: true, autoplaySpeed: 5000 }}
+          list={swiperList}
           renderItem={renderItem}
         />
       </div>

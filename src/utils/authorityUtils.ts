@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-01-13 11:29:46
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-01-13 11:29:46
+ * @LastEditTime: 2022-01-18 11:10:36
  */
 
 import { cloneDeep } from 'lodash';
@@ -13,35 +13,35 @@ import api from '@/api';
 
 const { all } = api;
 
-// 全局资源存储
-let globalAuthorityModules: AuthorityModuleType[] = [];
-
 export interface AuthorityModuleType {
   id: string;
   authName: string;
   desc: string;
 }
 
+// 全局资源存储
+let globalAuthorityModules: AuthorityModuleType[] | null = [];
+
 // 设置全局权限缓存
 export const setGlobalAuthorityModule = (
-  AuthorityModule: AuthorityModuleType[],
+  AuthorityModule: AuthorityModuleType[] | null,
 ) => {
   sessionStorage.setItem('AuthorityModule', JSON.stringify(AuthorityModule));
 };
 
-// 获取全局资源对象
-export const getGlobalAuthorityModule = (): AuthorityModuleType[] => {
+// 获取全局权限缓存
+export const getGlobalAuthorityModule = (): AuthorityModuleType[] | null => {
   const str = sessionStorage.getItem('AuthorityModule');
   if (str) {
     globalAuthorityModules = JSON.parse(str);
   } else {
-    globalAuthorityModules = [];
+    globalAuthorityModules = null;
   }
   return globalAuthorityModules;
 };
 
-// 初始化权限
-export const initGlobalAuthority = async (userId = null) => {
+// 初始化获取全局缓存资源
+export const initGlobalAuthority = async (userId = null, id = null) => {
   await all._getAuthority({ params: { userId } }).then((res) => {
     globalAuthorityModules = [];
     if (res.data.code === 200) {
@@ -56,10 +56,11 @@ export const authCheck = (routerItem: Route) => {
   // 判断是否需要权限校验
   if (!routerItem.authority) return true;
   // 获取权限列表
-  const AuthorityModule: AuthorityModuleType[] = getGlobalAuthorityModule();
+  const AuthorityModule: AuthorityModuleType[] | null =
+    getGlobalAuthorityModule();
   // 校验是否有该权限
   const authKey =
-    AuthorityModule.some((item) => item.authName === routerItem.authority) ||
+    AuthorityModule?.some((item) => item.authName === routerItem.authority) ||
     false;
   // 返回校验结果
   return authKey;

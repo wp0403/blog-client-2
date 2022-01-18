@@ -90,16 +90,19 @@
       flex: 1;
       min-height: 0;
       padding-top: 15px;
-      color: var(--b-alpha-80);
-      font-size: 16px;
-      line-height: 2rem;
+      overflow: hidden;
       display: flex;
       align-items: center;
-      text-indent: 2rem;
-      overflow: hidden;
-      // display: -webkit-box;
-      // -webkit-box-orient: vertical;
-      // -webkit-line-clamp: 11;
+
+      .desc_content {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 8;
+        line-height: 2rem;
+        text-indent: 2rem;
+        color: var(--b-alpha-80);
+        font-size: 16px;
+      }
     }
   }
 }
@@ -158,14 +161,19 @@
       flex: 1;
       min-height: 0;
       padding: 8px 0;
-      color: var(--b-alpha-80);
-      font-size: 16px;
-      line-height: 2.1rem;
-      text-indent: 2rem;
       overflow: hidden;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 4;
+      display: flex;
+      align-items: center;
+
+      .desc_content {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+        line-height: 2.1rem;
+        text-indent: 2rem;
+        color: var(--b-alpha-80);
+        font-size: 16px;
+      }
     }
   }
 }

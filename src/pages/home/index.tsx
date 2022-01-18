@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2021-12-23 16:28:08
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-01-17 10:41:16
+ * @LastEditTime: 2022-01-18 16:31:56
  */
 import React, { useEffect, useRef, useState } from 'react';
 import { useSize } from 'ahooks';
@@ -14,7 +14,9 @@ import {
   removeScroll,
   layoutContent,
 } from '@/utils/utils';
-import { scrollTo, getScroll } from '@/utils/elementUtils';
+import type { UserDate } from '@/utils/globalDataUtils';
+import { getGlobalUserData } from '@/utils/globalDataUtils';
+import { scrollTo } from '@/utils/elementUtils';
 import Typewriter from '@/components/Typewriter';
 import SysIcon from '@/components/SysIcon';
 import BackTopCom from '@/components/BackTopCom';
@@ -29,6 +31,8 @@ const Home = () => {
   const size = useSize(document.body);
   // 样式类型
   const [classType, setClassType] = useState<number>(1);
+  // 博主信息
+  const userData = getGlobalUserData() as UserDate;
 
   const goAbout = () => {
     const aboutMeTop = aboutMeDom.current.offsetTop;
@@ -56,14 +60,19 @@ const Home = () => {
     <div className={styles.home}>
       {classType === 1 ? (
         <div className={styles.header}>
-          <div className={styles.title_mobile}>世人万千，再难遇我</div>
+          <div className={styles.title_mobile}>
+            {userData?.title || '世人万千，再难遇我'}
+          </div>
         </div>
       ) : (
         <div className={styles.header}>
-          <div className={styles.title}>世人万千，再难遇我</div>
+          <div className={styles.title}>
+            {userData?.title || '世人万千，再难遇我'}
+          </div>
           <Typewriter
             data={
-              '今天终于把博客搭建上了，增加了公路旅人这个功能，可以把自己拍摄的照片和喜欢的照片上传上去了'
+              userData?.desc ||
+              '先挑起清风明月、杨柳依依和草长莺飞，少年郎的肩头，本就应当满是美好的事物啊。'
             }
             startTime={300}
             endTime={100}
