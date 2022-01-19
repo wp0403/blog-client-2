@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-01-13 11:42:16
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-01-18 14:27:10
+ * @LastEditTime: 2022-01-19 17:55:00
  */
 import { message } from 'antd';
 import { cloneDeep } from 'lodash';
@@ -26,6 +26,15 @@ export const stringReplace = (str: string) => {
   newStr = newStr.replace(/\s/g, '&nbsp;');
 
   return newStr;
+};
+
+export const stringReplaceP = (str: string) => {
+  let newStr = cloneDeep(str);
+
+  //替换所有的空格（中文空格、英文空格都会被替换）
+  newStr = newStr.replace(/\s/g, '&nbsp;');
+
+  return newStr.split('\\n');
 };
 
 /**
