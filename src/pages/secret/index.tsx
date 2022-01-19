@@ -4,13 +4,24 @@
  * @Author: WangPeng
  * @Date: 2021-12-29 11:06:42
  * @LastEditors: WangPeng
- * @LastEditTime: 2021-12-29 11:08:32
+ * @LastEditTime: 2022-01-19 11:56:16
  */
-import React from 'react';
+import React, { useEffect } from 'react';
+import { setBg, addLayoutNavStyle } from '@/utils/utils';
 import styles from './index.less';
 
 const Secret = () => {
-  return <div>secret 树洞先生</div>;
+  useEffect(() => {
+    addLayoutNavStyle();
+    setBg(false);
+  });
+  return (
+    <div className={styles.secret}>
+      <div className={styles.header}>secret 树洞先生</div>
+      <div className={styles.main}>secret 树洞先生</div>
+      <div className={styles.footer}>secret 树洞先生</div>
+    </div>
+  );
 };
 
 export default Secret;

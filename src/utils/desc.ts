@@ -1,5 +1,5 @@
 // 字典列表
-const bowen_class_sub = [
+export const bowen_class_sub = [
   {
     id: 1,
     classDesc: '前端',
@@ -52,11 +52,41 @@ const bowen_class_sub = [
   },
 ];
 
-const bowen_class = [
+// 仅一级分类
+export const bowen_class = [
   { id: 1, classDesc: '前端' },
   { id: 2, classDesc: '后端' },
   { id: 3, classDesc: '数据库' },
   { id: 4, classDesc: 'git' },
   { id: 5, classDesc: '设计' },
   { id: 6, classDesc: '吃喝玩乐' },
+];
+
+// 背景图片数据
+export const imgs = [
+  {
+    id: 1,
+    title: '墨韵',
+    src: '/bgImg/bg00001.jpg',
+  },
+  {
+    id: 2,
+    title: '墨韵',
+    src: '/bgImg/bg00002.jpg',
+  },
+  {
+    id: 3,
+    title: '墨韵',
+    src: '/bgImg/bg00003.jpg',
+  },
+  {
+    id: 4,
+    title: '墨韵',
+    src: '/bgImg/bg00004.jpg',
+  },
+  {
+    id: 5,
+    title: '墨韵',
+    src: '/bgImg/bg00005.jpg',
+  },
 ];

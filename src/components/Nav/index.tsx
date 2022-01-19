@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2021-12-23 18:13:58
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-01-17 17:55:29
+ * @LastEditTime: 2022-01-19 11:04:41
  */
 import React, { useState, useEffect } from 'react';
 import { history } from 'umi';
@@ -12,12 +12,18 @@ import { Drawer } from 'antd';
 import { useSize } from 'ahooks';
 import { MenuOutlined } from '@ant-design/icons';
 import { authRouterFilter, filterNoName } from '@/utils/authorityUtils';
-import { removeLayoutNavStyle, layoutNav } from '@/utils/utils';
+import { removeLayoutNavStyle, layoutNav, setBg } from '@/utils/utils';
 import SysIcon from '@/components/SysIcon';
 import styles from './index.less';
 
-const Nav = (props: any) => {
-  const { route } = props;
+interface Props {
+  style?: React.CSSProperties;
+  route: any;
+  [key: string]: any;
+}
+
+const Nav = (props: Props) => {
+  const { route, style } = props;
   // 过滤权限路由
   let routes = Array.isArray(authRouterFilter(route))
     ? authRouterFilter(route)
@@ -91,6 +97,7 @@ const Nav = (props: any) => {
     setRouteItemInd(index);
     setSubRouteItemInd(ind);
     removeLayoutNavStyle();
+    setBg(true);
   };
 
   // 渲染路由列表
@@ -174,7 +181,7 @@ const Nav = (props: any) => {
   );
 
   return (
-    <div className={styles.nav} id="layout_nav">
+    <div className={styles.nav} style={style} id="layout_nav">
       {classType ? mobileNav : pcNav}
     </div>
   );

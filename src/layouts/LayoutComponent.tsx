@@ -20,11 +20,14 @@ const LayoutPage = (props: any) => {
   // 初始化获取全局资源
   !isFlagGetGlobalData() && initGlobalData({});
 
+  // 检查当前路由是否可以访问（或者有没有权限访问）
   const checkAuth = authorityUtils.matchingRoute(pathname, route) || '/404';
 
+  // 判断children是否为空
   const childrenRender: React.ReactNode =
     typeof children === 'undefined' ? null : children;
 
+  // 判断当前的路由是否重定向
   const Authorized = () => {
     if (checkAuth !== '403' && checkAuth !== '404') {
       return childrenRender;
@@ -35,6 +38,7 @@ const LayoutPage = (props: any) => {
     }
   };
 
+  // 黑白切换
   const switchTheme = () => {
     document.documentElement.classList.toggle('dark');
   };
@@ -42,7 +46,7 @@ const LayoutPage = (props: any) => {
   useEffect(() => {
     switchTheme();
     getLayoutDom();
-  });
+  }, []);
 
   return (
     <div className={style.pro_layout}>

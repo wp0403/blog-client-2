@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-01-13 11:29:46
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-01-17 17:43:41
+ * @LastEditTime: 2022-01-19 11:11:55
  */
 
 // 页面背景盒子
@@ -38,6 +38,12 @@ export const setBg = (showBg: boolean) => {
 export const removeLayoutNavStyle = () => {
   if (!layoutNav) return;
   layoutNav?.classList.remove('nav_active');
+};
+
+// 设置全局导航样式
+export const addLayoutNavStyle = () => {
+  if (!layoutNav) return;
+  layoutNav?.classList.add('nav_active');
 };
 
 // 页面滚动事件
