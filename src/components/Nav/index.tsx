@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2021-12-23 18:13:58
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-01-19 11:04:41
+ * @LastEditTime: 2022-01-20 16:33:37
  */
 import React, { useState, useEffect } from 'react';
 import { history } from 'umi';
@@ -93,6 +93,8 @@ const Nav = (props: Props) => {
     index: number | null,
     ind: number | null,
   ) => {
+    if (path === props.location.pathname) return;
+
     history.push(path);
     setRouteItemInd(index);
     setSubRouteItemInd(ind);
