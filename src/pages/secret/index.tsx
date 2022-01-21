@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2021-12-29 11:06:42
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-01-20 18:34:47
+ * @LastEditTime: 2022-01-21 10:56:25
  */
 import React, { useEffect, useState } from 'react';
 import { useSize } from 'ahooks';
@@ -69,11 +69,10 @@ const Secret = () => {
   const [time, setTime] = useState<string>(moment(new Date()).format('LTS'));
 
   const renderSecretList = () => {
-    return [...list, ...list, ...list].map((item, index) => (
+    return list.map((item, index) => (
       <div className={styles.secret_item} key={item.id}>
-        {classType &&
-          classType !== 2 &&
-          (index % 2 === 0 ? (
+        {classType && classType === 1 ? (
+          index % 2 === 0 ? (
             <>
               <div className={styles.secret_item_content}>
                 <div className={styles.secret_item_content_con}>
@@ -107,8 +106,11 @@ const Secret = () => {
                 </div>
               </div>
             </>
-          ))}
-        {classType === 2 && (
+          )
+        ) : (
+          ''
+        )}
+        {classType === 2 || classType === 0 ? (
           <div className={styles.secret_item_content}>
             <div className={styles.secret_item_content}>
               <div className={styles.secret_item_content_label}>
@@ -124,6 +126,8 @@ const Secret = () => {
               </div>
             </div>
           </div>
+        ) : (
+          ''
         )}
       </div>
     ));
@@ -177,7 +181,7 @@ const Secret = () => {
         <div className={styles.right}>
           <div
             className={`${styles.right_content} ${
-              classType === 2 && styles.right_content_1
+              (classType === 2 || classType === 0) && styles.right_content_1
             }`}
           >
             {renderSecretList()}
