@@ -4,8 +4,13 @@
  * @Author: WangPeng
  * @Date: 2021-12-27 15:32:24
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-01-18 18:01:06
+ * @LastEditTime: 2022-01-21 18:00:57
  */
+// 获取公网ip
+export const _getIp = {
+  url: '/api/getIp',
+  method: 'get',
+};
 // 获取路由权限列表
 export const _getAuthority = {
   url: '/api/getAuthority',
