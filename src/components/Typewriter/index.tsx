@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2021-12-24 10:00:56
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-01-06 13:00:45
+ * @LastEditTime: 2022-01-21 11:23:03
  */
 import React, { useEffect, CSSProperties } from 'react';
 import { useSetState } from 'ahooks';
@@ -90,6 +90,11 @@ const Typewriter = (props: Props) => {
 
   useEffect(() => {
     setTimer();
+
+    return () => {
+      // 判断是否有正在执行的定时器，有则清除
+      state.timerId && clearTimeout(state.timerId);
+    };
   }, [state.textArr, state.flag, state.i]);
 
   return (

@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-01-18 11:05:40
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-01-18 12:10:20
+ * @LastEditTime: 2022-01-21 15:04:43
  */
 import api from '@/api';
 
@@ -21,6 +21,7 @@ export interface UserDate {
   email: string;
   about: string;
   aboutTags: string;
+  secret_guide: string;
 }
 
 // 全局博主信息储存

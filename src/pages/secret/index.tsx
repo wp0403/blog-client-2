@@ -4,61 +4,22 @@
  * @Author: WangPeng
  * @Date: 2021-12-29 11:06:42
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-01-21 10:56:25
+ * @LastEditTime: 2022-01-21 16:55:40
  */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useSize } from 'ahooks';
+import { message } from 'antd';
 import moment from 'moment';
+import api from '@/api';
+import BackTopCom from '@/components/BackTopCom';
 import SysIcon from '@/components/SysIcon';
 import { stringReplaceP } from '@/utils/dataUtils';
 import { setBg, addLayoutNavStyle } from '@/utils/utils';
+import { getGlobalUserData } from '@/utils/globalDataUtils';
+import { secretGuide } from '@/utils/desc';
 import styles from './index.less';
 
-const str =
-  '在吗？先生？我有好多事情想与你说，你会替我保密的对吧？\\n先生，你在吗？为什么你从来都不会与我说说我没见过的世界啊？\\n先生，我遇到好多问题，但是我不知道能够跟谁去说说，你可以听我说吗？先生。\\n先生我不太开心，也说不上来为什么，呀！你怎么知道我在想什么，可是先生，我放不下啊！\\n先生，你也会不开心的吧，没关系的先生，我会一直在，一直在的。';
-
-const list = [
-  {
-    id: 1,
-    time_str: '2022/01/01',
-    author: '于风里读诗',
-    type: '随笔',
-    content:
-      '你也没有难看到没有人喜欢吧 你也没有学习差的年级倒数吧 你也没有低到世界最矮吧 你也没有社交恐惧到不能与人交流吧 你也没有近视到看不见东西吧 你也没有发际线高到秃头吧 你也没有人缘差的没朋友吧 你也没有家境差到吃不了饭吧 你也没有胖到200斤吧 那你还怕什么？ 世界留给你的余地还很多。',
-  },
-  {
-    id: 2,
-    time_str: '2022/01/02',
-    author: '于风里读诗',
-    type: '随笔',
-    content:
-      '你也没有难看到没有人喜欢吧 你也没有学习差的年级倒数吧 你也没有低到世界最矮吧 你也没有社交恐惧到不能与人交流吧 你也没有近视到看不见东西吧 你也没有发际线高到秃头吧 你也没有人缘差的没朋友吧 你也没有家境差到吃不了饭吧 你也没有胖到200斤吧 那你还怕什么？ 世界留给你的余地还很多。',
-  },
-  {
-    id: 3,
-    time_str: '2022/01/03',
-    author: '于风里读诗',
-    type: '随笔',
-    content:
-      '你也没有难看到没有人喜欢吧 你也没有学习差的年级倒数吧 你也没有低到世界最矮吧 你也没有社交恐惧到不能与人交流吧 你也没有近视到看不见东西吧 你也没有发际线高到秃头吧 你也没有人缘差的没朋友吧 你也没有家境差到吃不了饭吧 你也没有胖到200斤吧 那你还怕什么？ 世界留给你的余地还很多。',
-  },
-  {
-    id: 4,
-    time_str: '2022/01/04',
-    author: '于风里读诗',
-    type: '随笔',
-    content:
-      '你也没有难看到没有人喜欢吧 你也没有学习差的年级倒数吧 你也没有低到世界最矮吧 你也没有社交恐惧到不能与人交流吧 你也没有近视到看不见东西吧 你也没有发际线高到秃头吧 你也没有人缘差的没朋友吧 你也没有家境差到吃不了饭吧 你也没有胖到200斤吧 那你还怕什么？ 世界留给你的余地还很多。',
-  },
-  {
-    id: 5,
-    time_str: '2022/01/05',
-    author: '于风里读诗',
-    type: '随笔',
-    content:
-      '你也没有难看到没有人喜欢吧 你也没有学习差的年级倒数吧 你也没有低到世界最矮吧 你也没有社交恐惧到不能与人交流吧 你也没有近视到看不见东西吧 你也没有发际线高到秃头吧 你也没有人缘差的没朋友吧 你也没有家境差到吃不了饭吧 你也没有胖到200斤吧 那你还怕什么？ 世界留给你的余地还很多。',
-  },
-];
+const { secret } = api;
 
 const Secret = () => {
   // 获取当前窗口大小
@@ -67,10 +28,27 @@ const Secret = () => {
   const [classType, setClassType] = useState<number>(1);
   // 当前的时间
   const [time, setTime] = useState<string>(moment(new Date()).format('LTS'));
+  // 获取作者信息
+  const authorData = getGlobalUserData();
+  // 当前页
+  const [page, setPage] = useState<number>(1);
+  // 每页条数
+  const [page_size, setPageSize] = useState<number>(10);
+  // 树洞列表
+  const [list, setList] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [total, setTotal] = useState<number>(0);
 
+  // mobile滚动盒子
+  const content = useRef<any>(null);
+  const contentScroll = useRef<any>(null);
+  // pc滚动盒子
+  const right = useRef<any>(null);
+  const rightContent = useRef<any>(null);
+  // 渲染列表
   const renderSecretList = () => {
     return list.map((item, index) => (
-      <div className={styles.secret_item} key={item.id}>
+      <div className={styles.secret_item} key={index}>
         {classType && classType === 1 ? (
           index % 2 === 0 ? (
             <>
@@ -132,12 +110,87 @@ const Secret = () => {
       </div>
     ));
   };
+  // 渲染loading
+  const renderLoading = () => {
+    return (
+      <>
+        {classType && classType === 1 ? (
+          <div className={styles.secret_item} key={0}>
+            <div className={styles.secret_item_null}></div>
+            <div className={styles.secret_item_content}>
+              <div className={styles.secret_item_content_label}>
+                <SysIcon type="icon-pingguo1" className={styles.icon} />
+              </div>
+              <div className={styles.secret_item_content_con}>
+                <div className={styles.secret_item_content_con_loading}>
+                  loading...
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          ''
+        )}
+        {classType === 2 || classType === 0 ? (
+          <div className={styles.secret_item}>
+            <div className={styles.secret_item_content}>
+              <div className={styles.secret_item_content}>
+                <div className={styles.secret_item_content_label}>
+                  <SysIcon type="icon-pingguo1" className={styles.icon} />
+                </div>
+                <div className={styles.secret_item_content_con}>
+                  <div className={styles.secret_item_content_con_loading}>
+                    loading...
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          ''
+        )}
+      </>
+    );
+  };
+
+  // 获取树洞列表数据
+  const getList = async () => {
+    await secret
+      ._getSecretList({ params: { page, page_size } })
+      .then(({ data }) => {
+        if (data.code === 200) {
+          setList((a) => [...a, ...data.data]);
+          !total && setTotal(data.meta.total);
+        }
+      })
+      .catch((error) => message.error(error));
+  };
+
+  // 滚动事件
+  const scrollFun = () => {
+    const scrollBox = classType === 0 ? content.current : right.current;
+    const scrollConBox =
+      classType === 0 ? contentScroll.current : rightContent.current;
+
+    const flag = page < Math.ceil(total / page_size);
+
+    if (
+      scrollConBox.offsetHeight -
+        scrollBox.offsetHeight +
+        40 -
+        scrollBox.scrollTop <=
+        300 &&
+      !loading &&
+      flag
+    ) {
+      setPage((data) => (data += 1));
+    }
+  };
 
   // 初始化
   useEffect(() => {
     addLayoutNavStyle();
     setBg(false);
-
     const timerId = setInterval(() => {
       setTime(moment(new Date()).format('LTS'));
     }, 1000);
@@ -146,6 +199,10 @@ const Secret = () => {
       clearInterval(timerId);
     };
   }, []);
+  // 获取列表数据
+  useEffect(() => {
+    getList();
+  }, [page]);
   // 监听页面宽度，设置样式
   useEffect(() => {
     if (size?.width && size?.width < 700) {
@@ -159,35 +216,58 @@ const Secret = () => {
     }
   }, [size?.width]);
 
+  useEffect(() => {
+    if (classType === 0) {
+      content.current.addEventListener('scroll', scrollFun);
+    } else {
+      right.current.addEventListener('scroll', scrollFun);
+    }
+
+    return () => {
+      content.current.removeEventListener('scroll', scrollFun);
+      right.current.removeEventListener('scroll', scrollFun);
+    };
+  }, [classType, total, page_size, page]);
+
   return (
     <div
       className={`${styles.secret} ${
         classType ? styles.secret_pc : styles.secret_mobile
       }`}
     >
-      <div className={styles.content}>
-        <div className={styles.left}>
-          <div className={styles.time}>{time}</div>
-          <div className={styles.left_con}>
-            {stringReplaceP(str).map((item, index) => (
-              <p key={index}>{item}</p>
-            ))}
+      <div className={styles.content} ref={content}>
+        <div className={styles.con} ref={contentScroll}>
+          <div className={styles.left}>
+            <div className={styles.time}>{time}</div>
+            <div className={styles.left_con}>
+              {stringReplaceP(authorData?.secret_guide || secretGuide).map(
+                (item, index) => (
+                  <p key={index}>{item}</p>
+                ),
+              )}
+            </div>
+            <div className={styles.left_bottom}>
+              <div className={styles.left_bottom_border} />
+              {authorData?.userName || '于风里读诗'}
+            </div>
           </div>
-          <div className={styles.left_bottom}>
-            <div className={styles.left_bottom_border} />
-            于风里读诗
-          </div>
-        </div>
-        <div className={styles.right}>
-          <div
-            className={`${styles.right_content} ${
-              (classType === 2 || classType === 0) && styles.right_content_1
-            }`}
-          >
-            {renderSecretList()}
+          <div className={styles.right} ref={right}>
+            <div
+              className={`${styles.right_content} ${
+                (classType === 2 || classType === 0) && styles.right_content_1
+              }`}
+              ref={rightContent}
+            >
+              {renderLoading()}
+              {renderSecretList()}
+            </div>
           </div>
         </div>
       </div>
+      <BackTopCom
+        visibilityHeight={100}
+        target={() => content.current || window}
+      />
     </div>
   );
 };

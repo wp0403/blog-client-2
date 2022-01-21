@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-01-11 18:19:11
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-01-18 17:59:43
+ * @LastEditTime: 2022-01-21 15:32:43
  */
 import React, { useState, useEffect } from 'react';
 import { useSize } from 'ahooks';
@@ -14,45 +14,6 @@ import api from '@/api';
 import styles from './index.less';
 
 const { home } = api;
-
-const list = [
-  {
-    id: 1,
-    title: '标题',
-    desc: '这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一',
-    timeStr: '2022/01/01',
-    img: 'https://wp-1302605407.cos.ap-beijing.myqcloud.com/img%2F%E4%BA%8C%E6%AC%A1%E5%85%83%E5%8A%A8%E6%BC%AB%E5%9B%BE%E5%BA%93%2F%E8%A8%80%E3%81%AE%E8%91%89%E3%81%AE%E5%BA%AD%2F00.PNG',
-    classify: '励志',
-    classifyId: '1',
-  },
-  {
-    id: 2,
-    title: '标题',
-    desc: '这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息',
-    timeStr: '2022/01/01',
-    img: 'https://wp-1302605407.cos.ap-beijing.myqcloud.com/img%2F%E4%BA%8C%E6%AC%A1%E5%85%83%E5%8A%A8%E6%BC%AB%E5%9B%BE%E5%BA%93%2F%E8%A8%80%E3%81%AE%E8%91%89%E3%81%AE%E5%BA%AD%2F001.PNG',
-    classify: '励志',
-    classifyId: '1',
-  },
-  {
-    id: 3,
-    title: '标题',
-    desc: '这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息',
-    timeStr: '2022/01/01',
-    img: 'https://wp-1302605407.cos.ap-beijing.myqcloud.com/img%2F%E4%BA%8C%E6%AC%A1%E5%85%83%E5%8A%A8%E6%BC%AB%E5%9B%BE%E5%BA%93%2F%E4%BA%91%E3%81%AE%E3%82%80%E3%81%93%E3%81%86%E7%BA%A6%E6%9D%9F%E3%81%AE%E5%9C%BA%E6%89%80%2F%E6%97%A0%E5%AD%97%E5%A3%81%E7%BA%B8%2F09.jpg',
-    classify: '励志',
-    classifyId: '1',
-  },
-  {
-    id: 4,
-    title: '标题',
-    desc: '这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息这是一段文字信息',
-    timeStr: '2022/01/01',
-    img: 'https://wp-1302605407.cos.ap-beijing.myqcloud.com/img%2F%E4%BA%8C%E6%AC%A1%E5%85%83%E5%8A%A8%E6%BC%AB%E5%9B%BE%E5%BA%93%2F%E4%BA%91%E3%81%AE%E3%82%80%E3%81%93%E3%81%86%E7%BA%A6%E6%9D%9F%E3%81%AE%E5%9C%BA%E6%89%80%2F%E6%97%A0%E5%AD%97%E5%A3%81%E7%BA%B8%2F00.jpg',
-    classify: '励志',
-    classifyId: '1',
-  },
-];
 
 interface Item {
   id: number | string;

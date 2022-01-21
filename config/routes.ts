@@ -16,45 +16,13 @@ export default [
         path: '/classify',
         name: '分类',
         component: './classify',
-        routes: [
-          {
-            path: '/classify/projectLibrary',
-            name: '项目库',
-            component: './projectLibrary',
-          },
-          {
-            path: '/classify/itinerary',
-            name: '旅行日记',
-            component: './itinerary',
-          },
-          {
-            path: '/classify/secret',
-            name: '树洞先生',
-            component: './secret',
-          },
-        ],
+        routes: [],
       },
       {
         path: '/projectLibrary',
         name: '项目库',
         component: './projectLibrary',
-        routes: [
-          {
-            path: '/projectLibrary/projectLibrary',
-            name: '项目库',
-            component: './projectLibrary',
-          },
-          {
-            path: '/projectLibrary/itinerary',
-            name: '旅行日记',
-            component: './itinerary',
-          },
-          {
-            path: '/projectLibrary/secret',
-            name: '树洞先生',
-            component: './secret',
-          },
-        ],
+        routes: [],
       },
       {
         path: '/itinerary',
