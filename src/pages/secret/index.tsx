@@ -3,8 +3,8 @@
  * @version:
  * @Author: WangPeng
  * @Date: 2021-12-29 11:06:42
- * @LastEditors: WangPeng
- * @LastEditTime: 2022-01-21 16:55:40
+ * @LastEditors: 王鹏
+ * @LastEditTime: 2022-01-23 00:30:47
  */
 import React, { useEffect, useState, useRef } from 'react';
 import { useSize } from 'ahooks';
@@ -155,6 +155,7 @@ const Secret = () => {
 
   // 获取树洞列表数据
   const getList = async () => {
+    setLoading(true);
     await secret
       ._getSecretList({ params: { page, page_size } })
       .then(({ data }) => {
@@ -163,7 +164,8 @@ const Secret = () => {
           !total && setTotal(data.meta.total);
         }
       })
-      .catch((error) => message.error(error));
+      .catch((error) => message.error(error))
+      .finally(() => setLoading(false));
   };
 
   // 滚动事件
@@ -222,12 +224,15 @@ const Secret = () => {
     } else {
       right.current.addEventListener('scroll', scrollFun);
     }
-
-    return () => {
-      content.current.removeEventListener('scroll', scrollFun);
-      right.current.removeEventListener('scroll', scrollFun);
-    };
   }, [classType, total, page_size, page]);
+
+  useEffect(() => {
+    return () => {
+      content.current &&
+        content.current.removeEventListener('scroll', scrollFun);
+      right.current && right.current.removeEventListener('scroll', scrollFun);
+    };
+  }, []);
 
   return (
     <div

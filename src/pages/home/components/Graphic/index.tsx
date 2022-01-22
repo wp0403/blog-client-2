@@ -3,8 +3,8 @@
  * @version:
  * @Author: WangPeng
  * @Date: 2022-01-11 18:19:11
- * @LastEditors: WangPeng
- * @LastEditTime: 2022-01-21 15:32:43
+ * @LastEditors: 王鹏
+ * @LastEditTime: 2022-01-23 00:38:51
  */
 import React, { useState, useEffect } from 'react';
 import { useSize } from 'ahooks';
@@ -104,6 +104,10 @@ const Graphic = () => {
   // 初始化
   useEffect(() => {
     getSwiperList();
+
+    return () => {
+      setSwiperList([]);
+    };
   }, []);
 
   return (

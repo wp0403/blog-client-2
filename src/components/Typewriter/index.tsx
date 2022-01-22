@@ -3,8 +3,8 @@
  * @version:
  * @Author: WangPeng
  * @Date: 2021-12-24 10:00:56
- * @LastEditors: WangPeng
- * @LastEditTime: 2022-01-21 11:23:03
+ * @LastEditors: 王鹏
+ * @LastEditTime: 2022-01-23 00:29:35
  */
 import React, { useEffect, CSSProperties } from 'react';
 import { useSetState } from 'ahooks';
@@ -83,19 +83,21 @@ const Typewriter = (props: Props) => {
       flag: true,
     });
   };
-
+  // 初始化数据
   useEffect(() => {
     initData();
   }, [data, startTime, endTime]);
-
+  // 更新定时器
   useEffect(() => {
     setTimer();
-
+  }, [state.textArr, state.flag, state.i]);
+  // 卸载期
+  useEffect(() => {
     return () => {
       // 判断是否有正在执行的定时器，有则清除
       state.timerId && clearTimeout(state.timerId);
     };
-  }, [state.textArr, state.flag, state.i]);
+  }, [state.timerId]);
 
   return (
     <div className={style.text_input} style={typewriterStyle}>
