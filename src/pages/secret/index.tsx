@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2021-12-29 11:06:42
  * @LastEditors: 王鹏
- * @LastEditTime: 2022-01-23 00:30:47
+ * @LastEditTime: 2022-01-23 12:47:42
  */
 import React, { useEffect, useState, useRef } from 'react';
 import { useSize } from 'ahooks';
@@ -13,7 +13,7 @@ import moment from 'moment';
 import api from '@/api';
 import BackTopCom from '@/components/BackTopCom';
 import SysIcon from '@/components/SysIcon';
-import { stringReplaceP } from '@/utils/dataUtils';
+import { stringReplaceP, distinctObjectMap } from '@/utils/dataUtils';
 import { setBg, addLayoutNavStyle } from '@/utils/utils';
 import { getGlobalUserData } from '@/utils/globalDataUtils';
 import { secretGuide } from '@/utils/desc';
@@ -37,7 +37,7 @@ const Secret = () => {
   // 树洞列表
   const [list, setList] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [total, setTotal] = useState<number>(0);
+  const [totalPages, setTotalPages] = useState<number>(0);
 
   // mobile滚动盒子
   const content = useRef<any>(null);
@@ -123,7 +123,7 @@ const Secret = () => {
               </div>
               <div className={styles.secret_item_content_con}>
                 <div className={styles.secret_item_content_con_loading}>
-                  loading...
+                  LOADING...
                 </div>
               </div>
             </div>
@@ -140,7 +140,7 @@ const Secret = () => {
                 </div>
                 <div className={styles.secret_item_content_con}>
                   <div className={styles.secret_item_content_con_loading}>
-                    loading...
+                    LOADING...
                   </div>
                 </div>
               </div>
@@ -160,8 +160,8 @@ const Secret = () => {
       ._getSecretList({ params: { page, page_size } })
       .then(({ data }) => {
         if (data.code === 200) {
-          setList((a) => [...a, ...data.data]);
-          !total && setTotal(data.meta.total);
+          setList((a) => distinctObjectMap([...a, ...data.data], 'id'));
+          page === 1 && setTotalPages(data.meta.total_pages);
         }
       })
       .catch((error) => message.error(error))
@@ -174,7 +174,7 @@ const Secret = () => {
     const scrollConBox =
       classType === 0 ? contentScroll.current : rightContent.current;
 
-    const flag = page < Math.ceil(total / page_size);
+    const flag = page < totalPages;
 
     if (
       scrollConBox.offsetHeight -
@@ -185,7 +185,7 @@ const Secret = () => {
       !loading &&
       flag
     ) {
-      setPage((data) => (data += 1));
+      setPage((data) => data + 1);
     }
   };
 
@@ -213,29 +213,29 @@ const Secret = () => {
     if (size?.width && size?.width >= 700) {
       setClassType(1);
     }
-    if (size?.width && size?.width <= 860 && size?.width >= 700) {
+    if (size?.width && size?.width <= 900 && size?.width >= 700) {
       setClassType(2);
     }
   }, [size?.width]);
 
   useEffect(() => {
+    right.current.removeEventListener('scroll', scrollFun);
+    content.current.removeEventListener('scroll', scrollFun);
     if (classType === 0) {
       content.current.addEventListener('scroll', scrollFun);
     } else {
       right.current.addEventListener('scroll', scrollFun);
     }
-  }, [classType, total, page_size, page]);
-
-  useEffect(() => {
     return () => {
       content.current &&
         content.current.removeEventListener('scroll', scrollFun);
       right.current && right.current.removeEventListener('scroll', scrollFun);
     };
-  }, []);
+  }, [classType, page_size, page, totalPages, loading]);
 
   return (
     <div
+      id="noselect"
       className={`${styles.secret} ${
         classType ? styles.secret_pc : styles.secret_mobile
       }`}

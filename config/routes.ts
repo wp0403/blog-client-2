@@ -1,3 +1,11 @@
+/*
+ * @Descripttion:
+ * @version: 1.1.1
+ * @Author: 王鹏
+ * @Date: 2022-01-22 13:20:17
+ * @LastEditors: 王鹏
+ * @LastEditTime: 2022-01-23 11:50:12
+ */
 export default [
   {
     path: '/',
@@ -16,7 +24,10 @@ export default [
         path: '/classify',
         name: '分类',
         component: './classify',
-        routes: [],
+      },
+      {
+        path: '/classify/list',
+        component: './classify-list',
       },
       {
         path: '/projectLibrary',

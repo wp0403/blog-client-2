@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-01-18 11:05:40
  * @LastEditors: 王鹏
- * @LastEditTime: 2022-01-23 01:14:47
+ * @LastEditTime: 2022-01-23 10:11:53
  */
 import api from '@/api';
 
@@ -65,14 +65,15 @@ export const getGlobalDict = (): Dict | null => {
   return globalDictList;
 };
 // 根据type获取字典
-export const getOnlyDictObj = (type: string) => {
+export const getOnlyDictObj = (type: string): any[] | any => {
   const str = sessionStorage.getItem('dict');
+  let onlyDict: any = [];
   if (str) {
-    globalDictList = eval('(' + JSON.parse(str)[type] + ')');
+    onlyDict = JSON.parse(str)[type];
   } else {
-    globalDictList = null;
+    onlyDict = null;
   }
-  return globalDictList;
+  return onlyDict;
 };
 
 // 判断是否需要重新获取

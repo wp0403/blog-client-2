@@ -3,8 +3,8 @@
  * @version:
  * @Author: WangPeng
  * @Date: 2022-01-13 11:42:16
- * @LastEditors: WangPeng
- * @LastEditTime: 2022-01-19 17:55:00
+ * @LastEditors: 王鹏
+ * @LastEditTime: 2022-01-23 12:04:39
  */
 import { message } from 'antd';
 import { cloneDeep } from 'lodash';
@@ -105,4 +105,13 @@ export const signInEmail = (email) => {
   if (!key) return message.error('暂无该邮箱的跳转地址');
 
   window.open(hash[key]);
+};
+
+/**
+ * 数组对象去重
+ */
+export const distinctObjectMap = (arr, type) => {
+  const res = new Map();
+  // 使用map记录下每个item的id，已存在的id将不会被筛选入内
+  return arr.filter((item) => !res.has(item[type]) && res.set(item[type], 1));
 };
