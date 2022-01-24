@@ -3,10 +3,11 @@
  * @version:
  * @Author: WangPeng
  * @Date: 2021-12-29 11:04:51
- * @LastEditors: 王鹏
- * @LastEditTime: 2022-01-23 11:32:04
+ * @LastEditors: WangPeng
+ * @LastEditTime: 2022-01-24 10:57:50
  */
 import React, { useEffect, useState } from 'react';
+import { history } from 'umi';
 import { getOnlyDictObj } from '@/utils/globalDataUtils';
 import { addLayoutNavStyle } from '@/utils/utils';
 import styles from './index.less';
@@ -14,6 +15,11 @@ import styles from './index.less';
 const Classify = () => {
   // 分类列表
   const [classList, setClassList] = useState<any[] | any>([]);
+
+  // 跳转博文列表页
+  const goClassifyList = (obj, type) => {
+    history.push({ pathname: '/classify/list', state: { obj, type } });
+  };
 
   useEffect(() => {
     addLayoutNavStyle();
@@ -25,11 +31,31 @@ const Classify = () => {
         {classList?.map((item) => (
           <div className={styles.classListItem} key={item.id}>
             <div className={styles.classItem}>
-              <span className={styles.classItem_name}>{item.classDesc}</span>
+              <span
+                onClick={() =>
+                  goClassifyList(
+                    { classDesc: item.classDesc, id: item.id },
+                    'one',
+                  )
+                }
+                className={styles.classItem_name}
+              >
+                {item.classDesc}
+              </span>
             </div>
             <div className={styles.classItem_subList}>
               {item.children?.map((ite) => (
-                <span key={ite.id}>{ite.classDesc}</span>
+                <span
+                  onClick={() =>
+                    goClassifyList(
+                      { classDesc: ite.classDesc, id: ite.id },
+                      'two',
+                    )
+                  }
+                  key={ite.id}
+                >
+                  {ite.classDesc}
+                </span>
               ))}
             </div>
           </div>
