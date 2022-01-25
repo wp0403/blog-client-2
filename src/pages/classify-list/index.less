@@ -2,7 +2,6 @@
   width: 100%;
   height: 100%;
   padding-top: 60px;
-  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,13 +21,70 @@
 
   .listBox {
     width: 85%;
-    height: 70%;
-    background-color: aliceblue;
   }
 
   .pageBox {
     width: 85%;
-    height: 20%;
-    background-color: aquamarine;
+  }
+}
+
+.list_item {
+  width: 100%;
+  height: 300px;
+  padding: 20px;
+  background-color: var(--w-alpha-20);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  margin-bottom: 20px;
+
+  .list_item_left {
+    width: 40%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+    }
+  }
+
+  .list_item_right {
+    width: 60%;
+    height: 100%;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+
+    .list_item_title {
+      width: 100%;
+      height: 60px;
+      font-size: 24px;
+      line-height: 60px;
+    }
+
+    .list_item_info {
+      width: 100%;
+
+      span {
+        cursor: pointer;
+      }
+    }
+
+    .list_item_desc {
+      width: 100%;
+    }
+
+    .list_item_time {
+      width: 100%;
+    }
+
+    .list_item_author {
+      width: 100%;
+    }
   }
 }

@@ -40,16 +40,6 @@ export const bowen_class_sub = [
   },
   { id: 4, classDesc: 'git', children: [{ id: '4_1', classDesc: 'git' }] },
   { id: 5, classDesc: '设计', children: [{ id: '5_1', classDesc: '设计' }] },
-  {
-    id: 6,
-    classDesc: '吃喝玩乐',
-    children: [
-      { id: '6_1', classDesc: '旅游' },
-      { id: '6_2', classDesc: '摄影' },
-      { id: '6_3', classDesc: '美食' },
-      { id: '6_4', classDesc: '其它' },
-    ],
-  },
 ];
 
 // 仅一级分类
@@ -59,7 +49,6 @@ export const bowen_class = [
   { id: 3, classDesc: '数据库' },
   { id: 4, classDesc: 'git' },
   { id: 5, classDesc: '设计' },
-  { id: 6, classDesc: '吃喝玩乐' },
 ];
 
 // 背景图片数据
@@ -88,6 +77,21 @@ export const imgs = [
     id: 5,
     title: '墨韵',
     src: '/bgImg/bg00005.jpg',
+  },
+  {
+    id: 6,
+    title: '墨韵',
+    src: '/bgImg/bg00006.jpg',
+  },
+  {
+    id: 7,
+    title: '墨韵',
+    src: '/bgImg/bg00007.jpg',
+  },
+  {
+    id: 8,
+    title: '墨韵',
+    src: '/bgImg/bg00008.jpg',
   },
 ];
 
