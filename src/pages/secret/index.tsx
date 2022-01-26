@@ -3,8 +3,8 @@
  * @version:
  * @Author: WangPeng
  * @Date: 2021-12-29 11:06:42
- * @LastEditors: 王鹏
- * @LastEditTime: 2022-01-23 12:47:42
+ * @LastEditors: WangPeng
+ * @LastEditTime: 2022-01-26 16:24:17
  */
 import React, { useEffect, useState, useRef } from 'react';
 import { useSize } from 'ahooks';
@@ -119,7 +119,7 @@ const Secret = () => {
             <div className={styles.secret_item_null}></div>
             <div className={styles.secret_item_content}>
               <div className={styles.secret_item_content_label}>
-                <SysIcon type="icon-pingguo1" className={styles.icon} />
+                <SysIcon type="icon-pingguo" className={styles.icon} />
               </div>
               <div className={styles.secret_item_content_con}>
                 <div className={styles.secret_item_content_con_loading}>
@@ -136,7 +136,7 @@ const Secret = () => {
             <div className={styles.secret_item_content}>
               <div className={styles.secret_item_content}>
                 <div className={styles.secret_item_content_label}>
-                  <SysIcon type="icon-pingguo1" className={styles.icon} />
+                  <SysIcon type="icon-pingguo" className={styles.icon} />
                 </div>
                 <div className={styles.secret_item_content_con}>
                   <div className={styles.secret_item_content_con_loading}>

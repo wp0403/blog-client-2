@@ -1,0 +1,30 @@
+.pageBox {
+  display: flex;
+  height: 100%;
+  align-items: center;
+
+  .pageBox_prev,
+  .pageBox_next {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--w-alpha-10);
+    border-radius: 10px;
+    font-size: 18px;
+    margin: 0 5px;
+    cursor: pointer;
+    color: var(--txt-b-pure) !important;
+    font-weight: 600;
+
+    &:hover {
+      background-color: var(--w-alpha-30);
+    }
+  }
+
+  .pageBox_con {
+    display: flex;
+    align-items: center;
+  }
+}
