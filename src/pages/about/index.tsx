@@ -7,10 +7,16 @@
  * @LastEditTime: 2022-01-05 17:05:22
  */
 import React from 'react';
+import LoadingCard from '@/components/LoadingCard';
 import styles from './index.less';
 
 const About = () => {
-  return <div>about 关于</div>;
+  return (
+    <div>
+      about 关于
+      <LoadingCard />
+    </div>
+  );
 };
 
 export default About;
