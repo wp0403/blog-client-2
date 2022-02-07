@@ -36,6 +36,7 @@
     "rc-util": "^5.16.1",
     "react": "17.x",
     "react-dom": "17.x",
+    "react-markdown": "^8.0.0",
     "react-tsparticles": "^1.38.0",
     "snakecase-keys": "^5.1.2",
     "tsparticles": "^1.38.0",
