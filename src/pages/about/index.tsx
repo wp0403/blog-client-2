@@ -4,13 +4,13 @@
  * @Author: WangPeng
  * @Date: 2021-12-29 11:03:48
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-02-06 08:10:37
+ * @LastEditTime: 2022-02-08 14:40:23
  */
 import React from 'react';
 import type { UserDate } from '@/utils/globalDataUtils';
 import { getGlobalUserData } from '@/utils/globalDataUtils';
-// import ReactMarkdown from 'react-markdown';
 import styles from './index.less';
+import RanderMarkdown from '@/components/RanderMarkdown';
 
 const About = () => {
   const userData = getGlobalUserData() as UserDate;
@@ -20,8 +20,7 @@ const About = () => {
   return (
     <div className={styles.about}>
       <div className={styles.content}>
-        {userData.about_page}
-        {/* <ReactMarkdown>{userData.about_page}</ReactMarkdown> */}
+        <RanderMarkdown markdown={userData.about_page} />
       </div>
     </div>
   );

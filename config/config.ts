@@ -97,5 +97,5 @@ export default defineConfig({
   fastRefresh: {},
   // esbuild: {},
   // 使用 webpack 5 代替 webpack 4 进行构建。
-  webpack5: {},
+  // webpack5: {},
 });
