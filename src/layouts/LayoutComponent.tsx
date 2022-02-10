@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { Redirect } from 'umi';
 import Nav from '@/components/Nav';
 import Bg from '@/components/Bg/Img';
 import * as authorityUtils from '@/utils/authorityUtils';
 import { isFlagGetGlobalData, initGlobalData } from '@/utils/globalDataUtils';
-import { getLayoutDom } from '@/utils/utils';
+import { getLayoutDom, getTheme } from '@/utils/utils';
 import style from './index.less';
 
 const LayoutPage = (props: any) => {
@@ -41,6 +41,7 @@ const LayoutPage = (props: any) => {
   // 黑白切换
   const switchTheme = () => {
     document.documentElement.classList.toggle('dark');
+    getTheme();
   };
 
   useEffect(() => {

@@ -1,17 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { Fragment } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 // 设置高亮样式
 import { coy } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
-import darkStyle from './darkStyle';
+import './style.less';
 
 const RanderMarkdown = (props: any) => {
   return (
-    <div className={darkStyle.markdown_body}>
+    <Fragment>
       <ReactMarkdown
         children={props.markdown}
+        className="markdown_body"
         remarkPlugins={[remarkGfm]}
         components={{
           code({ node, inline, className, children, ...props }) {
@@ -32,7 +33,7 @@ const RanderMarkdown = (props: any) => {
           },
         }}
       />
-    </div>
+    </Fragment>
   );
 };
 

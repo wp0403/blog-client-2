@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-01-13 11:29:46
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-01-27 14:30:02
+ * @LastEditTime: 2022-02-10 10:01:09
  */
 
 // 页面背景盒子
@@ -13,6 +13,8 @@ let bgDom: any = null;
 export let layoutContent: any = null;
 // 全局导航盒子
 export let layoutNav: any = null;
+// 当前的主题
+export let theme: boolean = false;
 
 // 初始化获取全局元素
 export const getLayoutDom = () => {
@@ -66,4 +68,9 @@ export const bindHandleScroll = () => {
 export const removeScroll = () => {
   if (!layoutContent) return;
   layoutContent.removeEventListener('scroll', pageScroll, false);
+};
+
+// 获取当前的主题
+export const getTheme = () => {
+  theme = document.documentElement.classList.contains('dark');
 };
