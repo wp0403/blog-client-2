@@ -32,6 +32,7 @@ export default defineConfig({
     antd: true,
     baseNavigator: true,
   },
+  publicPath: '/',
   antd: {},
   dva: {
     hmr: true,
@@ -75,9 +76,9 @@ export default defineConfig({
    * @desc 配置是否需要生成额外用于描述产物的 manifest 文件，默认会生成 asset-manifest.json
    * basePath，给所有文件路径加前缀
    */
-  manifest: {
-    basePath: '/',
-  },
+  // manifest: {
+  //   basePath: '/',
+  // },
   extraPostCSSPlugins: [
     require('postcss-flexbugs-fixes'),
     require('postcss-px-to-viewport')({
@@ -98,4 +99,13 @@ export default defineConfig({
   // esbuild: {},
   // 使用 webpack 5 代替 webpack 4 进行构建。
   // webpack5: {},
+  // 配置是否开启服务端渲染，配置如下：
+  // ssr: {
+  //   // 更多配置
+  //   // forceInitial: false,
+  //   // removeWindowInitialProps: false
+  //   // devServerRender: true,
+  //   // mode: 'string',
+  //   // staticMarkup: false,
+  // }
 });
