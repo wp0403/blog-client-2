@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-01-27 12:36:13
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-02-10 18:12:09
+ * @LastEditTime: 2022-02-11 14:07:23
  */
 import React, { useState, useEffect } from 'react';
 import { useSize } from 'ahooks';
@@ -40,6 +40,8 @@ const ClassifyDetails = (props: any) => {
   const [data, setData] = useState<any>({});
   // loading
   const [loading, setLoading] = useState<boolean>(false);
+  // 上一条和下一条的列表
+  const [footerList, setFooterList] = useState<any[]>([]);
   // 获取详情数据
   const getClassifyDetails = async () => {
     setLoading(true);
@@ -52,15 +54,34 @@ const ClassifyDetails = (props: any) => {
       })
       .finally(() => setLoading(false));
   };
+  // 获取详情上一条和下一条数据
+  const getClassifyDetailsFooterList = async () => {
+    await classify
+      ._getClassifyDetailsFooter({ params: { id } })
+      .then(({ data }) => {
+        if (data.code === 200) {
+          setFooterList(data.data);
+        }
+      });
+  };
 
   // 跳转博文列表页
-  const goClassifyList = (id, type) => {
-    history.push({ pathname: '/classify/list', state: { obj: { id }, type } });
+  const goClassifyList = (ids, type) => {
+    history.push({
+      pathname: '/classify/list',
+      state: { obj: { id: ids }, type },
+    });
+  };
+
+  // 跳转详情页
+  const goDetails = (ids) => {
+    history.push({ pathname: '/classify/details', state: { id: ids } });
   };
 
   useEffect(() => {
     getClassifyDetails();
-  }, []);
+    getClassifyDetailsFooterList();
+  }, [id]);
 
   useEffect(() => {
     setBg(false);
@@ -133,6 +154,30 @@ const ClassifyDetails = (props: any) => {
           </div>
           <div className={styles.footer}>
             <Permit />
+            <div className={styles.prev_next}>
+              <div
+                className={styles.prev}
+                onClick={() =>
+                  footerList[0]?.obj.id && goDetails(footerList[0]?.obj.id)
+                }
+              >
+                <div className={styles.prev_title}>上一篇</div>
+                <div className={styles.prev_content}>
+                  {footerList[0]?.obj.id ? footerList[0]?.obj.title : '没有了'}
+                </div>
+              </div>
+              <div
+                className={styles.next}
+                onClick={() =>
+                  footerList[1]?.obj.id && goDetails(footerList[1]?.obj.id)
+                }
+              >
+                <div className={styles.next_title}>下一篇</div>
+                <div className={styles.next_content}>
+                  {footerList[1]?.obj.id ? footerList[1]?.obj.title : '没有了'}
+                </div>
+              </div>
+            </div>
           </div>
         </>
       ) : (
