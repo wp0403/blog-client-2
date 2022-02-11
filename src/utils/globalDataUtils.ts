@@ -3,8 +3,8 @@
  * @version:
  * @Author: WangPeng
  * @Date: 2022-01-18 11:05:40
- * @LastEditors: 王鹏
- * @LastEditTime: 2022-01-23 10:11:53
+ * @LastEditors: WangPeng
+ * @LastEditTime: 2022-02-06 07:13:41
  */
 import api from '@/api';
 
@@ -22,6 +22,7 @@ export interface UserDate {
   about: string;
   aboutTags: string;
   secret_guide: string;
+  about_page: string;
 }
 
 interface Dict {

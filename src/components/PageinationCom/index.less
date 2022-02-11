@@ -1,0 +1,79 @@
+.pageBox {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Chrome/Safari/Opera */
+  -khtml-user-select: none;
+  /* Konqueror */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+  not supported by any browser */
+
+  .pageBox_con {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .pageBox_prev,
+    .pageBox_next {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--w-alpha-10);
+      border-radius: 10px;
+      font-size: 18px;
+      margin: 0 5px;
+      cursor: pointer;
+      color: var(--txt-b-pure) !important;
+      font-weight: 600;
+      flex-shrink: 0;
+
+      &:hover {
+        background-color: var(--w-alpha-30);
+      }
+    }
+
+    .pageBox_btn_disable {
+      cursor: not-allowed;
+
+      &:hover {
+        background-color: var(--w-alpha-10) !important;
+      }
+    }
+
+    .pageBox_con_first,
+    .pageBox_con_last,
+    .pageBox_con_item {
+      padding: 0 15px;
+      height: 40px;
+      display: block;
+      line-height: 40px;
+      white-space: nowrap;
+      background-color: var(--w-alpha-10);
+      border-radius: 10px;
+      font-size: 14px;
+      margin: 5px;
+      cursor: pointer;
+      color: var(--txt-b-pure) !important;
+      flex-shrink: 0;
+
+      &:hover {
+        background-color: var(--w-alpha-30);
+      }
+    }
+
+    .pageBox_con_item_active {
+      background-color: var(--w-alpha-50);
+    }
+  }
+}

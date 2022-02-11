@@ -3,8 +3,8 @@
  * @version:
  * @Author: WangPeng
  * @Date: 2021-12-23 18:13:58
- * @LastEditors: 王鹏
- * @LastEditTime: 2022-01-23 11:44:14
+ * @LastEditors: WangPeng
+ * @LastEditTime: 2022-01-27 14:29:46
  */
 import React, { useState, useEffect } from 'react';
 import { history } from 'umi';
@@ -12,7 +12,12 @@ import { Drawer } from 'antd';
 import { useSize } from 'ahooks';
 import { MenuOutlined } from '@ant-design/icons';
 import { authRouterFilter, filterNoName } from '@/utils/authorityUtils';
-import { removeLayoutNavStyle, layoutNav, setBg } from '@/utils/utils';
+import {
+  removeLayoutNavStyle,
+  layoutNav,
+  setBg,
+  layoutContent,
+} from '@/utils/utils';
 import SysIcon from '@/components/SysIcon';
 import styles from './index.less';
 
@@ -94,7 +99,7 @@ const Nav = (props: Props) => {
     ind: number | null,
   ) => {
     if (path === props.location.pathname) return;
-
+    layoutContent.scrollTop = 0;
     history.push(path);
     setRouteItemInd(index);
     setSubRouteItemInd(ind);

@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-01-06 11:43:49
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-01-19 10:18:55
+ * @LastEditTime: 2022-01-25 14:52:05
  */
 import React, { useState, useEffect } from 'react';
 import { imgs } from '@/utils/desc';
@@ -15,7 +15,7 @@ interface Props {
 }
 
 const Img = (props: Props) => {
-  let { ind = 0 } = props;
+  let { ind = 7 } = props;
 
   if (ind > imgs.length - 1) {
     ind = 0;

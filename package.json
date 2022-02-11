@@ -26,6 +26,7 @@
     "ahooks": "^3.0.0-alpha.18",
     "autoprefixer": "^8.0.0",
     "axios": "^0.24.0",
+    "github-markdown-css": "^5.1.0",
     "juice": "^8.0.0",
     "lodash": "^4.17.21",
     "postcss-flexbugs-fixes": "^4.1.0",
@@ -37,14 +38,20 @@
     "react": "17.x",
     "react-dom": "17.x",
     "react-markdown": "^8.0.0",
+    "react-syntax-highlighter": "^15.4.5",
     "react-tsparticles": "^1.38.0",
+    "remark-gfm": "^3.0.1",
     "snakecase-keys": "^5.1.2",
     "tsparticles": "^1.38.0",
     "umi": "^3.5.20"
   },
+  "engines": {
+    "node": ">=10.0.0"
+  },
   "devDependencies": {
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "@types/react-syntax-highlighter": "^13.5.2",
     "@umijs/preset-react": "1.x",
     "@umijs/test": "^3.5.20",
     "lint-staged": "^10.0.7",

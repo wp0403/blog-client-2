@@ -3,8 +3,8 @@
  * @version: 1.1.1
  * @Author: 王鹏
  * @Date: 2022-01-22 13:20:17
- * @LastEditors: 王鹏
- * @LastEditTime: 2022-01-23 15:08:13
+ * @LastEditors: WangPeng
+ * @LastEditTime: 2022-02-08 13:48:28
  */
 export default [
   {
@@ -24,10 +24,15 @@ export default [
         path: '/classify',
         name: '分类',
         component: './classify',
+        access: 'canReadPageA', // 权限定义返回值的某个 key
       },
       {
         path: '/classify/list',
         component: './classify-list',
+      },
+      {
+        path: '/classify/details',
+        component: './classify-details',
       },
       {
         path: '/projectLibrary',
