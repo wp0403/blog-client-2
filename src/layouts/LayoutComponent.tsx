@@ -45,7 +45,7 @@ const LayoutPage = (props: any) => {
   };
 
   useEffect(() => {
-    switchTheme();
+    getTheme();
     getLayoutDom();
   }, []);
 
