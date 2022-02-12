@@ -3,9 +3,10 @@
  * @version:
  * @Author: WangPeng
  * @Date: 2022-01-18 11:05:40
- * @LastEditors: WangPeng
- * @LastEditTime: 2022-02-06 07:13:41
+ * @LastEditors: 王鹏
+ * @LastEditTime: 2022-02-12 11:23:00
  */
+import { history } from 'umi';
 import api from '@/api';
 
 const { all } = api;
@@ -99,4 +100,6 @@ export const initGlobalData = async (obj) => {
     }
     setGlobalDict(globalDictList);
   });
+
+  history.go(0);
 };

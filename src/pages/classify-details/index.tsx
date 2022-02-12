@@ -3,8 +3,8 @@
  * @version:
  * @Author: WangPeng
  * @Date: 2022-01-27 12:36:13
- * @LastEditors: WangPeng
- * @LastEditTime: 2022-02-11 14:07:23
+ * @LastEditors: 王鹏
+ * @LastEditTime: 2022-02-12 10:39:10
  */
 import React, { useState, useEffect } from 'react';
 import { useSize } from 'ahooks';
@@ -32,6 +32,8 @@ const ClassifyDetails = (props: any) => {
   const {
     state: { id },
   } = props.location;
+  console.log(props.location);
+
   // 获取当前窗口大小
   const size = useSize(document.body);
   // 样式类型
