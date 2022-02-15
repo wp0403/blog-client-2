@@ -2,14 +2,14 @@
  * @Descripttion:
  * @version:
  * @Author: WangPeng
- * @Date: 2021-12-23 17:33:30
+ * @Date: 2022-02-14 11:40:55
  * @LastEditors: WangPeng
- * @LastEditTime: 2021-12-23 17:33:31
+ * @LastEditTime: 2022-02-14 11:40:56
  */
 import React from 'react';
 
-const index = () => {
-  return <div>123</div>;
+const PageLoading = () => {
+  return <div>111</div>;
 };
 
-export default index;
+export default PageLoading;

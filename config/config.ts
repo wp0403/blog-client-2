@@ -52,7 +52,7 @@ export default defineConfig({
    * 子配置项 loading, 类型为字符串，指向 loading 组件文件
    */
   dynamicImport: {
-    loading: '@/components/PageLoading/index',
+    loading: '@/components/LoadingCard',
   },
   /**
    * @desc 配置需要兼容的浏览器最低版本，会自动引入 polyfill 和做语法转换。
