@@ -4,9 +4,10 @@
  * @Author: WangPeng
  * @Date: 2022-01-11 18:19:11
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-01-27 11:15:15
+ * @LastEditTime: 2022-02-15 14:02:49
  */
 import React, { useState, useEffect } from 'react';
+import { history } from 'umi';
 import { useSize } from 'ahooks';
 import { message } from 'antd';
 import CarouselCom from '@/components/CarouselCom';
@@ -44,6 +45,11 @@ const Graphic = () => {
     }
   }, [size?.width]);
 
+  // 跳转详情页
+  const goDetails = (id) => {
+    history.push({ pathname: '/classify/details', state: { id } });
+  };
+
   // 轮播渲染函数
   const renderItem = (item: Item) => {
     const flag = Math.random() >= 0.5;
@@ -69,6 +75,7 @@ const Graphic = () => {
         className={
           classType ? styles.carouselComItemMobile : styles.carouselComItem
         }
+        onClick={() => goDetails(item.id)}
       >
         {flag ? (
           <>
@@ -77,10 +84,8 @@ const Graphic = () => {
           </>
         ) : (
           <>
-            <>
-              {txtBox(item)}
-              {imgBox(item)}
-            </>
+            {txtBox(item)}
+            {imgBox(item)}
           </>
         )}
       </div>

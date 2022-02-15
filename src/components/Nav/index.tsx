@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2021-12-23 18:13:58
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-02-15 10:22:32
+ * @LastEditTime: 2022-02-15 14:36:51
  */
 import React, { useState, useEffect } from 'react';
 import { history } from 'umi';
@@ -27,7 +27,12 @@ interface Props {
 }
 
 const Nav = (props: Props) => {
-  const { route, style } = props;
+  const {
+    route,
+    style,
+    location: { pathname },
+  } = props;
+
   // 过滤权限路由
   let routes = Array.isArray(authRouterFilter(route))
     ? authRouterFilter(route)
@@ -69,7 +74,6 @@ const Nav = (props: Props) => {
 
   // 根据当前地址栏匹配路由高亮
   useEffect(() => {
-    const pathname = props.location.pathname;
     const pathnameList = pathname.split('/').filter((ite) => ite);
 
     const searchRputeInd = () => {
@@ -81,7 +85,7 @@ const Nav = (props: Props) => {
         }
 
         if (pathnameList.length > 1) {
-          item.routes?.forEach((ite, ind) => {
+          item?.routes?.forEach((ite, ind) => {
             if (ite.path === pathname) {
               setSubRouteItemInd(ind);
             }
@@ -91,7 +95,7 @@ const Nav = (props: Props) => {
     };
 
     searchRputeInd();
-  }, []);
+  }, [pathname]);
 
   // 跳转路由
   const goToListPage = (
