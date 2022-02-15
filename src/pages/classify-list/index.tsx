@@ -4,7 +4,7 @@
  * @Author: 王鹏
  * @Date: 2022-01-23 11:24:13
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-02-10 14:34:05
+ * @LastEditTime: 2022-02-15 10:33:25
  */
 import React, { useEffect, useState } from 'react';
 import { history } from 'umi';
@@ -122,6 +122,7 @@ const ClassifyList = (props) => {
           classType && styles.list_item_mobile
         }`}
         key={item.id}
+        onClick={() => goDetails(item.id)}
       >
         <div className={styles.list_item_left}>
           <img src={item.img} alt="" />
@@ -138,14 +139,20 @@ const ClassifyList = (props) => {
               <SysIcon className={styles.icon} type="icon-biaoqian" />
               <span
                 className={styles.list_item_type_item}
-                onClick={() => clickTab(item.classify_id, 'one')}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  clickTab(item.classify_id, 'one');
+                }}
               >
                 {item.classify}
               </span>
               |
               <span
                 className={styles.list_item_type_item}
-                onClick={() => clickTab(item.classify_sub_id, 'two')}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  clickTab(item.classify_sub_id, 'two');
+                }}
               >
                 {item.classify_sub}
               </span>

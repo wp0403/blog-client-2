@@ -4,13 +4,12 @@
  * @Author: WangPeng
  * @Date: 2021-12-23 18:13:58
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-01-27 14:29:46
+ * @LastEditTime: 2022-02-15 10:22:32
  */
 import React, { useState, useEffect } from 'react';
 import { history } from 'umi';
 import { Drawer } from 'antd';
 import { useSize } from 'ahooks';
-import { MenuOutlined } from '@ant-design/icons';
 import { authRouterFilter, filterNoName } from '@/utils/authorityUtils';
 import {
   removeLayoutNavStyle,
@@ -38,6 +37,8 @@ const Nav = (props: Props) => {
   routes = filterNoName(routes);
   // 样式类型
   const [classType, setClassType] = useState<number>(1);
+  // 主题类型
+  const [theme, setTheme] = useState<boolean>(true);
   // 抽屉显隐
   const [visible, setVisible] = useState(false);
   // 显示抽屉
@@ -147,12 +148,17 @@ const Nav = (props: Props) => {
   const pcNav = (
     <div className={styles.nav_pc}>
       <div className={styles.nav_pc_left}>
+        <div className={styles.nav_pc_name}>
+          <img src="/favicon.png" alt="" />
+        </div>
         <SysIcon
-          className={styles.pc_icon}
-          type="icon-a-weixiaobiaoqing"
-          onClick={props.switchTheme}
+          className={styles.nav_pc_icon}
+          type={theme ? 'icon-taiyang' : 'icon-yueliang'}
+          onClick={() => {
+            setTheme((v) => !v);
+            props.switchTheme();
+          }}
         />
-        <div>{JSON.stringify(scroll)}</div>
       </div>
       <div className={styles.nav_pc_right}>{renderRouter(routes)}</div>
     </div>
@@ -162,20 +168,25 @@ const Nav = (props: Props) => {
   const mobileNav = (
     <div className={styles.nav_mobile}>
       <div className={styles.nav_mobile_left}>
+        <div className={styles.nav_mobile_name}>
+          <img src="/favicon.png" alt="" />
+        </div>
         <SysIcon
-          className={styles.mobile_icon}
-          type="icon-a-weixiaobiaoqing"
-          onClick={props.switchTheme}
+          className={styles.nav_mobile_ico}
+          type={theme ? 'icon-taiyang' : 'icon-yueliang'}
+          onClick={() => {
+            setTheme((v) => !v);
+            props.switchTheme();
+          }}
         />
-        <div>{JSON.stringify(scroll)}</div>
       </div>
       <div className={styles.nav_mobile_right}>
         <div className={styles.nav_mobile_drawer} onClick={showDrawer}>
-          <MenuOutlined />
+          <SysIcon type="icon-daohang-caidan" />
         </div>
       </div>
       <Drawer
-        title="Basic Drawer"
+        title="导航菜单"
         placement="right"
         onClose={onClose}
         visible={visible}
