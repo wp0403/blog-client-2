@@ -15,6 +15,18 @@ const devtoolMap = {
 
 export default defineConfig({
   /**
+   * @desc 配置开发服务器。
+   * @type object
+   * @default {}
+   * port，端口号，默认 8000
+   * host，默认 0.0.0.0
+   * https，是否启用 https server，同时也会开启 HTTP/2
+   * writeToDisk，生成 assets 到文件系统
+   */
+  devServer: {
+    port: 3000,
+  },
+  /**
    * @desc 配置是否让生成的文件包含 hash 后缀，通常用于增量发布和避免浏览器加载缓存。
    */
   hash: true,

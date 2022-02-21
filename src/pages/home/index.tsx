@@ -49,6 +49,8 @@ const Home = () => {
   }, []);
   // 监听页面宽度，设置样式
   useEffect(() => {
+    console.log(process.env);
+
     if (size?.width && size?.width < 700) {
       setClassType(1);
     }

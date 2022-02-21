@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2021-12-29 11:07:43
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-02-16 17:52:50
+ * @LastEditTime: 2022-02-21 11:34:39
  */
 import React, { useEffect } from 'react';
 import { useSize } from 'ahooks';
@@ -50,16 +50,10 @@ const TimeAxis = () => {
   }, []);
   return (
     <div className={styles.timeAxis}>
-      <div className={styles.header}>
-        <div className={styles.header_left}>
-          <div className={styles.num}>2022</div>
-          <div className={styles.company}>YEAR</div>
-        </div>
-        <div className={styles.header_right}>网站成长史</div>
-      </div>
+      <div className={styles.header}>网站成长史</div>
       <div className={styles.main}>
         {arr.map((item, index) => (
-          <div className={styles.list_item}></div>
+          <div className={styles.list_item}>{item.title}</div>
         ))}
       </div>
       <div className={styles.footer}></div>
