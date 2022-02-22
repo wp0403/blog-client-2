@@ -3,8 +3,8 @@
  * @version:
  * @Author: WangPeng
  * @Date: 2021-12-23 16:28:08
- * @LastEditors: 王鹏
- * @LastEditTime: 2022-02-12 11:15:16
+ * @LastEditors: WangPeng
+ * @LastEditTime: 2022-02-22 14:10:23
  */
 import React, { useEffect, useRef, useState } from 'react';
 import { useSize } from 'ahooks';
@@ -49,8 +49,6 @@ const Home = () => {
   }, []);
   // 监听页面宽度，设置样式
   useEffect(() => {
-    console.log(process.env);
-
     if (size?.width && size?.width < 700) {
       setClassType(1);
     }

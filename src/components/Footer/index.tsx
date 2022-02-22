@@ -3,8 +3,8 @@
  * @version: 1.1.1
  * @Author: 张三
  * @Date: 2021-07-09 07:11:30
- * @LastEditors: 王鹏
- * @LastEditTime: 2022-01-23 00:39:53
+ * @LastEditors: WangPeng
+ * @LastEditTime: 2022-02-22 14:02:24
  */
 import React, { useState, useEffect } from 'react';
 import { Carousel, message } from 'antd';
@@ -54,7 +54,12 @@ const Footer = () => {
         <div className={style.tags}>
           {footerRouter[0] &&
             footerRouter?.map((item: any) => (
-              <a className={style.tagItem} key={item?.id} href={item?.path}>
+              <a
+                className={style.tagItem}
+                target="_blank"
+                key={item?.id}
+                href={item?.path}
+              >
                 {item?.text}
               </a>
             ))}

@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Redirect } from 'umi';
 import Nav from '@/components/Nav';
 import Bg from '@/components/Bg/Img';
+import LoadingCard from '@/components/LoadingCard';
 import * as authorityUtils from '@/utils/authorityUtils';
 import { isFlagGetGlobalData, initGlobalData } from '@/utils/globalDataUtils';
 import { getLayoutDom, getTheme } from '@/utils/utils';
@@ -13,12 +14,17 @@ const LayoutPage = (props: any) => {
     location: { pathname },
     route,
   } = props;
+
+  const [readPage, setReadPage] = useState<Boolean>(false);
+
   // 初始化获取权限
   !authorityUtils.getGlobalAuthorityModule() &&
     authorityUtils.initGlobalAuthority();
 
   // 初始化获取全局资源
-  !isFlagGetGlobalData() && initGlobalData({});
+  !isFlagGetGlobalData()
+    ? initGlobalData({ fun: setReadPage })
+    : !readPage && setReadPage(true);
 
   // 检查当前路由是否可以访问（或者有没有权限访问）
   const checkAuth = authorityUtils.matchingRoute(pathname, route) || '/404';
@@ -45,11 +51,12 @@ const LayoutPage = (props: any) => {
   };
 
   useEffect(() => {
+    if (!readPage) return;
     getTheme();
     getLayoutDom();
-  }, []);
+  }, [readPage]);
 
-  return (
+  return readPage ? (
     <div className={style.pro_layout}>
       <Bg />
       <Nav {...props} switchTheme={switchTheme} />
@@ -57,6 +64,8 @@ const LayoutPage = (props: any) => {
         {Authorized()}
       </div>
     </div>
+  ) : (
+    <LoadingCard />
   );
 };
 

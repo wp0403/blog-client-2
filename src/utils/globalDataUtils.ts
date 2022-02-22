@@ -3,8 +3,8 @@
  * @version:
  * @Author: WangPeng
  * @Date: 2022-01-18 11:05:40
- * @LastEditors: 王鹏
- * @LastEditTime: 2022-02-12 11:23:00
+ * @LastEditors: WangPeng
+ * @LastEditTime: 2022-02-22 15:52:21
  */
 import { history } from 'umi';
 import api from '@/api';
@@ -86,8 +86,8 @@ export const isFlagGetGlobalData = () => {
 };
 
 // 初始化获取全局资源
-export const initGlobalData = async (obj) => {
-  const { id = null } = obj;
+export const initGlobalData = async (obj: any) => {
+  const { id = null, fun } = obj;
   await all._getUserData({ params: { id } }).then((res) => {
     if (res.data.code === 200) {
       globalUserDate = res.data?.data;
@@ -100,6 +100,5 @@ export const initGlobalData = async (obj) => {
     }
     setGlobalDict(globalDictList);
   });
-
-  history.go(0);
+  await fun(true);
 };
