@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2021-12-29 11:07:43
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-02-21 11:34:39
+ * @LastEditTime: 2022-02-23 13:33:09
  */
 import React, { useEffect } from 'react';
 import { useSize } from 'ahooks';
@@ -53,7 +53,13 @@ const TimeAxis = () => {
       <div className={styles.header}>网站成长史</div>
       <div className={styles.main}>
         {arr.map((item, index) => (
-          <div className={styles.list_item}>{item.title}</div>
+          <div className={styles.list_item}>
+            <div className={styles.list_item_title}>
+              <div className={styles.list_item_title_left}>{item.time}</div>
+              <div className={styles.list_item_title_right}>{item.title}</div>
+            </div>
+            <div className={styles.list_item_content}>{item.desc}</div>
+          </div>
         ))}
       </div>
       <div className={styles.footer}></div>

@@ -33,6 +33,9 @@ const RanderMarkdown = (props: any) => {
               </code>
             );
           },
+          img({ src, alt }) {
+            return <img onClick={() => alert('aaa')} src={src} alt={alt} />;
+          },
         }}
       />
     </Fragment>
