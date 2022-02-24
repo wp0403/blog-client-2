@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2021-12-29 11:07:43
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-02-23 13:33:09
+ * @LastEditTime: 2022-02-24 18:15:19
  */
 import React, { useEffect } from 'react';
 import { useSize } from 'ahooks';
@@ -62,7 +62,6 @@ const TimeAxis = () => {
           </div>
         ))}
       </div>
-      <div className={styles.footer}></div>
     </div>
   );
 };
