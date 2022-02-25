@@ -4,11 +4,16 @@
  * @Author: WangPeng
  * @Date: 2021-12-29 11:07:43
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-02-24 18:15:19
+ * @LastEditTime: 2022-02-25 18:01:06
  */
 import React, { useEffect } from 'react';
 import { useSize } from 'ahooks';
-import { setBg } from '@/utils/utils';
+import {
+  setBg,
+  bindHandleScroll,
+  removeScroll,
+  layoutContent,
+} from '@/utils/utils';
 import styles from './index.less';
 
 const arr = [
@@ -42,23 +47,56 @@ const arr = [
     title: '第5个标题',
     desc: '这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字',
   },
+  {
+    id: 11,
+    time: '2022/01/01',
+    title: '第一个标题',
+    desc: '这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字',
+  },
+  {
+    id: 12,
+    time: '2022/01/02',
+    title: '第2个标题',
+    desc: '这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字',
+  },
+  {
+    id: 13,
+    time: '2022/01/03',
+    title: '第3个标题',
+    desc: '这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字',
+  },
+  {
+    id: 14,
+    time: '2022/01/04',
+    title: '第4个标题',
+    desc: '这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字',
+  },
+  {
+    id: 15,
+    time: '2022/01/05',
+    title: '第5个标题',
+    desc: '这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字这是一段文字',
+  },
 ];
 
 const TimeAxis = () => {
+  // 初始化
   useEffect(() => {
     setBg(false);
+    bindHandleScroll();
+
+    return () => {
+      removeScroll();
+    };
   }, []);
   return (
     <div className={styles.timeAxis}>
-      <div className={styles.header}>网站成长史</div>
       <div className={styles.main}>
         {arr.map((item, index) => (
-          <div className={styles.list_item}>
-            <div className={styles.list_item_title}>
-              <div className={styles.list_item_title_left}>{item.time}</div>
-              <div className={styles.list_item_title_right}>{item.title}</div>
-            </div>
-            <div className={styles.list_item_content}>{item.desc}</div>
+          <div className={styles.list_item} key={index}>
+            <div className={styles.list_item_left}>{item.time}</div>
+            <div className={styles.list_item_border} />
+            <div className={styles.list_item_right}>{item.title}</div>
           </div>
         ))}
       </div>
