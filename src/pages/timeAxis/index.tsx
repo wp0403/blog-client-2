@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2021-12-29 11:07:43
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-02-25 18:01:06
+ * @LastEditTime: 2022-02-28 11:33:01
  */
 import React, { useEffect } from 'react';
 import { useSize } from 'ahooks';
@@ -14,6 +14,7 @@ import {
   removeScroll,
   layoutContent,
 } from '@/utils/utils';
+import SysIcon from '@/components/SysIcon';
 import styles from './index.less';
 
 const arr = [
@@ -94,7 +95,12 @@ const TimeAxis = () => {
       <div className={styles.main}>
         {arr.map((item, index) => (
           <div className={styles.list_item} key={index}>
-            <div className={styles.list_item_left}>{item.time}</div>
+            <div className={styles.list_item_left}>
+              <div className={styles.list_item_left_icon}>
+                <SysIcon type="icon-yezi-" />
+              </div>
+              <div className={styles.list_item_left_time}>{item.time}</div>
+            </div>
             <div className={styles.list_item_border} />
             <div className={styles.list_item_right}>{item.title}</div>
           </div>

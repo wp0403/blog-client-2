@@ -9,34 +9,51 @@
 .main {
   width: 100%;
   flex: 1;
+  padding-top: 80px;
 }
 
 .list_item {
-  padding-top: 100px;
   height: 120px;
-  width: 100%;
+  width: 70%;
   margin: 0 auto 20px;
   border-radius: 10px;
   color: var(--b-alpha-80);
   display: flex;
+  box-shadow: -5px -5px 20px var(--bg-w-pure),
+    inset 5px 5px 20px var(--b-alpha-30);
+
+  &:hover {
+    box-shadow: -5px -5px 20px var(--bg-w-pure), 5px 5px 20px var(--b-alpha-30);
+  }
 
   .list_item_left {
-    width: 40%;
+    width: 30%;
     height: 100%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
+
+    .list_item_left_icon {
+      font-size: 24px;
+      margin-right: 50px;
+    }
+
+    .list_item_left_time {
+      font-size: 20px;
+      font-weight: 500;
+    }
   }
 
   .list_item_border {
-    width: 5%;
+    width: 10%;
     height: 100%;
   }
 
   .list_item_right {
-    width: 55%;
+    width: 60%;
     height: 100%;
     display: flex;
     align-items: center;
+    font-size: 16px;
   }
 }

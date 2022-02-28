@@ -35,6 +35,7 @@
     background-color: var(--w-alpha-20);
     padding: 10px;
     border-radius: 20px;
+    box-shadow: -5px -5px 20px var(--bg-w-pure), 5px 5px 20px var(--b-alpha-30);
 
     .classItem {
       width: 100%;
@@ -73,6 +74,7 @@
 
       .classItem_name:hover {
         color: var(--theme-color);
+
         &::after {
           transform: scaleX(1);
         }
@@ -97,6 +99,8 @@
         border-radius: 10px;
         cursor: pointer;
         color: var(--txt-b-pure);
+        box-shadow: -5px -5px 20px var(--bg-w-pure),
+          5px 5px 20px var(--b-alpha-30);
 
         &:hover {
           background-color: var(--theme-color);
