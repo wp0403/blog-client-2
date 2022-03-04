@@ -4,12 +4,12 @@
  * @Author: 王鹏
  * @Date: 2022-01-22 13:20:17
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-02-08 13:48:28
+ * @LastEditTime: 2022-03-04 11:23:23
  */
 export default [
   {
     path: '/',
-    component: '../layouts/layoutComponent',
+    component: '../layouts/LayoutComponent',
     routes: [
       {
         path: '/',
