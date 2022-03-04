@@ -8,6 +8,20 @@ import { coy } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import './style.less';
 
 const RanderMarkdown = (props: any) => {
+  const alertImg = (src: any) => {
+    const imgBox = document.createElement('div');
+    imgBox.className = 'layoutImgBox';
+    imgBox.innerHTML = `<div class="layoutImgBox_content">
+      <img src=${src} />
+    </div>`;
+
+    imgBox.onclick = () => {
+      imgBox.remove();
+    };
+
+    document.body.appendChild(imgBox);
+  };
+
   return (
     <Fragment>
       <ReactMarkdown
@@ -34,7 +48,7 @@ const RanderMarkdown = (props: any) => {
             );
           },
           img({ src, alt }) {
-            return <img onClick={() => alert('aaa')} src={src} alt={alt} />;
+            return <img onClick={() => alertImg(src)} src={src} alt={alt} />;
           },
         }}
       />
