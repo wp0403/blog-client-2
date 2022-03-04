@@ -10,7 +10,7 @@ import React from 'react';
 import styles from './index.less';
 
 const Itinerary = () => {
-  return <div>itinerary 旅行日记aaaaaaaa</div>;
+  return <div>itinerary 旅行日记aaaaaaaaaaaaaaa</div>;
 };
 
 export default Itinerary;
