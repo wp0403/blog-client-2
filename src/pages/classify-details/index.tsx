@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-01-27 12:36:13
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-03-08 14:56:38
+ * @LastEditTime: 2022-03-08 15:03:09
  */
 import React, { useState, useEffect } from 'react';
 import { useSize } from 'ahooks';
@@ -76,8 +76,8 @@ const ClassifyDetails = (props: any) => {
   };
 
   // 跳转详情页
-  const goDetails = (ids, title) => {
-    history.push({ pathname: `/classify/details/${ids}/${title}` });
+  const goDetails = (ids, t) => {
+    history.push({ pathname: `/classify/details/${ids}/${t}` });
   };
 
   useEffect(() => {
