@@ -3,8 +3,8 @@
  * @version:
  * @Author: WangPeng
  * @Date: 2022-01-11 18:19:11
- * @LastEditors: WangPeng
- * @LastEditTime: 2022-02-15 14:02:49
+ * @LastEditors: 王鹏
+ * @LastEditTime: 2022-03-08 20:23:26
  */
 import React, { useState, useEffect } from 'react';
 import { history } from 'umi';
@@ -46,8 +46,8 @@ const Graphic = () => {
   }, [size?.width]);
 
   // 跳转详情页
-  const goDetails = (id) => {
-    history.push({ pathname: '/classify/details', state: { id } });
+  const goDetails = (id, title) => {
+    history.push({ pathname: `/classify/details/${id}/${title}` });
   };
 
   // 轮播渲染函数
@@ -75,7 +75,7 @@ const Graphic = () => {
         className={
           classType ? styles.carouselComItemMobile : styles.carouselComItem
         }
-        onClick={() => goDetails(item.id)}
+        onClick={() => goDetails(item.id, item.title)}
       >
         {flag ? (
           <>
