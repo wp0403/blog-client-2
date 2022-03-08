@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-01-27 12:36:13
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-02-21 17:30:35
+ * @LastEditTime: 2022-03-08 14:56:38
  */
 import React, { useState, useEffect } from 'react';
 import { useSize } from 'ahooks';
@@ -29,9 +29,10 @@ import styles from './index.less';
 const { classify } = api;
 
 const ClassifyDetails = (props: any) => {
-  const {
-    state: { id },
-  } = props.location;
+  const { pathname } = props.location;
+
+  // id为博文id  title为博文标题  为了以后做单网页的收录
+  const [id, title] = pathname.split('/').slice(3);
 
   // 获取当前窗口大小
   const size = useSize(document.body);
@@ -75,8 +76,8 @@ const ClassifyDetails = (props: any) => {
   };
 
   // 跳转详情页
-  const goDetails = (ids) => {
-    history.push({ pathname: '/classify/details', state: { id: ids } });
+  const goDetails = (ids, title) => {
+    history.push({ pathname: `/classify/details/${ids}/${title}` });
   };
 
   useEffect(() => {
@@ -159,7 +160,8 @@ const ClassifyDetails = (props: any) => {
               <div
                 className={styles.prev}
                 onClick={() =>
-                  footerList[0]?.obj.id && goDetails(footerList[0]?.obj.id)
+                  footerList[0]?.obj.id &&
+                  goDetails(footerList[0]?.obj.id, footerList[0]?.obj.title)
                 }
               >
                 <div className={styles.prev_title}>上一篇</div>
@@ -170,7 +172,8 @@ const ClassifyDetails = (props: any) => {
               <div
                 className={styles.next}
                 onClick={() =>
-                  footerList[1]?.obj.id && goDetails(footerList[1]?.obj.id)
+                  footerList[1]?.obj.id &&
+                  goDetails(footerList[1]?.obj.id, footerList[0]?.obj.title)
                 }
               >
                 <div className={styles.next_title}>下一篇</div>

@@ -4,7 +4,7 @@
  * @Author: 王鹏
  * @Date: 2022-01-23 11:24:13
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-02-15 10:33:25
+ * @LastEditTime: 2022-03-08 14:50:40
  */
 import React, { useEffect, useState } from 'react';
 import { history } from 'umi';
@@ -87,8 +87,8 @@ const ClassifyList = (props) => {
   };
 
   // 跳转详情页
-  const goDetails = (id) => {
-    history.push({ pathname: '/classify/details', state: { id } });
+  const goDetails = (id, title) => {
+    history.push({ pathname: `/classify/details/${id}/${title}` });
   };
 
   useEffect(() => {
@@ -122,7 +122,7 @@ const ClassifyList = (props) => {
           classType && styles.list_item_mobile
         }`}
         key={item.id}
-        onClick={() => goDetails(item.id)}
+        onClick={() => goDetails(item.id, item.title)}
       >
         <div className={styles.list_item_left}>
           <img src={item.img} alt="" />
@@ -130,7 +130,7 @@ const ClassifyList = (props) => {
         <div className={styles.list_item_right}>
           <div
             className={styles.list_item_title}
-            onClick={() => goDetails(item.id)}
+            onClick={() => goDetails(item.id, item.title)}
           >
             {item.title}
           </div>

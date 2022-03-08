@@ -4,7 +4,7 @@
  * @Author: 王鹏
  * @Date: 2022-01-22 13:20:17
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-03-04 11:23:23
+ * @LastEditTime: 2022-03-08 14:50:16
  */
 export default [
   {
@@ -18,52 +18,61 @@ export default [
       {
         path: '/home',
         name: '首页',
+        exact: true,
         component: './home',
       },
       {
         path: '/classify',
         name: '分类',
+        exact: true,
         component: './classify',
         access: 'canReadPageA', // 权限定义返回值的某个 key
       },
       {
         path: '/classify/list',
+        exact: true,
         component: './classify-list',
       },
       {
-        path: '/classify/details',
+        path: '/classify/details/:id/:title',
         component: './classify-details',
       },
       {
         path: '/projectLibrary',
         name: '项目库',
+        exact: true,
         component: './projectLibrary',
         routes: [],
       },
       {
         path: '/itinerary',
         name: '旅行日记',
+        exact: true,
         component: './itinerary',
       },
       {
         path: '/secret',
         name: '树洞先生',
+        exact: true,
         component: './secret',
       },
       {
         path: '/resume',
         name: '个人简历',
+        exact: true,
         component: './resume',
         authority: 'resume@user',
       },
       {
         path: '/timeAxis',
         name: '时间轴',
+        exact: true,
         component: './timeAxis',
       },
       {
         path: '/about',
         name: '关于',
+        exact: true,
         component: './about',
       },
       {
