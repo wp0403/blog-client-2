@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-01-27 12:36:13
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-03-08 15:03:09
+ * @LastEditTime: 2022-03-08 15:23:44
  */
 import React, { useState, useEffect } from 'react';
 import { useSize } from 'ahooks';
@@ -173,7 +173,7 @@ const ClassifyDetails = (props: any) => {
                 className={styles.next}
                 onClick={() =>
                   footerList[1]?.obj.id &&
-                  goDetails(footerList[1]?.obj.id, footerList[0]?.obj.title)
+                  goDetails(footerList[1]?.obj.id, footerList[1]?.obj.title)
                 }
               >
                 <div className={styles.next_title}>下一篇</div>
