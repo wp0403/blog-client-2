@@ -4,10 +4,10 @@
  * @Author: 王鹏
  * @Date: 2022-01-23 11:24:13
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-03-08 14:50:40
+ * @LastEditTime: 2022-03-09 18:15:40
  */
 import React, { useEffect, useState } from 'react';
-import { history } from 'umi';
+import { history, KeepAlive } from 'umi';
 import { useSize } from 'ahooks';
 import {
   setBg,
@@ -35,7 +35,6 @@ const ClassifyList = (props) => {
   const size = useSize(document.body);
   // 样式类型
   const [classType, setClassType] = useState<number>(0);
-
   // 当前页
   const [page, setPage] = useState<number>(1);
   // 每页条数
@@ -46,6 +45,7 @@ const ClassifyList = (props) => {
   const [loading, setLoading] = useState<boolean>(false);
   // 列表数据
   const [list, setList] = useState<any[]>([]);
+
   // 获取列表数据
   const getList = async (id, type) => {
     setLoading(true);
@@ -67,7 +67,7 @@ const ClassifyList = (props) => {
 
   // 跳转博文列表页  此处用法是刷新当前页面的location.state的参数
   const goClassifyList = (obj, type) => {
-    history.push({ pathname: '/classify/list', state: { obj, type } });
+    history.push({ pathname: `/classify/list/${obj.id}/${type}` });
   };
 
   // 点击分类
@@ -107,6 +107,8 @@ const ClassifyList = (props) => {
 
   // 监听页面宽度，设置样式
   useEffect(() => {
+    console.log(history.location);
+
     if (size?.width && size?.width < 700) {
       setClassType(1);
     }
@@ -175,39 +177,47 @@ const ClassifyList = (props) => {
   };
 
   return (
-    <div className={styles.list}>
-      {loading ? (
-        <div className={styles.loadingBox}>
-          <LoadingCard />
-        </div>
-      ) : list.length ? (
-        <div className={styles.content}>
-          <div
-            className={`${styles.listBox} ${
-              classType && styles.listBox_mobile
-            }`}
-          >
-            {list?.map((item) => renderItem(item))}
+    <KeepAlive
+      saveScrollPosition="screen"
+      id={history.location.search || history.location.pathname}
+      when={() => {
+        return history.action !== 'POP';
+      }}
+    >
+      <div className={styles.list}>
+        {loading ? (
+          <div className={styles.loadingBox}>
+            <LoadingCard />
           </div>
-          <div
-            className={`${styles.pageBox} ${
-              classType && styles.pageBox_mobile
-            }`}
-          >
-            <PageinationCom
-              page={page}
-              totalPages={totalPages}
-              changePage={changePage}
-            />
+        ) : list.length ? (
+          <div className={styles.content}>
+            <div
+              className={`${styles.listBox} ${
+                classType && styles.listBox_mobile
+              }`}
+            >
+              {list?.map((item) => renderItem(item))}
+            </div>
+            <div
+              className={`${styles.pageBox} ${
+                classType && styles.pageBox_mobile
+              }`}
+            >
+              <PageinationCom
+                page={page}
+                totalPages={totalPages}
+                changePage={changePage}
+              />
+            </div>
           </div>
-        </div>
-      ) : (
-        <div className={styles.loadingBox}>
-          <EmptyCard />
-        </div>
-      )}
-      <BackTopCom visibilityHeight={100} target={() => layoutContent} />
-    </div>
+        ) : (
+          <div className={styles.loadingBox}>
+            <EmptyCard />
+          </div>
+        )}
+        <BackTopCom visibilityHeight={100} target={() => layoutContent} />
+      </div>
+    </KeepAlive>
   );
 };
 

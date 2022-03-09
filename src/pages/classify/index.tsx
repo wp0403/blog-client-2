@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2021-12-29 11:04:51
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-01-24 10:57:50
+ * @LastEditTime: 2022-03-09 18:19:34
  */
 import React, { useEffect, useState } from 'react';
 import { history } from 'umi';
@@ -18,7 +18,7 @@ const Classify = () => {
 
   // 跳转博文列表页
   const goClassifyList = (obj, type) => {
-    history.push({ pathname: '/classify/list', state: { obj, type } });
+    history.push({ pathname: `/classify/list/${obj.id}/${type}` });
   };
 
   useEffect(() => {

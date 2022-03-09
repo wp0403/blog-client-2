@@ -4,7 +4,7 @@
  * @Author: 王鹏
  * @Date: 2022-01-22 13:20:17
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-03-08 14:50:16
+ * @LastEditTime: 2022-03-09 18:19:11
  */
 export default [
   {
@@ -29,7 +29,7 @@ export default [
         access: 'canReadPageA', // 权限定义返回值的某个 key
       },
       {
-        path: '/classify/list',
+        path: '/classify/list/:id/:type',
         exact: true,
         component: './classify-list',
       },
