@@ -4,10 +4,10 @@
  * @Author: 王鹏
  * @Date: 2022-01-23 11:24:13
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-03-10 10:23:32
+ * @LastEditTime: 2022-03-10 17:01:34
  */
 import React, { useEffect, useState } from 'react';
-import { history, KeepAlive } from 'umi';
+import { history, withRouter } from 'umi';
 import { useSize } from 'ahooks';
 import {
   setBg,
@@ -178,13 +178,6 @@ const ClassifyList = (props) => {
   };
 
   return (
-    // <KeepAlive
-    //   saveScrollPosition="screen"
-    //   id={history.location.search || history.location.pathname}
-    //   when={() => {
-    //     return history.action !== 'POP';
-    //   }}
-    // >
     <div className={styles.list}>
       {loading ? (
         <div className={styles.loadingBox}>
@@ -218,8 +211,7 @@ const ClassifyList = (props) => {
       )}
       <BackTopCom visibilityHeight={100} target={() => layoutContent} />
     </div>
-    // </KeepAlive>
   );
 };
 
-export default ClassifyList;
+export default withRouter(ClassifyList);
