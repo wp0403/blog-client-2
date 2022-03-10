@@ -4,7 +4,7 @@
  * @Author: 王鹏
  * @Date: 2022-01-23 11:24:13
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-03-09 18:15:40
+ * @LastEditTime: 2022-03-10 10:23:32
  */
 import React, { useEffect, useState } from 'react';
 import { history, KeepAlive } from 'umi';
@@ -27,9 +27,10 @@ import styles from './index.less';
 const { classify } = api;
 
 const ClassifyList = (props) => {
-  const {
-    state: { obj, type },
-  } = props.location;
+  const { pathname } = props.location;
+
+  // id为类别id  type为分类标识  为了以后做单网页的收录
+  const [id, type] = pathname.split('/').slice(3);
 
   // 获取当前窗口大小
   const size = useSize(document.body);
@@ -92,7 +93,7 @@ const ClassifyList = (props) => {
   };
 
   useEffect(() => {
-    getList(obj.id, type);
+    getList(id, type);
   }, [page]);
 
   useEffect(() => {
@@ -177,47 +178,47 @@ const ClassifyList = (props) => {
   };
 
   return (
-    <KeepAlive
-      saveScrollPosition="screen"
-      id={history.location.search || history.location.pathname}
-      when={() => {
-        return history.action !== 'POP';
-      }}
-    >
-      <div className={styles.list}>
-        {loading ? (
-          <div className={styles.loadingBox}>
-            <LoadingCard />
+    // <KeepAlive
+    //   saveScrollPosition="screen"
+    //   id={history.location.search || history.location.pathname}
+    //   when={() => {
+    //     return history.action !== 'POP';
+    //   }}
+    // >
+    <div className={styles.list}>
+      {loading ? (
+        <div className={styles.loadingBox}>
+          <LoadingCard />
+        </div>
+      ) : list.length ? (
+        <div className={styles.content}>
+          <div
+            className={`${styles.listBox} ${
+              classType && styles.listBox_mobile
+            }`}
+          >
+            {list?.map((item) => renderItem(item))}
           </div>
-        ) : list.length ? (
-          <div className={styles.content}>
-            <div
-              className={`${styles.listBox} ${
-                classType && styles.listBox_mobile
-              }`}
-            >
-              {list?.map((item) => renderItem(item))}
-            </div>
-            <div
-              className={`${styles.pageBox} ${
-                classType && styles.pageBox_mobile
-              }`}
-            >
-              <PageinationCom
-                page={page}
-                totalPages={totalPages}
-                changePage={changePage}
-              />
-            </div>
+          <div
+            className={`${styles.pageBox} ${
+              classType && styles.pageBox_mobile
+            }`}
+          >
+            <PageinationCom
+              page={page}
+              totalPages={totalPages}
+              changePage={changePage}
+            />
           </div>
-        ) : (
-          <div className={styles.loadingBox}>
-            <EmptyCard />
-          </div>
-        )}
-        <BackTopCom visibilityHeight={100} target={() => layoutContent} />
-      </div>
-    </KeepAlive>
+        </div>
+      ) : (
+        <div className={styles.loadingBox}>
+          <EmptyCard />
+        </div>
+      )}
+      <BackTopCom visibilityHeight={100} target={() => layoutContent} />
+    </div>
+    // </KeepAlive>
   );
 };
 
