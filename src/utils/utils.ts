@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-01-13 11:29:46
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-02-10 10:01:09
+ * @LastEditTime: 2022-03-11 11:25:34
  */
 
 // 页面背景盒子
@@ -51,7 +51,7 @@ export const addLayoutNavStyle = () => {
 // 页面滚动事件
 export const pageScroll = () => {
   if (!layoutNav) return;
-  if (layoutContent?.scrollTop && layoutContent?.scrollTop > 180) {
+  if (layoutContent?.scrollTop && layoutContent?.scrollTop > 80) {
     layoutNav?.classList.add('nav_active');
   } else {
     layoutNav?.classList.remove('nav_active');
