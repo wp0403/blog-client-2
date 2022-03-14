@@ -4,7 +4,7 @@
  * @Author: 王鹏
  * @Date: 2022-01-23 11:24:13
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-03-10 17:01:34
+ * @LastEditTime: 2022-03-11 10:50:46
  */
 import React, { useEffect, useState } from 'react';
 import { history, withRouter } from 'umi';
@@ -92,10 +92,12 @@ const ClassifyList = (props) => {
     history.push({ pathname: `/classify/details/${id}/${title}` });
   };
 
+  // 分页变化触发
   useEffect(() => {
     getList(id, type);
   }, [page]);
 
+  // 初始化
   useEffect(() => {
     setBg(true);
     removeLayoutNavStyle();
@@ -108,8 +110,6 @@ const ClassifyList = (props) => {
 
   // 监听页面宽度，设置样式
   useEffect(() => {
-    console.log(history.location);
-
     if (size?.width && size?.width < 700) {
       setClassType(1);
     }
@@ -118,6 +118,7 @@ const ClassifyList = (props) => {
     }
   }, [size?.width]);
 
+  // 渲染单项的样式
   const renderItem = (item) => {
     return (
       <div
