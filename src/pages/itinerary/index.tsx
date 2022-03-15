@@ -4,10 +4,11 @@
  * @Author: WangPeng
  * @Date: 2021-12-29 11:13:12
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-03-15 16:56:20
+ * @LastEditTime: 2022-03-15 17:23:56
  */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { history } from 'umi';
+import { useSize } from 'ahooks';
 import { setBg, addLayoutNavStyle, layoutContent } from '@/utils/utils';
 import SysIcon from '@/components/SysIcon';
 import BackTopCom from '@/components/BackTopCom';
@@ -77,6 +78,21 @@ const Itinerary = () => {
     history.push(`/itinerary/details/${id}`);
   };
 
+  // 样式类型
+  const [classType, setClassType] = useState<number>(1);
+
+  // 获取当前窗口大小
+  const size = useSize(document.body);
+  // 监听页面宽度，设置轮播盒子样式
+  useEffect(() => {
+    if (size?.width && size?.width < 700) {
+      setClassType(1);
+    }
+    if (size?.width && size?.width >= 700) {
+      setClassType(0);
+    }
+  }, [size?.width]);
+
   // 初始化
   useEffect(() => {
     addLayoutNavStyle();
@@ -98,7 +114,7 @@ const Itinerary = () => {
             <div className={styles.type_content}>
               {item.data.map((v: any, ind: number) => (
                 <div
-                  className={styles.item}
+                  className={classType ? styles.item_mobile : styles.item}
                   key={ind}
                   onClick={() => goDetail(v.id)}
                 >
