@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-01-27 12:36:13
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-03-08 15:23:44
+ * @LastEditTime: 2022-03-15 16:54:30
  */
 import React, { useState, useEffect } from 'react';
 import { useSize } from 'ahooks';
@@ -67,12 +67,9 @@ const ClassifyDetails = (props: any) => {
       });
   };
 
-  // 跳转博文列表页
+  // 跳转博文列表页  此处用法是刷新当前页面的location.state的参数
   const goClassifyList = (ids, type) => {
-    history.push({
-      pathname: '/classify/list',
-      state: { obj: { id: ids }, type },
-    });
+    history.push({ pathname: `/classify/list/${ids}/${type}` });
   };
 
   // 跳转详情页

@@ -3,8 +3,8 @@
  * @version:
  * @Author: WangPeng
  * @Date: 2022-01-11 18:19:11
- * @LastEditors: 王鹏
- * @LastEditTime: 2022-03-08 20:23:26
+ * @LastEditors: WangPeng
+ * @LastEditTime: 2022-03-15 10:04:59
  */
 import React, { useState, useEffect } from 'react';
 import { history } from 'umi';
@@ -121,7 +121,8 @@ const Graphic = () => {
       <div className={styles.border} />
       <div className={classType ? styles.contentMobile : styles.content}>
         <CarouselCom
-          config={{ autoplay: true, autoplaySpeed: 5000 }}
+          autoplay={true}
+          autoplaySpeed={5000}
           list={swiperList}
           renderItem={renderItem}
         />

@@ -1,7 +1,148 @@
 .itinerary {
   width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 70px;
 
   * {
     transition: all 0.5s;
   }
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  * {
+    color: var(--txt-b-pure);
+  }
+}
+
+.list_box {
+  width: 90%;
+
+  .type {
+    padding-top: 20px;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+
+    .type_name {
+      width: 70px;
+      height: 100%;
+      font-size: 20px;
+      line-height: 40px;
+    }
+
+    .type_icon {
+      font-size: 20px;
+    }
+  }
+
+  .type_content {
+    width: 100%;
+    padding-left: 20px;
+  }
+}
+
+.item {
+  width: 100%;
+  height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 10px 1px var(--b-alpha-10);
+
+  &:hover {
+    box-shadow: 0 0 10px 1px var(--b-alpha-30);
+  }
+
+  .item_info {
+    width: 60%;
+    height: 100%;
+    padding: 20px;
+  }
+
+  .item_img {
+    width: 40%;
+    height: 100%;
+    padding: 20px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+.item_info_top {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+
+  .item_info_top_time {
+    display: block;
+    margin-right: 30px;
+  }
+
+  .item_info_top_weather {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    margin-right: 30px;
+
+    .item_info_top_weather_icon {
+      font-size: 20px;
+      margin-right: 10px;
+    }
+
+    .item_info_top_weather_name {
+      font-size: 14px;
+      color: var(--b-alpha-70);
+    }
+  }
+
+  .item_info_top_mood {
+    display: flex;
+    height: 100%;
+    align-items: center;
+
+    .item_info_top_mood_icon {
+      font-size: 20px;
+      margin-right: 10px;
+    }
+
+    .item_info_top_mood_name {
+      font-size: 14px;
+      color: var(--b-alpha-70);
+    }
+  }
+}
+
+.item_info_title {
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  font-size: 16px;
+}
+
+.item_info_desc {
+  width: 100%;
+  height: 80px;
+  line-height: 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-indent: 2em;
+  -webkit-line-clamp: 2;
 }

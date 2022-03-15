@@ -4,17 +4,11 @@
  * @Author: WangPeng
  * @Date: 2021-12-29 11:03:48
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-02-10 13:34:52
+ * @LastEditTime: 2022-03-15 16:42:04
  */
 import React, { useEffect, useState } from 'react';
 import { useSize } from 'ahooks';
-import {
-  setBg,
-  removeLayoutNavStyle,
-  bindHandleScroll,
-  removeScroll,
-  layoutContent,
-} from '@/utils/utils';
+import { setBg, layoutContent, addLayoutNavStyle } from '@/utils/utils';
 import type { UserDate } from '@/utils/globalDataUtils';
 import { getGlobalUserData } from '@/utils/globalDataUtils';
 import styles from './index.less';
@@ -41,12 +35,7 @@ const About = () => {
 
   useEffect(() => {
     setBg(true);
-    removeLayoutNavStyle();
-    bindHandleScroll();
-
-    return () => {
-      removeScroll();
-    };
+    addLayoutNavStyle();
   }, []);
 
   return (

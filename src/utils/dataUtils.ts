@@ -3,8 +3,8 @@
  * @version:
  * @Author: WangPeng
  * @Date: 2022-01-13 11:42:16
- * @LastEditors: 王鹏
- * @LastEditTime: 2022-01-23 12:04:39
+ * @LastEditors: WangPeng
+ * @LastEditTime: 2022-03-15 14:47:09
  */
 import { message } from 'antd';
 import { cloneDeep } from 'lodash';
@@ -114,4 +114,25 @@ export const distinctObjectMap = (arr, type) => {
   const res = new Map();
   // 使用map记录下每个item的id，已存在的id将不会被筛选入内
   return arr.filter((item) => !res.has(item[type]) && res.set(item[type], 1));
+};
+
+// 计算方法，num为当前的数  rate为进率  digit为保留的小数位
+export const calculation = (num, rate, digit) => {
+  return parseFloat(`${(Math.trunc(num) / rate).toFixed(digit)}`);
+};
+
+// 对数据进行分类处理，arr为要分类的数据  type为以什么属性分类
+export const modifyData = (data: any[], type) => {
+  const newData = [] as any[];
+  data.forEach((item, index) => {
+    const ind = newData.findIndex((item1: any) => item1.type === item[type]);
+
+    if (ind !== -1) {
+      newData[ind].list.push(item);
+    } else {
+      newData.push({ id: index, type: item[type], list: [item] });
+    }
+  });
+
+  return newData.map((item) => item.list).flat(Infinity);
 };
