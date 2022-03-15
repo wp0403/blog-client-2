@@ -94,6 +94,14 @@
   .item_info_top_time {
     display: block;
     margin-right: 30px;
+    white-space: nowrap;
+  }
+
+  .item_info_top_place {
+    font-size: 14px;
+    color: var(--b-alpha-70);
+    margin-right: 30px;
+    white-space: nowrap;
   }
 
   .item_info_top_weather {
@@ -110,6 +118,7 @@
     .item_info_top_weather_name {
       font-size: 14px;
       color: var(--b-alpha-70);
+      white-space: nowrap;
     }
   }
 
@@ -126,6 +135,7 @@
     .item_info_top_mood_name {
       font-size: 14px;
       color: var(--b-alpha-70);
+      white-space: nowrap;
     }
   }
 }
@@ -133,8 +143,19 @@
 .item_info_title {
   width: 100%;
   height: 60px;
-  line-height: 60px;
-  font-size: 16px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+
+  .item_info_title_place {
+    font-size: 14px;
+    color: var(--b-alpha-70);
+    white-space: nowrap;
+  }
+
+  .item_info_title_name {
+    font-size: 16px;
+  }
 }
 
 .item_info_desc {

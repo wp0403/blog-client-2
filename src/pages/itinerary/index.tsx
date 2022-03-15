@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2021-12-29 11:13:12
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-03-15 17:23:56
+ * @LastEditTime: 2022-03-15 18:07:02
  */
 import React, { useEffect, useState } from 'react';
 import { history } from 'umi';
@@ -123,6 +123,14 @@ const Itinerary = () => {
                       <div className={styles.item_info_top_time}>
                         2019/08/01
                       </div>
+                      {classType ? (
+                        ''
+                      ) : (
+                        <div className={styles.item_info_top_place}>
+                          {v.place || '地点'}
+                        </div>
+                      )}
+
                       <div className={styles.item_info_top_weather}>
                         <SysIcon
                           className={styles.item_info_top_weather_icon}
@@ -142,7 +150,18 @@ const Itinerary = () => {
                         </div>
                       </div>
                     </div>
-                    <div className={styles.item_info_title}>{v.title}</div>
+                    <div className={styles.item_info_title}>
+                      {classType ? (
+                        <div className={styles.item_info_title_place}>
+                          {v.place || '地点'}——
+                        </div>
+                      ) : (
+                        ''
+                      )}
+                      <div className={styles.item_info_title_name}>
+                        {v.title}
+                      </div>
+                    </div>
                     <div className={styles.item_info_desc}>{v.content}</div>
                   </div>
                   <div className={styles.item_img}>
