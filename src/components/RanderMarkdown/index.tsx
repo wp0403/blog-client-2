@@ -50,6 +50,13 @@ const RanderMarkdown = (props: any) => {
           img({ src, alt }) {
             return <img onClick={() => alertImg(src)} src={src} alt={alt} />;
           },
+          a({ href, children }) {
+            return (
+              <a href={href} target="_blank">
+                {children}
+              </a>
+            );
+          },
         }}
       />
     </Fragment>

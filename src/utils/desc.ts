@@ -41,6 +41,7 @@ export const bowen_class_sub = [
   },
   { id: 4, classDesc: 'git', children: [{ id: '4_1', classDesc: 'git' }] },
   { id: 5, classDesc: '设计', children: [{ id: '5_1', classDesc: '设计' }] },
+  { id: 6, classDesc: '文集', children: [{ id: '6_1', classDesc: '文集' }] },
 ];
 
 // 仅一级分类
@@ -50,6 +51,7 @@ export const bowen_class = [
   { id: 3, classDesc: '数据库' },
   { id: 4, classDesc: 'git' },
   { id: 5, classDesc: '设计' },
+  { id: 6, classDesc: '文集' },
 ];
 
 // 背景图片数据
