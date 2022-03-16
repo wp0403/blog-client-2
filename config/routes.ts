@@ -4,7 +4,7 @@
  * @Author: 王鹏
  * @Date: 2022-01-22 13:20:17
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-03-11 10:10:20
+ * @LastEditTime: 2022-03-16 11:41:23
  */
 export default [
   {
@@ -26,7 +26,6 @@ export default [
         name: '分类',
         exact: true,
         component: './classify',
-        access: 'canReadPageA', // 权限定义返回值的某个 key
       },
       {
         path: '/classify/list/:id/:type',
@@ -43,6 +42,7 @@ export default [
         exact: true,
         component: './projectLibrary',
         routes: [],
+        authority: 'juice@user',
       },
       {
         path: '/itinerary',
@@ -73,6 +73,7 @@ export default [
         name: '时间轴',
         exact: true,
         component: './timeAxis',
+        authority: 'juice@user',
       },
       {
         path: '/about',
