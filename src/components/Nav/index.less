@@ -220,6 +220,19 @@
 }
 
 .nav_mobile_drawer {
+  :global {
+    .ant-drawer-wrapper-body,
+    .ant-drawer-header {
+      background-color: var(--bg-w-s);
+      color: var(--b-alpha-80);
+    }
+
+    .ant-drawer-header .ant-drawer-title,
+    .ant-drawer-close {
+      color: var(--b-alpha-80);
+    }
+  }
+
   .routeItem {
     display: flex;
     flex-direction: column;
