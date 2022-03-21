@@ -1,8 +1,202 @@
 .itineraryDetails {
   width: 100%;
-  padding-top: 70px;
+  height: 100%;
+  padding-top: 60px;
+  margin: 0 auto;
+}
+
+.content {
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.img_box {
+  width: 50%;
+  height: 100%;
+
+  .imgBig {
+    width: 100%;
+    height: 85%;
+    position: relative;
+
+    .img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      z-index: 1;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%) translateY(-50%);
+    }
+
+    .imgBackground {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      width: 100%;
+      height: 100%;
+      filter: blur(20px);
+      z-index: 0;
+    }
+  }
+
+  .imgList {
+    width: 100%;
+    height: 15%;
+    border: 5px solid var(--b-alpha-50);
+    background-color: var(--txt-white);
+  }
+}
+
+.information_box {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.information_box {
+  width: 50%;
+  height: 100%;
 
   * {
     transition: all 0.5s;
+  }
+
+  /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+  ::-webkit-scrollbar {
+    width: 7px;
+    height: 16px;
+    background-color: var(--scrollbar);
+  }
+
+  /*定义滚动条轨道 内阴影+圆角*/
+  /* ::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      background-color: #F5F5F5;
+  } */
+
+  /*定义滑块 内阴影+圆角*/
+  ::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: var(--scrollbar-thumb);
+  }
+}
+
+.CarouselCustomItem {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+
+  .CarouselCustomItemImg,
+  .CarouselCustomItemImgActive {
+    width: 20%;
+    height: 100%;
+    border-right: 3px solid var(--b-alpha-50);
+    cursor: pointer;
+
+    &:last-child {
+      border-right: none !important;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      -webkit-filter: brightness(80%);
+      filter: brightness(80%);
+    }
+  }
+
+  .CarouselCustomItemImgActive img {
+    -webkit-filter: brightness(100%);
+    filter: brightness(100%);
+  }
+
+  .CarouselCustomItemLoading {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.info_top {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+
+  .info_top_time {
+    display: block;
+    margin-right: 30px;
+    white-space: nowrap;
+  }
+
+  .info_top_place {
+    font-size: 14px;
+    color: var(--b-alpha-70);
+    margin-right: 30px;
+    white-space: nowrap;
+  }
+
+  .info_top_weather {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    margin-right: 30px;
+
+    .info_top_weather_icon {
+      font-size: 20px;
+      margin-right: 10px;
+    }
+
+    .info_top_weather_name {
+      font-size: 14px;
+      color: var(--b-alpha-70);
+      white-space: nowrap;
+    }
+  }
+
+  .info_top_mood {
+    display: flex;
+    height: 100%;
+    align-items: center;
+
+    .info_top_mood_icon {
+      font-size: 20px;
+      margin-right: 10px;
+    }
+
+    .info_top_mood_name {
+      font-size: 14px;
+      color: var(--b-alpha-70);
+      white-space: nowrap;
+    }
+  }
+}
+
+.info_title {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+
+  .info_title_place {
+    font-size: 14px;
+    color: var(--b-alpha-70);
+    white-space: nowrap;
+  }
+
+  .info_title_name {
+    font-size: 16px;
   }
 }
