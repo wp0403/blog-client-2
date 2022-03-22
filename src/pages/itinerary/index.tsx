@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2021-12-29 11:13:12
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-03-22 13:53:07
+ * @LastEditTime: 2022-03-22 14:31:36
  */
 import React, { useEffect, useState } from 'react';
 import { history } from 'umi';
@@ -81,7 +81,7 @@ const Itinerary = () => {
   const [classType, setClassType] = useState<number>(1);
   // 获取当前窗口大小
   const size = useSize(document.body);
-  // 监听页面宽度，设置轮播盒子样式
+  // 监听页面宽度
   useEffect(() => {
     if (size?.width && size?.width < 700) {
       setClassType(1);

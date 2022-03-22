@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-03-10 18:03:32
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-03-22 14:05:24
+ * @LastEditTime: 2022-03-22 15:03:29
  */
 import React, { useEffect, useState } from 'react';
 import { useSize } from 'ahooks';
@@ -96,6 +96,19 @@ const ItineraryDetails = () => {
     );
   };
 
+  // 监听页面宽度
+  useEffect(() => {
+    if (size?.width && size?.width < 700) {
+      setClassType(0);
+    }
+    if (size?.width && size?.width >= 1100) {
+      setClassType(1);
+    }
+    if (size?.width && size?.width >= 700 && size?.width < 1100) {
+      setClassType(2);
+    }
+  }, [size?.width]);
+
   // 初始化
   useEffect(() => {
     addLayoutNavStyle();
@@ -117,12 +130,12 @@ const ItineraryDetails = () => {
         <div className={styles.information_box}>
           <div className={styles.info_top}>
             <div className={styles.info_top_time}>2019/08/01</div>
-            {classType ? (
-              ''
-            ) : (
+            {classType !== 2 && classType > 0 ? (
               <div className={styles.info_top_place}>
                 {detailObj.place || '地点'}
               </div>
+            ) : (
+              ''
             )}
             <div className={styles.info_top_weather}>
               <SysIcon
@@ -140,14 +153,14 @@ const ItineraryDetails = () => {
             </div>
           </div>
           <div className={styles.info_title}>
-            {classType ? (
-              <div className={styles.info_title_place}>
-                {detailObj.place || '地点'}——
-              </div>
-            ) : (
-              ''
-            )}
             <div className={styles.info_title_name}>{detailObj.title}</div>
+            {classType !== 2 && classType > 0 ? (
+              ''
+            ) : (
+              <div className={styles.info_title_place}>
+                ——{detailObj.place || '地点'}
+              </div>
+            )}
           </div>
           <div className={styles.info_content}>
             <div className={styles.info_content_desc}>{detailObj.content}</div>
