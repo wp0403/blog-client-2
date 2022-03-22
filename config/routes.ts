@@ -4,7 +4,7 @@
  * @Author: 王鹏
  * @Date: 2022-01-22 13:20:17
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-03-22 17:13:24
+ * @LastEditTime: 2022-03-22 18:28:53
  */
 export default [
   {
@@ -42,7 +42,7 @@ export default [
         exact: true,
         component: './projectLibrary',
         routes: [],
-        authority: '',
+        authority: 'resume@user',
       },
       {
         path: '/itinerary',
@@ -73,7 +73,7 @@ export default [
         name: '时间轴',
         exact: true,
         component: './timeAxis',
-        authority: '',
+        authority: 'resume@user',
       },
       {
         path: '/about',
