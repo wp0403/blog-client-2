@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2021-12-29 11:13:12
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-03-15 18:07:02
+ * @LastEditTime: 2022-03-22 13:53:07
  */
 import React, { useEffect, useState } from 'react';
 import { history } from 'umi';
@@ -77,10 +77,8 @@ const Itinerary = () => {
   const goDetail = (id) => {
     history.push(`/itinerary/details/${id}`);
   };
-
   // 样式类型
   const [classType, setClassType] = useState<number>(1);
-
   // 获取当前窗口大小
   const size = useSize(document.body);
   // 监听页面宽度，设置轮播盒子样式
@@ -95,6 +93,7 @@ const Itinerary = () => {
 
   // 初始化
   useEffect(() => {
+    // getAllCard();
     addLayoutNavStyle();
     setBg(false);
   }, []);

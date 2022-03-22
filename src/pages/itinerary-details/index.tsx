@@ -4,9 +4,10 @@
  * @Author: WangPeng
  * @Date: 2022-03-10 18:03:32
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-03-21 18:40:44
+ * @LastEditTime: 2022-03-22 14:05:24
  */
 import React, { useEffect, useState } from 'react';
+import { useSize } from 'ahooks';
 import SysIcon from '@/components/SysIcon';
 import { setBg, addLayoutNavStyle } from '@/utils/utils';
 import CarouselCustom from '@/components/CarouselCustom';
@@ -50,13 +51,17 @@ const list = [
 ];
 
 const ItineraryDetails = () => {
+  // 样式类型
+  const [classType, setClassType] = useState<number>(1);
+  // 获取当前窗口大小
+  const size = useSize(document.body);
   // 当前的详情对象
   const [detailObj, setDetailObj] = useState<any>({
     id: 1,
     timeData: '2019/01/02',
     title: '模拟数据1',
     content:
-      '这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据',
+      '这是模拟数据这是模拟数据据这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据',
     img: 'https://wp-1302605407.cos.ap-beijing.myqcloud.com/img%2F%E4%BA%8C%E6%AC%A1%E5%85%83%E5%8A%A8%E6%BC%AB%E5%9B%BE%E5%BA%93%2F%E7%A7%92%E9%80%9F5%E3%82%BB%E3%83%B3%E3%83%81%E3%83%A1%E3%83%BC%E3%83%88%E3%83%AB%2F%E7%A7%92%E9%80%9F5%E5%8E%98%E7%B1%B3%20(1).jpg',
   });
   // 当前的选中图片
@@ -99,7 +104,7 @@ const ItineraryDetails = () => {
 
   return (
     <div className={styles.itineraryDetails}>
-      <div className={styles.content}>
+      <div className={classType ? styles.content : styles.content_mobile}>
         <div className={styles.img_box}>
           <div className={styles.imgBig}>
             <img className={styles.img} src={currentImg.src} alt="" />
@@ -112,7 +117,7 @@ const ItineraryDetails = () => {
         <div className={styles.information_box}>
           <div className={styles.info_top}>
             <div className={styles.info_top_time}>2019/08/01</div>
-            {1 ? (
+            {classType ? (
               ''
             ) : (
               <div className={styles.info_top_place}>
@@ -135,16 +140,18 @@ const ItineraryDetails = () => {
             </div>
           </div>
           <div className={styles.info_title}>
-            {1 ? (
-              <div className={styles.item_info_title_place}>
+            {classType ? (
+              <div className={styles.info_title_place}>
                 {detailObj.place || '地点'}——
               </div>
             ) : (
               ''
             )}
-            <div className={styles.item_info_title_name}>{detailObj.title}</div>
+            <div className={styles.info_title_name}>{detailObj.title}</div>
           </div>
-          <div className={styles.info_content}>{detailObj.content}</div>
+          <div className={styles.info_content}>
+            <div className={styles.info_content_desc}>{detailObj.content}</div>
+          </div>
         </div>
       </div>
     </div>
