@@ -4,14 +4,17 @@
  * @Author: WangPeng
  * @Date: 2022-03-10 18:03:32
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-03-22 15:03:29
+ * @LastEditTime: 2022-03-22 18:24:06
  */
 import React, { useEffect, useState } from 'react';
 import { useSize } from 'ahooks';
+import api from '@/api';
 import SysIcon from '@/components/SysIcon';
 import { setBg, addLayoutNavStyle } from '@/utils/utils';
 import CarouselCustom from '@/components/CarouselCustom';
 import styles from './index.less';
+
+const { itinerary } = api;
 
 const list = [
   {
@@ -50,20 +53,16 @@ const list = [
   },
 ];
 
-const ItineraryDetails = () => {
+const ItineraryDetails = (props) => {
+  const { pathname } = props.location;
+  // id为详情id
+  const id = pathname.split('/').pop();
   // 样式类型
   const [classType, setClassType] = useState<number>(1);
   // 获取当前窗口大小
   const size = useSize(document.body);
   // 当前的详情对象
-  const [detailObj, setDetailObj] = useState<any>({
-    id: 1,
-    timeData: '2019/01/02',
-    title: '模拟数据1',
-    content:
-      '这是模拟数据这是模拟数据据这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据',
-    img: 'https://wp-1302605407.cos.ap-beijing.myqcloud.com/img%2F%E4%BA%8C%E6%AC%A1%E5%85%83%E5%8A%A8%E6%BC%AB%E5%9B%BE%E5%BA%93%2F%E7%A7%92%E9%80%9F5%E3%82%BB%E3%83%B3%E3%83%81%E3%83%A1%E3%83%BC%E3%83%88%E3%83%AB%2F%E7%A7%92%E9%80%9F5%E5%8E%98%E7%B1%B3%20(1).jpg',
-  });
+  const [detailObj, setDetailObj] = useState<any>({});
   // 当前的选中图片
   const [currentImg, setCurrentImg] = useState<any>(list[0].imgs[0]);
   // 修改当前的选中图片
@@ -95,6 +94,18 @@ const ItineraryDetails = () => {
       </div>
     );
   };
+
+  const getData = async () => {
+    await itinerary._getItineraryDetail({ params: { id } }).then(({ data }) => {
+      if (data.code === 200) {
+        setDetailObj(data.data);
+      }
+    });
+  };
+
+  useEffect(() => {
+    getData();
+  }, [id]);
 
   // 监听页面宽度
   useEffect(() => {

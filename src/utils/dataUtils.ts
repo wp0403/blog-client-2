@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-01-13 11:42:16
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-03-15 14:47:09
+ * @LastEditTime: 2022-03-22 18:08:03
  */
 import { message } from 'antd';
 import { cloneDeep } from 'lodash';
@@ -135,4 +135,29 @@ export const modifyData = (data: any[], type) => {
   });
 
   return newData.map((item) => item.list).flat(Infinity);
+};
+
+// 对旅行日记列表进行处理
+export const itineraryData = (data: any[]) => {
+  const newData = [] as any[];
+  data.forEach((item, index) => {
+    const type = item['timeData'].split('/')[0];
+    const ind = newData.findIndex((item1: any) => item1.type === type);
+
+    const newItem = {
+      ...item,
+      imgs: item.imgs.map((v, i) => ({
+        id: `${item.id}-${i}`,
+        src: v,
+      })),
+    };
+
+    if (ind !== -1) {
+      newData[ind].list.push(newItem);
+    } else {
+      newData.push({ id: index, type, list: [newItem] });
+    }
+  });
+
+  return newData;
 };

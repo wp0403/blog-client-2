@@ -4,83 +4,60 @@
  * @Author: WangPeng
  * @Date: 2021-12-29 11:13:12
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-03-22 14:31:36
+ * @LastEditTime: 2022-03-22 18:26:54
  */
 import React, { useEffect, useState } from 'react';
 import { history } from 'umi';
 import { useSize } from 'ahooks';
+import api from '@/api';
 import { setBg, addLayoutNavStyle, layoutContent } from '@/utils/utils';
+import { itineraryData } from '@/utils/dataUtils';
 import SysIcon from '@/components/SysIcon';
 import BackTopCom from '@/components/BackTopCom';
 import styles from './index.less';
 
-const list = [
-  {
-    id: 1,
-    time: 2019,
-    data: [
-      {
-        id: 1,
-        timeData: '2019/01/02',
-        title: '模拟数据1',
-        content:
-          '这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据',
-        img: 'https://wp-1302605407.cos.ap-beijing.myqcloud.com/img%2F%E4%BA%8C%E6%AC%A1%E5%85%83%E5%8A%A8%E6%BC%AB%E5%9B%BE%E5%BA%93%2F%E7%A7%92%E9%80%9F5%E3%82%BB%E3%83%B3%E3%83%81%E3%83%A1%E3%83%BC%E3%83%88%E3%83%AB%2F%E7%A7%92%E9%80%9F5%E5%8E%98%E7%B1%B3%20(1).jpg',
-      },
-      {
-        id: 2,
-        title: '模拟数据2',
-        content:
-          '这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据',
-        img: 'https://wp-1302605407.cos.ap-beijing.myqcloud.com/img%2F%E4%BA%8C%E6%AC%A1%E5%85%83%E5%8A%A8%E6%BC%AB%E5%9B%BE%E5%BA%93%2F%E7%A7%92%E9%80%9F5%E3%82%BB%E3%83%B3%E3%83%81%E3%83%A1%E3%83%BC%E3%83%88%E3%83%AB%2F%E7%A7%92%E9%80%9F5%E5%8E%98%E7%B1%B3%20(1).jpg',
-      },
-      {
-        id: 3,
-        title: '模拟数据3',
-        content:
-          '这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据',
-        img: 'https://wp-1302605407.cos.ap-beijing.myqcloud.com/img%2F%E4%BA%8C%E6%AC%A1%E5%85%83%E5%8A%A8%E6%BC%AB%E5%9B%BE%E5%BA%93%2F%E7%A7%92%E9%80%9F5%E3%82%BB%E3%83%B3%E3%83%81%E3%83%A1%E3%83%BC%E3%83%88%E3%83%AB%2F%E7%A7%92%E9%80%9F5%E5%8E%98%E7%B1%B3%20(1).jpg',
-      },
-    ],
-  },
-  {
-    id: 2,
-    time: 2020,
-    data: [
-      {
-        id: 1,
-        title: '模拟数据1',
-        content:
-          '这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据',
-        img: 'https://wp-1302605407.cos.ap-beijing.myqcloud.com/img%2F%E4%BA%8C%E6%AC%A1%E5%85%83%E5%8A%A8%E6%BC%AB%E5%9B%BE%E5%BA%93%2F%E7%A7%92%E9%80%9F5%E3%82%BB%E3%83%B3%E3%83%81%E3%83%A1%E3%83%BC%E3%83%88%E3%83%AB%2F%E7%A7%92%E9%80%9F5%E5%8E%98%E7%B1%B3%20(1).jpg',
-      },
-      {
-        id: 2,
-        title: '模拟数据2',
-        content:
-          '这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据',
-        img: 'https://wp-1302605407.cos.ap-beijing.myqcloud.com/img%2F%E4%BA%8C%E6%AC%A1%E5%85%83%E5%8A%A8%E6%BC%AB%E5%9B%BE%E5%BA%93%2F%E7%A7%92%E9%80%9F5%E3%82%BB%E3%83%B3%E3%83%81%E3%83%A1%E3%83%BC%E3%83%88%E3%83%AB%2F%E7%A7%92%E9%80%9F5%E5%8E%98%E7%B1%B3%20(1).jpg',
-      },
-      {
-        id: 3,
-        title: '模拟数据3',
-        content:
-          '这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据这是模拟数据',
-        img: 'https://wp-1302605407.cos.ap-beijing.myqcloud.com/img%2F%E4%BA%8C%E6%AC%A1%E5%85%83%E5%8A%A8%E6%BC%AB%E5%9B%BE%E5%BA%93%2F%E7%A7%92%E9%80%9F5%E3%82%BB%E3%83%B3%E3%83%81%E3%83%A1%E3%83%BC%E3%83%88%E3%83%AB%2F%E7%A7%92%E9%80%9F5%E5%8E%98%E7%B1%B3%20(1).jpg',
-      },
-    ],
-  },
-];
+const { itinerary } = api;
 
 const Itinerary = () => {
   // 跳转详情页
   const goDetail = (id) => {
     history.push(`/itinerary/details/${id}`);
   };
+  // 列表数据
+  const [list, setList] = useState<any[]>([]);
+  // 当前页
+  const [page, setPage] = useState<number>(1);
+  // 每页条数
+  const [pageSize, setPageSize] = useState<number>(10);
+  // 搜索关键字
+  const [keyword, setKeyword] = useState<string>('');
+  // loading
+  const [loading, setLoading] = useState<boolean>(false);
   // 样式类型
   const [classType, setClassType] = useState<number>(1);
   // 获取当前窗口大小
   const size = useSize(document.body);
+
+  // 获取列表数据
+  const getList = async () => {
+    setLoading(true);
+    await itinerary
+      ._getItineraryList({
+        params: { page, page_size: pageSize, keyword },
+      })
+      .then(({ data }) => {
+        if (data.code === 200) {
+          page !== 1 ? setList([...list, ...data.data]) : setList(data.data);
+        }
+      })
+      .finally(() => setLoading(false));
+  };
+
+  // 获取数据
+  useEffect(() => {
+    getList();
+  }, [page, pageSize, keyword]);
+
   // 监听页面宽度
   useEffect(() => {
     if (size?.width && size?.width < 700) {
@@ -93,7 +70,6 @@ const Itinerary = () => {
 
   // 初始化
   useEffect(() => {
-    // getAllCard();
     addLayoutNavStyle();
     setBg(false);
   }, []);
@@ -101,17 +77,17 @@ const Itinerary = () => {
   return (
     <div className={styles.itinerary}>
       <div className={styles.content}>
-        {list.map((item: any, index: number) => (
+        {itineraryData(list).map((item: any, index: number) => (
           <div className={styles.list_box} key={index}>
             <div className={styles.type}>
-              <div className={styles.type_name}>{item.time}</div>
+              <div className={styles.type_name}>{item.type}</div>
               <SysIcon
                 className={styles.type_icon}
                 type="icon-a-youjiantouqianwang"
               />
             </div>
             <div className={styles.type_content}>
-              {item.data.map((v: any, ind: number) => (
+              {item.list.map((v: any, ind: number) => (
                 <div
                   className={classType ? styles.item_mobile : styles.item}
                   key={ind}
