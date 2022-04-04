@@ -3,8 +3,8 @@
  * @version:
  * @Author: WangPeng
  * @Date: 2022-03-10 18:03:32
- * @LastEditors: WangPeng
- * @LastEditTime: 2022-03-22 18:24:06
+ * @LastEditors: 王鹏
+ * @LastEditTime: 2022-04-05 00:30:24
  */
 import React, { useEffect, useState } from 'react';
 import { useSize } from 'ahooks';
@@ -15,43 +15,6 @@ import CarouselCustom from '@/components/CarouselCustom';
 import styles from './index.less';
 
 const { itinerary } = api;
-
-const list = [
-  {
-    id: 1,
-    imgs: [
-      {
-        id: 1,
-        src: 'https://wp-1302605407.cos.ap-beijing.myqcloud.com/img%2F%E4%BA%8C%E6%AC%A1%E5%85%83%E5%8A%A8%E6%BC%AB%E5%9B%BE%E5%BA%93%2F%E7%A7%92%E9%80%9F5%E3%82%BB%E3%83%B3%E3%83%81%E3%83%A1%E3%83%BC%E3%83%88%E3%83%AB%2F%E7%A7%92%E9%80%9F5%E5%8E%98%E7%B1%B3%20(10).jpg',
-      },
-      {
-        id: 2,
-        src: 'https://wp-1302605407.cos.ap-beijing.myqcloud.com/img%2F%E4%BA%8C%E6%AC%A1%E5%85%83%E5%8A%A8%E6%BC%AB%E5%9B%BE%E5%BA%93%2F%E7%A7%92%E9%80%9F5%E3%82%BB%E3%83%B3%E3%83%81%E3%83%A1%E3%83%BC%E3%83%88%E3%83%AB%2F%E7%A7%92%E9%80%9F5%E5%8E%98%E7%B1%B3%20(100).jpg',
-      },
-      {
-        id: 3,
-        src: 'https://wp-1302605407.cos.ap-beijing.myqcloud.com/img%2F%E4%BA%8C%E6%AC%A1%E5%85%83%E5%8A%A8%E6%BC%AB%E5%9B%BE%E5%BA%93%2F%E7%A7%92%E9%80%9F5%E3%82%BB%E3%83%B3%E3%83%81%E3%83%A1%E3%83%BC%E3%83%88%E3%83%AB%2F%E7%A7%92%E9%80%9F5%E5%8E%98%E7%B1%B3%20(1000).jpg',
-      },
-      {
-        id: 4,
-        src: 'https://wp-1302605407.cos.ap-beijing.myqcloud.com/img%2F%E4%BA%8C%E6%AC%A1%E5%85%83%E5%8A%A8%E6%BC%AB%E5%9B%BE%E5%BA%93%2F%E7%A7%92%E9%80%9F5%E3%82%BB%E3%83%B3%E3%83%81%E3%83%A1%E3%83%BC%E3%83%88%E3%83%AB%2F%E7%A7%92%E9%80%9F5%E5%8E%98%E7%B1%B3%20(1001).jpg',
-      },
-      {
-        id: 5,
-        src: 'https://wp-1302605407.cos.ap-beijing.myqcloud.com/img%2F%E4%BA%8C%E6%AC%A1%E5%85%83%E5%8A%A8%E6%BC%AB%E5%9B%BE%E5%BA%93%2F%E7%A7%92%E9%80%9F5%E3%82%BB%E3%83%B3%E3%83%81%E3%83%A1%E3%83%BC%E3%83%88%E3%83%AB%2F%E7%A7%92%E9%80%9F5%E5%8E%98%E7%B1%B3%20(1002).jpg',
-      },
-    ],
-  },
-  {
-    id: 2,
-    imgs: [
-      {
-        id: 6,
-        src: 'https://wp-1302605407.cos.ap-beijing.myqcloud.com/img%2F%E4%BA%8C%E6%AC%A1%E5%85%83%E5%8A%A8%E6%BC%AB%E5%9B%BE%E5%BA%93%2F%E7%A7%92%E9%80%9F5%E3%82%BB%E3%83%B3%E3%83%81%E3%83%A1%E3%83%BC%E3%83%88%E3%83%AB%2F%E7%A7%92%E9%80%9F5%E5%8E%98%E7%B1%B3%20(1003).jpg',
-      },
-    ],
-  },
-];
 
 const ItineraryDetails = (props) => {
   const { pathname } = props.location;
@@ -64,7 +27,9 @@ const ItineraryDetails = (props) => {
   // 当前的详情对象
   const [detailObj, setDetailObj] = useState<any>({});
   // 当前的选中图片
-  const [currentImg, setCurrentImg] = useState<any>(list[0].imgs[0]);
+  const [currentImg, setCurrentImg] = useState<any>(
+    detailObj.imgs && detailObj.imgs[0],
+  );
   // 修改当前的选中图片
   const changeImg = (v) => {
     currentImg.id !== v.id && setCurrentImg(v);
@@ -135,7 +100,7 @@ const ItineraryDetails = (props) => {
             <img className={styles.imgBackground} src={currentImg.src} alt="" />
           </div>
           <div className={styles.imgList}>
-            <CarouselCustom list={list} renderItem={renderItem} />
+            <CarouselCustom list={currentImg.imgs} renderItem={renderItem} />
           </div>
         </div>
         <div className={styles.information_box}>
