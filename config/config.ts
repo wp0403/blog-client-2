@@ -112,12 +112,12 @@ export default defineConfig({
   // 使用 webpack 5 代替 webpack 4 进行构建。
   // webpack5: {},
   // 配置是否开启服务端渲染，配置如下：
-  // ssr: {
-  //   // 更多配置
-  //   // forceInitial: false,
-  //   // removeWindowInitialProps: false
-  //   // devServerRender: true,
-  //   // mode: 'string',
-  //   // staticMarkup: false,
-  // }
+  ssr: {
+    // 更多配置
+    // forceInitial: false,
+    // removeWindowInitialProps: false
+    devServerRender: false,
+    // mode: 'string',
+    // staticMarkup: false,
+  },
 });

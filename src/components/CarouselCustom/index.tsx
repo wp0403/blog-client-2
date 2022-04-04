@@ -3,8 +3,8 @@
  * @version:
  * @Author: WangPeng
  * @Date: 2022-03-21 11:53:49
- * @LastEditors: WangPeng
- * @LastEditTime: 2022-03-21 18:21:51
+ * @LastEditors: 王鹏
+ * @LastEditTime: 2022-04-05 01:26:47
  */
 import React, { useRef } from 'react';
 import { Carousel } from 'antd';

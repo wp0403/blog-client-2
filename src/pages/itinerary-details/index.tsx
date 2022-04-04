@@ -4,13 +4,14 @@
  * @Author: WangPeng
  * @Date: 2022-03-10 18:03:32
  * @LastEditors: 王鹏
- * @LastEditTime: 2022-04-05 00:30:24
+ * @LastEditTime: 2022-04-05 01:54:37
  */
 import React, { useEffect, useState } from 'react';
 import { useSize } from 'ahooks';
 import api from '@/api';
 import SysIcon from '@/components/SysIcon';
 import { setBg, addLayoutNavStyle } from '@/utils/utils';
+import { groupingData } from '@/utils/dataUtils';
 import CarouselCustom from '@/components/CarouselCustom';
 import styles from './index.less';
 
@@ -27,9 +28,7 @@ const ItineraryDetails = (props) => {
   // 当前的详情对象
   const [detailObj, setDetailObj] = useState<any>({});
   // 当前的选中图片
-  const [currentImg, setCurrentImg] = useState<any>(
-    detailObj.imgs && detailObj.imgs[0],
-  );
+  const [currentImg, setCurrentImg] = useState<any>({});
   // 修改当前的选中图片
   const changeImg = (v) => {
     currentImg.id !== v.id && setCurrentImg(v);
@@ -38,9 +37,9 @@ const ItineraryDetails = (props) => {
   const renderItem = (item) => {
     return (
       <div className={styles.CarouselCustomItem} key={item.id}>
-        {item.imgs &&
-          item.imgs[0] &&
-          item.imgs.map((ite, ind) => (
+        {item?.list &&
+          item?.list[0] &&
+          item?.list.map((ite, ind) => (
             <div
               key={ind}
               onClick={() => changeImg(ite)}
@@ -53,7 +52,7 @@ const ItineraryDetails = (props) => {
               <img src={ite.src} />
             </div>
           ))}
-        {item.imgs.length < 5 && (
+        {item?.list.length < 5 && (
           <div className={styles.CarouselCustomItemLoading}>loading...</div>
         )}
       </div>
@@ -64,6 +63,7 @@ const ItineraryDetails = (props) => {
     await itinerary._getItineraryDetail({ params: { id } }).then(({ data }) => {
       if (data.code === 200) {
         setDetailObj(data.data);
+        setCurrentImg(data.data?.imgs[0]);
       }
     });
   };
@@ -96,19 +96,26 @@ const ItineraryDetails = (props) => {
       <div className={classType ? styles.content : styles.content_mobile}>
         <div className={styles.img_box}>
           <div className={styles.imgBig}>
-            <img className={styles.img} src={currentImg.src} alt="" />
-            <img className={styles.imgBackground} src={currentImg.src} alt="" />
+            <img className={styles.img} src={currentImg?.src} alt="" />
+            <img
+              className={styles.imgBackground}
+              src={currentImg?.src}
+              alt=""
+            />
           </div>
           <div className={styles.imgList}>
-            <CarouselCustom list={currentImg.imgs} renderItem={renderItem} />
+            <CarouselCustom
+              list={groupingData(detailObj.imgs || [], 5)}
+              renderItem={renderItem}
+            />
           </div>
         </div>
         <div className={styles.information_box}>
           <div className={styles.info_top}>
-            <div className={styles.info_top_time}>2019/08/01</div>
+            <div className={styles.info_top_time}>{detailObj?.timeData}</div>
             {classType !== 2 && classType > 0 ? (
               <div className={styles.info_top_place}>
-                {detailObj.place || '地点'}
+                {detailObj?.place || '地点'}
               </div>
             ) : (
               ''
@@ -129,17 +136,17 @@ const ItineraryDetails = (props) => {
             </div>
           </div>
           <div className={styles.info_title}>
-            <div className={styles.info_title_name}>{detailObj.title}</div>
+            <div className={styles.info_title_name}>{detailObj?.title}</div>
             {classType !== 2 && classType > 0 ? (
               ''
             ) : (
               <div className={styles.info_title_place}>
-                ——{detailObj.place || '地点'}
+                ——{detailObj?.place || '地点'}
               </div>
             )}
           </div>
           <div className={styles.info_content}>
-            <div className={styles.info_content_desc}>{detailObj.content}</div>
+            <div className={styles.info_content_desc}>{detailObj?.content}</div>
           </div>
         </div>
       </div>

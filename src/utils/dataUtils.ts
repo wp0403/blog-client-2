@@ -3,8 +3,8 @@
  * @version:
  * @Author: WangPeng
  * @Date: 2022-01-13 11:42:16
- * @LastEditors: WangPeng
- * @LastEditTime: 2022-03-22 18:08:03
+ * @LastEditors: 王鹏
+ * @LastEditTime: 2022-04-05 01:52:13
  */
 import { message } from 'antd';
 import { cloneDeep } from 'lodash';
@@ -158,6 +158,19 @@ export const itineraryData = (data: any[]) => {
       newData.push({ id: index, type, list: [newItem] });
     }
   });
+
+  return newData;
+};
+
+// 对数据分组处理
+export const groupingData = (data, num) => {
+  const maxPage = Math.ceil(data.length / num);
+  const newData = [] as any;
+
+  if (!maxPage) return data;
+  for (let i = 0; i < maxPage; i++) {
+    newData.push({ id: i, list: data.slice(i * num, (i + 1) * num) });
+  }
 
   return newData;
 };
