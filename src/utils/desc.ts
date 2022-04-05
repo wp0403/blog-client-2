@@ -36,22 +36,32 @@ export const bowen_class_sub = [
   },
   {
     id: 3,
-    classDesc: '数据库',
-    children: [{ id: '3_1', classDesc: '数据库' }],
+    classDesc: '其它学习资料',
+    children: [
+      { id: '3_1', classDesc: '数据库' },
+      { id: '3_2', classDesc: 'git' },
+      { id: '3_3', classDesc: '设计' },
+    ],
   },
-  { id: 4, classDesc: 'git', children: [{ id: '4_1', classDesc: 'git' }] },
-  { id: 5, classDesc: '设计', children: [{ id: '5_1', classDesc: '设计' }] },
-  { id: 6, classDesc: '文集', children: [{ id: '6_1', classDesc: '文集' }] },
+  {
+    id: 4,
+    classDesc: '花若盛开',
+    children: [{ id: '4_1', classDesc: '文集' }],
+  },
+  {
+    id: 5,
+    classDesc: '阳光自在',
+    children: [{ id: '5_1', classDesc: '生活' }],
+  },
 ];
 
 // 仅一级分类
 export const bowen_class = [
   { id: 1, classDesc: '前端' },
   { id: 2, classDesc: '后端' },
-  { id: 3, classDesc: '数据库' },
-  { id: 4, classDesc: 'git' },
-  { id: 5, classDesc: '设计' },
-  { id: 6, classDesc: '文集' },
+  { id: 3, classDesc: '其它学习资料' },
+  { id: 4, classDesc: '花若盛开' },
+  { id: 5, classDesc: '阳光自在' },
 ];
 
 // 背景图片数据
