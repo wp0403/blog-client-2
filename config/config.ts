@@ -112,6 +112,7 @@ export default defineConfig({
   // 使用 webpack 5 代替 webpack 4 进行构建。
   // webpack5: {},
   // 配置是否开启服务端渲染，配置如下：
+  // 由于我的博客有太多交互的地方，所以对于ssr不太友好暂时不采用
   // ssr: {
   // 更多配置
   // forceInitial: false,
