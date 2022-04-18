@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2021-12-24 10:00:56
  * @LastEditors: WangPeng
- * @LastEditTime: 2021-12-24 10:10:25
+ * @LastEditTime: 2022-04-18 16:43:57
  */
 import React, { useEffect } from 'react';
 import style from './index.less';
@@ -15,7 +15,7 @@ interface Props {
 
 const Typewriter = (props: Props) => {
   const { data } = props;
-  const aa = () => {
+  const fun = () => {
     const container = document.getElementById('content');
     let index = 0;
     function writing() {
@@ -28,7 +28,7 @@ const Typewriter = (props: Props) => {
   };
 
   useEffect(() => {
-    aa();
+    fun();
   }, []);
 
   return <div id="content" className={style.typewriter}></div>;
