@@ -3,8 +3,8 @@
  * @version:
  * @Author: WangPeng
  * @Date: 2022-03-10 18:03:32
- * @LastEditors: 王鹏
- * @LastEditTime: 2022-04-05 01:54:37
+ * @LastEditors: WangPeng
+ * @LastEditTime: 2022-04-18 16:32:28
  */
 import React, { useEffect, useState } from 'react';
 import { useSize } from 'ahooks';
@@ -13,6 +13,7 @@ import SysIcon from '@/components/SysIcon';
 import { setBg, addLayoutNavStyle } from '@/utils/utils';
 import { groupingData } from '@/utils/dataUtils';
 import CarouselCustom from '@/components/CarouselCustom';
+import LoadingCard from '@/components/LoadingCard';
 import styles from './index.less';
 
 const { itinerary } = api;
@@ -27,6 +28,8 @@ const ItineraryDetails = (props) => {
   const size = useSize(document.body);
   // 当前的详情对象
   const [detailObj, setDetailObj] = useState<any>({});
+  // loading
+  const [loading, setLoading] = useState<boolean>(false);
   // 当前的选中图片
   const [currentImg, setCurrentImg] = useState<any>({});
   // 修改当前的选中图片
@@ -60,12 +63,16 @@ const ItineraryDetails = (props) => {
   };
 
   const getData = async () => {
-    await itinerary._getItineraryDetail({ params: { id } }).then(({ data }) => {
-      if (data.code === 200) {
-        setDetailObj(data.data);
-        setCurrentImg(data.data?.imgs[0]);
-      }
-    });
+    setLoading(true);
+    await itinerary
+      ._getItineraryDetail({ params: { id } })
+      .then(({ data }) => {
+        if (data.code === 200) {
+          setDetailObj(data.data);
+          setCurrentImg(data.data?.imgs[0]);
+        }
+      })
+      .finally(() => setLoading(false));
   };
 
   useEffect(() => {
@@ -93,63 +100,71 @@ const ItineraryDetails = (props) => {
 
   return (
     <div className={styles.itineraryDetails}>
-      <div className={classType ? styles.content : styles.content_mobile}>
-        <div className={styles.img_box}>
-          <div className={styles.imgBig}>
-            <img className={styles.img} src={currentImg?.src} alt="" />
-            <img
-              className={styles.imgBackground}
-              src={currentImg?.src}
-              alt=""
-            />
-          </div>
-          <div className={styles.imgList}>
-            <CarouselCustom
-              list={groupingData(detailObj.imgs || [], 5)}
-              renderItem={renderItem}
-            />
-          </div>
+      {loading ? (
+        <div className={styles.loadingBox}>
+          <LoadingCard />
         </div>
-        <div className={styles.information_box}>
-          <div className={styles.info_top}>
-            <div className={styles.info_top_time}>{detailObj?.timeData}</div>
-            {classType !== 2 && classType > 0 ? (
-              <div className={styles.info_top_place}>
-                {detailObj?.place || '地点'}
-              </div>
-            ) : (
-              ''
-            )}
-            <div className={styles.info_top_weather}>
-              <SysIcon
-                className={styles.info_top_weather_icon}
-                type="icon-zhongdaodaxue"
+      ) : (
+        <div className={classType ? styles.content : styles.content_mobile}>
+          <div className={styles.img_box}>
+            <div className={styles.imgBig}>
+              <img className={styles.img} src={currentImg?.src} alt="" />
+              <img
+                className={styles.imgBackground}
+                src={currentImg?.src}
+                alt=""
               />
-              <div className={styles.info_top_weather_name}>下雪了</div>
             </div>
-            <div className={styles.info_top_mood}>
-              <SysIcon
-                className={styles.info_top_mood_icon}
-                type="icon-kaixin"
+            <div className={styles.imgList}>
+              <CarouselCustom
+                list={groupingData(detailObj.imgs || [], 5)}
+                renderItem={renderItem}
               />
-              <div className={styles.info_top_mood_name}>开心</div>
             </div>
           </div>
-          <div className={styles.info_title}>
-            <div className={styles.info_title_name}>{detailObj?.title}</div>
-            {classType !== 2 && classType > 0 ? (
-              ''
-            ) : (
-              <div className={styles.info_title_place}>
-                ——{detailObj?.place || '地点'}
+          <div className={styles.information_box}>
+            <div className={styles.info_top}>
+              <div className={styles.info_top_time}>{detailObj?.timeData}</div>
+              {classType !== 2 && classType > 0 ? (
+                <div className={styles.info_top_place}>
+                  {detailObj?.place || '地点'}
+                </div>
+              ) : (
+                ''
+              )}
+              <div className={styles.info_top_weather}>
+                <SysIcon
+                  className={styles.info_top_weather_icon}
+                  type="icon-zhongdaodaxue"
+                />
+                <div className={styles.info_top_weather_name}>下雪了</div>
               </div>
-            )}
-          </div>
-          <div className={styles.info_content}>
-            <div className={styles.info_content_desc}>{detailObj?.content}</div>
+              <div className={styles.info_top_mood}>
+                <SysIcon
+                  className={styles.info_top_mood_icon}
+                  type="icon-kaixin"
+                />
+                <div className={styles.info_top_mood_name}>开心</div>
+              </div>
+            </div>
+            <div className={styles.info_title}>
+              <div className={styles.info_title_name}>{detailObj?.title}</div>
+              {classType !== 2 && classType > 0 ? (
+                ''
+              ) : (
+                <div className={styles.info_title_place}>
+                  ——{detailObj?.place || '地点'}
+                </div>
+              )}
+            </div>
+            <div className={styles.info_content}>
+              <div className={styles.info_content_desc}>
+                {detailObj?.content}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

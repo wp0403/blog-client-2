@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2021-12-29 11:13:12
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-03-22 18:26:54
+ * @LastEditTime: 2022-04-18 16:31:36
  */
 import React, { useEffect, useState } from 'react';
 import { history } from 'umi';
@@ -14,6 +14,7 @@ import { setBg, addLayoutNavStyle, layoutContent } from '@/utils/utils';
 import { itineraryData } from '@/utils/dataUtils';
 import SysIcon from '@/components/SysIcon';
 import BackTopCom from '@/components/BackTopCom';
+import LoadingCard from '@/components/LoadingCard';
 import styles from './index.less';
 
 const { itinerary } = api;
@@ -76,78 +77,84 @@ const Itinerary = () => {
 
   return (
     <div className={styles.itinerary}>
-      <div className={styles.content}>
-        {itineraryData(list).map((item: any, index: number) => (
-          <div className={styles.list_box} key={index}>
-            <div className={styles.type}>
-              <div className={styles.type_name}>{item.type}</div>
-              <SysIcon
-                className={styles.type_icon}
-                type="icon-a-youjiantouqianwang"
-              />
-            </div>
-            <div className={styles.type_content}>
-              {item.list.map((v: any, ind: number) => (
-                <div
-                  className={classType ? styles.item_mobile : styles.item}
-                  key={ind}
-                  onClick={() => goDetail(v.id)}
-                >
-                  <div className={styles.item_info}>
-                    <div className={styles.item_info_top}>
-                      <div className={styles.item_info_top_time}>
-                        2019/08/01
-                      </div>
-                      {classType ? (
-                        ''
-                      ) : (
-                        <div className={styles.item_info_top_place}>
-                          {v.place || '地点'}
+      {loading ? (
+        <div className={styles.loadingBox}>
+          <LoadingCard />
+        </div>
+      ) : (
+        <div className={styles.content}>
+          {itineraryData(list).map((item: any, index: number) => (
+            <div className={styles.list_box} key={index}>
+              <div className={styles.type}>
+                <div className={styles.type_name}>{item.type}</div>
+                <SysIcon
+                  className={styles.type_icon}
+                  type="icon-a-youjiantouqianwang"
+                />
+              </div>
+              <div className={styles.type_content}>
+                {item.list.map((v: any, ind: number) => (
+                  <div
+                    className={classType ? styles.item_mobile : styles.item}
+                    key={ind}
+                    onClick={() => goDetail(v.id)}
+                  >
+                    <div className={styles.item_info}>
+                      <div className={styles.item_info_top}>
+                        <div className={styles.item_info_top_time}>
+                          2019/08/01
                         </div>
-                      )}
+                        {classType ? (
+                          ''
+                        ) : (
+                          <div className={styles.item_info_top_place}>
+                            {v.place || '地点'}
+                          </div>
+                        )}
 
-                      <div className={styles.item_info_top_weather}>
-                        <SysIcon
-                          className={styles.item_info_top_weather_icon}
-                          type="icon-zhongdaodaxue"
-                        />
-                        <div className={styles.item_info_top_weather_name}>
-                          下雪了
+                        <div className={styles.item_info_top_weather}>
+                          <SysIcon
+                            className={styles.item_info_top_weather_icon}
+                            type="icon-zhongdaodaxue"
+                          />
+                          <div className={styles.item_info_top_weather_name}>
+                            下雪了
+                          </div>
+                        </div>
+                        <div className={styles.item_info_top_mood}>
+                          <SysIcon
+                            className={styles.item_info_top_mood_icon}
+                            type="icon-kaixin"
+                          />
+                          <div className={styles.item_info_top_mood_name}>
+                            开心
+                          </div>
                         </div>
                       </div>
-                      <div className={styles.item_info_top_mood}>
-                        <SysIcon
-                          className={styles.item_info_top_mood_icon}
-                          type="icon-kaixin"
-                        />
-                        <div className={styles.item_info_top_mood_name}>
-                          开心
+                      <div className={styles.item_info_title}>
+                        {classType ? (
+                          <div className={styles.item_info_title_place}>
+                            {v.place || '地点'}——
+                          </div>
+                        ) : (
+                          ''
+                        )}
+                        <div className={styles.item_info_title_name}>
+                          {v.title}
                         </div>
                       </div>
+                      <div className={styles.item_info_desc}>{v.content}</div>
                     </div>
-                    <div className={styles.item_info_title}>
-                      {classType ? (
-                        <div className={styles.item_info_title_place}>
-                          {v.place || '地点'}——
-                        </div>
-                      ) : (
-                        ''
-                      )}
-                      <div className={styles.item_info_title_name}>
-                        {v.title}
-                      </div>
+                    <div className={styles.item_img}>
+                      <img src={v.img} alt="" />
                     </div>
-                    <div className={styles.item_info_desc}>{v.content}</div>
                   </div>
-                  <div className={styles.item_img}>
-                    <img src={v.img} alt="" />
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
       <BackTopCom visibilityHeight={100} target={() => layoutContent} />
     </div>
   );
