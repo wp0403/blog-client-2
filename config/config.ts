@@ -79,7 +79,7 @@ export default defineConfig({
   // Theme for antd: https://ant.design/docs/react/customize-theme-cn
   theme: themeConfig,
   // 配置标题。
-  title: '欢迎来到我的小站👏',
+  title: '于风里读诗',
   // 忽略 moment 的 locale 文件，用于减少尺寸。
   ignoreMomentLocale: true,
   // 配置代理能力。
