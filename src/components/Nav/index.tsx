@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2021-12-23 18:13:58
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-02-15 14:36:51
+ * @LastEditTime: 2022-04-22 17:35:09
  */
 import React, { useState, useEffect } from 'react';
 import { history } from 'umi';
@@ -185,6 +185,11 @@ const Nav = (props: Props) => {
         />
       </div>
       <div className={styles.nav_mobile_right}>
+        {pathname.split('/').length > 2 && (
+          <div className={styles.go_back} onClick={() => history.go(-1)}>
+            <SysIcon type="icon-a-zuojiantoufanhui" />
+          </div>
+        )}
         <div className={styles.nav_mobile_drawer} onClick={showDrawer}>
           <SysIcon type="icon-daohang-caidan" />
         </div>
