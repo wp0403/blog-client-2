@@ -1,3 +1,6 @@
+const metaDesc =
+  'html,css3,javaScript,vue3,react,umiJs,uni-app,taro,antd,echarts,webpack,axios,npm,nodejs,express,koa2,egg,mySql,jenkins,http,数据库,git,文集,生活,树洞';
+
 // 字典列表
 export const bowen_class_sub = [
   {
