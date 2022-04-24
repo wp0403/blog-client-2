@@ -4,10 +4,10 @@
  * @Author: WangPeng
  * @Date: 2021-12-29 11:13:12
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-04-24 14:09:53
+ * @LastEditTime: 2022-04-24 18:33:36
  */
 import React, { useEffect, useState } from 'react';
-import { history } from 'umi';
+import { history, Link } from 'umi';
 import { useSize } from 'ahooks';
 import api from '@/api';
 import { setBg, addLayoutNavStyle, layoutContent } from '@/utils/utils';
@@ -23,7 +23,8 @@ const { itinerary } = api;
 const Itinerary = () => {
   // 跳转详情页
   const goDetail = (id) => {
-    history.push(`/itinerary/details/${id}`);
+    // history.push(`/itinerary/details/${id}`);
+    return `/itinerary/details/${id}`;
   };
   // 列表数据
   const [list, setList] = useState<any[]>([]);
@@ -95,10 +96,11 @@ const Itinerary = () => {
               </div>
               <div className={styles.type_content}>
                 {item.list.map((v: any, ind: number) => (
-                  <div
+                  <Link
                     className={classType ? styles.item_mobile : styles.item}
                     key={ind}
-                    onClick={() => goDetail(v.id)}
+                    to={v.id && goDetail(v.id)}
+                    onClick={(e) => !v.id && e.preventDefault()}
                   >
                     <div className={styles.item_info}>
                       <div className={styles.item_info_top}>
@@ -164,7 +166,7 @@ const Itinerary = () => {
                     <div className={styles.item_img}>
                       <img src={v.img} alt="" />
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
             </div>

@@ -4,11 +4,11 @@
  * @Author: WangPeng
  * @Date: 2022-01-27 12:36:13
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-03-15 16:54:30
+ * @LastEditTime: 2022-04-24 18:27:15
  */
 import React, { useState, useEffect } from 'react';
 import { useSize } from 'ahooks';
-import { history } from 'umi';
+import { history, Link } from 'umi';
 import api from '@/api';
 import {
   setBg,
@@ -67,14 +67,27 @@ const ClassifyDetails = (props: any) => {
       });
   };
 
-  // 跳转博文列表页  此处用法是刷新当前页面的location.state的参数
+  // 跳转博文列表页
   const goClassifyList = (ids, type) => {
-    history.push({ pathname: `/classify/list/${ids}/${type}` });
+    // history.push({ pathname: `/classify/list/${ids}/${type}` });
+    return `/classify/list/${ids}/${type}`;
   };
 
   // 跳转详情页
   const goDetails = (ids, t) => {
-    history.push({ pathname: `/classify/details/${ids}/${t}` });
+    // history.push({ pathname: `/classify/details/${ids}/${t}` });
+    return `/classify/details/${ids}/${t}`;
+  };
+
+  const renderLink = (obj, type) => {
+    return (
+      <Link
+        className={styles.list_item_type_item}
+        to={goClassifyList(obj.id, type)}
+      >
+        {obj.classDesc}
+      </Link>
+    );
   };
 
   useEffect(() => {
@@ -119,19 +132,15 @@ const ClassifyDetails = (props: any) => {
             <div className={styles.list_item_info}>
               <div className={styles.list_item_type}>
                 <SysIcon className={styles.icon} type="icon-biaoqian" />
-                <span
-                  className={styles.list_item_type_item}
-                  onClick={() => goClassifyList(data.classify_id, 'one')}
-                >
-                  {data.classify}
-                </span>
+                {renderLink(
+                  { classDesc: data.classify, id: data.classify_id },
+                  'one',
+                )}
                 |
-                <span
-                  className={styles.list_item_type_item}
-                  onClick={() => goClassifyList(data.classify_sub_id, 'two')}
-                >
-                  {data.classify_sub}
-                </span>
+                {renderLink(
+                  { classDesc: data.classify_sub, id: data.classify_sub_id },
+                  'two',
+                )}
               </div>
               <div className={styles.list_item_time}>
                 <SysIcon className={styles.icon} type="icon-a-shijianzuijin" />
@@ -154,30 +163,32 @@ const ClassifyDetails = (props: any) => {
           <div className={styles.footer}>
             <Permit />
             <div className={styles.prev_next}>
-              <div
+              <Link
                 className={styles.prev}
-                onClick={() =>
+                to={
                   footerList[0]?.obj.id &&
                   goDetails(footerList[0]?.obj.id, footerList[0]?.obj.title)
                 }
+                onClick={(e) => !footerList[0]?.obj.id && e.preventDefault()}
               >
                 <div className={styles.prev_title}>上一篇</div>
                 <div className={styles.prev_content}>
                   {footerList[0]?.obj.id ? footerList[0]?.obj.title : '没有了'}
                 </div>
-              </div>
-              <div
+              </Link>
+              <Link
                 className={styles.next}
-                onClick={() =>
+                to={
                   footerList[1]?.obj.id &&
                   goDetails(footerList[1]?.obj.id, footerList[1]?.obj.title)
                 }
+                onClick={(e) => !footerList[1]?.obj.id && e.preventDefault()}
               >
                 <div className={styles.next_title}>下一篇</div>
                 <div className={styles.next_content}>
                   {footerList[1]?.obj.id ? footerList[1]?.obj.title : '没有了'}
                 </div>
-              </div>
+              </Link>
             </div>
           </div>
         </>

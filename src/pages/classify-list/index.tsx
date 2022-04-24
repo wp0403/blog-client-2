@@ -4,10 +4,10 @@
  * @Author: 王鹏
  * @Date: 2022-01-23 11:24:13
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-04-24 13:40:58
+ * @LastEditTime: 2022-04-24 18:07:39
  */
 import React, { useEffect, useState } from 'react';
-import { history, withRouter } from 'umi';
+import { history, withRouter, Link } from 'umi';
 import { useSize } from 'ahooks';
 import {
   setBg,
@@ -132,12 +132,13 @@ const ClassifyList = (props) => {
           <img src={item.img} alt="" />
         </div>
         <div className={styles.list_item_right}>
-          <div
+          <Link
             className={styles.list_item_title}
             onClick={() => goDetails(item.id, item.title)}
+            to={`/classify/details/${item.id}/${item.title}`}
           >
             {item.title}
-          </div>
+          </Link>
           <div className={styles.list_item_info}>
             <div className={styles.list_item_type}>
               <SysIcon className={styles.icon} type="icon-biaoqian" />

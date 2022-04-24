@@ -4,10 +4,10 @@
  * @Author: WangPeng
  * @Date: 2021-12-23 18:13:58
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-04-22 17:35:09
+ * @LastEditTime: 2022-04-24 17:52:45
  */
 import React, { useState, useEffect } from 'react';
-import { history } from 'umi';
+import { history, Link } from 'umi';
 import { Drawer } from 'antd';
 import { useSize } from 'ahooks';
 import { authRouterFilter, filterNoName } from '@/utils/authorityUtils';
@@ -62,6 +62,37 @@ const Nav = (props: Props) => {
   const [routeItemInd, setRouteItemInd] = useState<number | null>(0);
   // 当前展示的二级路由
   const [subRouteItemInd, setSubRouteItemInd] = useState<number | null>(null);
+
+  // 跳转路由
+  const goToListPage = (
+    path: string,
+    index: number | null,
+    ind: number | null,
+  ) => {
+    if (path === props.location.pathname) return;
+    layoutContent.scrollTop = 0;
+    // history.push(path);
+    setRouteItemInd(index);
+    setSubRouteItemInd(ind);
+    removeLayoutNavStyle();
+    setBg(true);
+  };
+
+  const renderLink = (v: any) => {
+    return (
+      <Link
+        to={v.path}
+        onClick={(e) => {
+          if (v.path === props.location.pathname) {
+            e.preventDefault();
+          }
+        }}
+      >
+        {v.name}
+      </Link>
+    );
+  };
+
   // 监听页面宽度，设置导航样式
   useEffect(() => {
     if (size?.width && size?.width < 700) {
@@ -97,21 +128,6 @@ const Nav = (props: Props) => {
     searchRputeInd();
   }, [pathname]);
 
-  // 跳转路由
-  const goToListPage = (
-    path: string,
-    index: number | null,
-    ind: number | null,
-  ) => {
-    if (path === props.location.pathname) return;
-    layoutContent.scrollTop = 0;
-    history.push(path);
-    setRouteItemInd(index);
-    setSubRouteItemInd(ind);
-    removeLayoutNavStyle();
-    setBg(true);
-  };
-
   // 渲染路由列表
   const renderRouter = (routes: any) => {
     return routes.map((item, index) => (
@@ -125,7 +141,7 @@ const Nav = (props: Props) => {
           onClick={() => goToListPage(item.path, index, null)}
           className={styles.routeItem_name}
         >
-          {item.name}
+          {renderLink(item)}
         </span>
         {item.routes && item.routes[0] && (
           <div className={styles.routeItem_sub}>
@@ -139,7 +155,7 @@ const Nav = (props: Props) => {
                 }`}
                 onClick={() => goToListPage(ite.path, index, ind)}
               >
-                {ite.name}
+                {renderLink(ite)}
               </div>
             ))}
           </div>

@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-01-11 18:19:11
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-03-15 10:04:59
+ * @LastEditTime: 2022-04-24 17:55:45
  */
 import React, { useState, useEffect } from 'react';
 import { history } from 'umi';
@@ -28,7 +28,7 @@ interface Item {
   classifyId: string | number;
 }
 
-const Graphic = () => {
+const Graphic = (props) => {
   // 样式类型
   const [classType, setClassType] = useState<number>(1);
   // 轮播列表数据

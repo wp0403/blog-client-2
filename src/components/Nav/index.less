@@ -23,6 +23,11 @@
   user-select: none;
   /* Non-prefixed version, currently
   not supported by any browser */
+
+  a {
+    color: var(--mo-color);
+    text-decoration: none !important;
+  }
 }
 
 .nav_pc {
@@ -147,12 +152,20 @@
           &:hover {
             background-color: #88a2bb;
             color: #dde5eb;
+
+            a {
+              color: #dde5eb;
+            }
           }
         }
 
         .routeItem_sub_item_active {
           background-color: #88a2bb;
           color: #dde5eb;
+
+          a {
+            color: #dde5eb;
+          }
         }
       }
     }
@@ -258,6 +271,11 @@
       align-items: flex-start;
       justify-content: center;
       white-space: nowrap;
+
+      a {
+        color: var(--txt-b-pure);
+        text-decoration: none !important;
+      }
     }
 
     .routeItem_sub {
@@ -280,12 +298,16 @@
       .routeItem_sub_item_active {
         background-color: #88a2bb;
         color: #dde5eb;
+
+        a {
+          color: #dde5eb;
+        }
       }
     }
   }
 
   .routeItem_active {
-    .routeItem_name {
+    .routeItem_name a {
       color: var(--theme-color);
     }
   }
