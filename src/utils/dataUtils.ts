@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-01-13 11:42:16
  * @LastEditors: 王鹏
- * @LastEditTime: 2022-04-05 01:52:13
+ * @LastEditTime: 2022-04-24 20:32:00
  */
 import { message } from 'antd';
 import { cloneDeep } from 'lodash';
@@ -139,25 +139,32 @@ export const modifyData = (data: any[], type) => {
 
 // 对旅行日记列表进行处理
 export const itineraryData = (data: any[]) => {
-  const newData = [] as any[];
-  data.forEach((item, index) => {
-    const type = item['timeData'].split('/')[0];
-    const ind = newData.findIndex((item1: any) => item1.type === type);
+  let newData = [] as any[];
 
-    const newItem = {
-      ...item,
-      imgs: item.imgs.map((v, i) => ({
-        id: `${item.id}-${i}`,
-        src: v,
-      })),
-    };
+  data
+    .sort(
+      (a, b) => +b.timeData.replace(/\//g, '') - +a.timeData.replace(/\//g, ''),
+    )
+    .forEach((item, index) => {
+      const type = item['timeData'].split('/')[0];
+      const ind = newData.findIndex((item1: any) => item1.type === type);
 
-    if (ind !== -1) {
-      newData[ind].list.push(newItem);
-    } else {
-      newData.push({ id: index, type, list: [newItem] });
-    }
-  });
+      const newItem = {
+        ...item,
+        imgs: item.imgs.map((v, i) => ({
+          id: `${item.id}-${i}`,
+          src: v,
+        })),
+      };
+
+      if (ind !== -1) {
+        newData[ind].list.push(newItem);
+      } else {
+        newData.push({ id: index, type, list: [newItem] });
+      }
+    });
+
+  newData = newData.sort((a, b) => +b.type - +a.type);
 
   return newData;
 };
