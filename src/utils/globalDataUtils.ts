@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-01-18 11:05:40
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-02-22 15:52:21
+ * @LastEditTime: 2022-04-24 13:57:50
  */
 import { history } from 'umi';
 import api from '@/api';
@@ -76,6 +76,17 @@ export const getOnlyDictObj = (type: string): any[] | any => {
     onlyDict = null;
   }
   return onlyDict;
+};
+// 根据type和id获取字典对象
+export const getDictObj = (type: string, id: number): any[] | any => {
+  const str = sessionStorage.getItem('dict');
+  let dictObj: any = {};
+  if (str) {
+    dictObj = JSON.parse(str)[type]?.find((v: any) => v.id === id);
+  } else {
+    dictObj = null;
+  }
+  return dictObj;
 };
 
 // 判断是否需要重新获取

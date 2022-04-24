@@ -4,13 +4,14 @@
  * @Author: WangPeng
  * @Date: 2021-12-29 11:13:12
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-04-18 16:31:36
+ * @LastEditTime: 2022-04-24 14:09:53
  */
 import React, { useEffect, useState } from 'react';
 import { history } from 'umi';
 import { useSize } from 'ahooks';
 import api from '@/api';
 import { setBg, addLayoutNavStyle, layoutContent } from '@/utils/utils';
+import { getDictObj } from '@/utils/globalDataUtils';
 import { itineraryData } from '@/utils/dataUtils';
 import SysIcon from '@/components/SysIcon';
 import BackTopCom from '@/components/BackTopCom';
@@ -102,7 +103,7 @@ const Itinerary = () => {
                     <div className={styles.item_info}>
                       <div className={styles.item_info_top}>
                         <div className={styles.item_info_top_time}>
-                          2019/08/01
+                          {v?.timeData || '--'}
                         </div>
                         {classType ? (
                           ''
@@ -113,22 +114,37 @@ const Itinerary = () => {
                         )}
 
                         <div className={styles.item_info_top_weather}>
-                          <SysIcon
-                            className={styles.item_info_top_weather_icon}
-                            type="icon-zhongdaodaxue"
-                          />
-                          <div className={styles.item_info_top_weather_name}>
-                            下雪了
-                          </div>
+                          {v.weatherId && (
+                            <>
+                              <SysIcon
+                                className={styles.item_info_top_weather_icon}
+                                type={
+                                  getDictObj('weather_list', +v?.weatherId)
+                                    ?.icon
+                                }
+                              />
+                              <div
+                                className={styles.item_info_top_weather_name}
+                              >
+                                {getDictObj('weather_list', +v?.weatherId)
+                                  ?.name || '--'}
+                              </div>
+                            </>
+                          )}
                         </div>
                         <div className={styles.item_info_top_mood}>
-                          <SysIcon
-                            className={styles.item_info_top_mood_icon}
-                            type="icon-kaixin"
-                          />
-                          <div className={styles.item_info_top_mood_name}>
-                            开心
-                          </div>
+                          {v.moodId && (
+                            <>
+                              <SysIcon
+                                className={styles.item_info_top_mood_icon}
+                                type={getDictObj('mood_list', +v?.moodId)?.icon}
+                              />
+                              <div className={styles.item_info_top_mood_name}>
+                                {getDictObj('mood_list', +v?.moodId)?.name ||
+                                  '--'}
+                              </div>
+                            </>
+                          )}
                         </div>
                       </div>
                       <div className={styles.item_info_title}>

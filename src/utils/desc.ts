@@ -13,7 +13,7 @@ export const bowen_class_sub = [
       { id: '1_7', classDesc: 'uni-app' },
       { id: '1_8', classDesc: 'taro' },
       { id: '1_9', classDesc: 'antd' },
-      { id: '1_10', classDesc: 'eachars' },
+      { id: '1_10', classDesc: 'echarts' },
       { id: '1_11', classDesc: 'webpack' },
       { id: '1_12', classDesc: 'axios' },
       { id: '1_13', classDesc: 'npm' },
