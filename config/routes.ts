@@ -3,8 +3,8 @@
  * @version: 1.1.1
  * @Author: 王鹏
  * @Date: 2022-01-22 13:20:17
- * @LastEditors: WangPeng
- * @LastEditTime: 2022-03-22 18:28:53
+ * @LastEditors: 王鹏
+ * @LastEditTime: 2022-04-24 20:57:14
  */
 export default [
   {
@@ -98,6 +98,10 @@ export default [
       {
         path: '/500',
         component: '@/pages/error/500',
+      },
+      {
+        path: '/sitemap',
+        component: '@/pages/websiteConfig/sitemap',
       },
     ],
   },

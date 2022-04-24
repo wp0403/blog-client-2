@@ -3,8 +3,8 @@
  * @version: 1.1.1
  * @Author: 王鹏
  * @Date: 2022-01-23 11:24:13
- * @LastEditors: WangPeng
- * @LastEditTime: 2022-04-24 18:07:39
+ * @LastEditors: 王鹏
+ * @LastEditTime: 2022-04-24 22:10:47
  */
 import React, { useEffect, useState } from 'react';
 import { history, withRouter, Link } from 'umi';
@@ -16,6 +16,7 @@ import {
   removeScroll,
   layoutContent,
 } from '@/utils/utils';
+import { stopPropagation } from '@/utils/dataUtils';
 import api from '@/api';
 import SysIcon from '@/components/SysIcon';
 import BackTopCom from '@/components/BackTopCom';
@@ -79,7 +80,6 @@ const ClassifyList = (props) => {
     } else {
       goClassifyList({ id }, 'two');
     }
-    getList(id, type);
   };
 
   // 切换页
@@ -87,7 +87,7 @@ const ClassifyList = (props) => {
     setPage(value);
   };
 
-  // 跳转详情页
+  // // 跳转详情页
   const goDetails = (id, title) => {
     history.push({ pathname: `/classify/details/${id}/${title}` });
   };
@@ -95,7 +95,7 @@ const ClassifyList = (props) => {
   // 分页变化触发
   useEffect(() => {
     getList(id, type);
-  }, [page]);
+  }, [page, pathname]);
 
   // 初始化
   useEffect(() => {
@@ -134,8 +134,9 @@ const ClassifyList = (props) => {
         <div className={styles.list_item_right}>
           <Link
             className={styles.list_item_title}
-            onClick={() => goDetails(item.id, item.title)}
+            onClick={(e) => stopPropagation(e)}
             to={`/classify/details/${item.id}/${item.title}`}
+            target="_blank"
           >
             {item.title}
           </Link>
@@ -145,7 +146,7 @@ const ClassifyList = (props) => {
               <span
                 className={styles.list_item_type_item}
                 onClick={(e) => {
-                  e.stopPropagation();
+                  stopPropagation(e);
                   clickTab(item.classify_id, 'one');
                 }}
               >
@@ -155,7 +156,7 @@ const ClassifyList = (props) => {
               <span
                 className={styles.list_item_type_item}
                 onClick={(e) => {
-                  e.stopPropagation();
+                  stopPropagation(e);
                   clickTab(item.classify_sub_id, 'two');
                 }}
               >

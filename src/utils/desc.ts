@@ -1,3 +1,4 @@
+// 网站关键字
 const metaDesc =
   'html,css3,javaScript,vue3,react,umiJs,uni-app,taro,antd,echarts,webpack,axios,npm,nodejs,express,koa2,egg,mySql,jenkins,http,数据库,git,文集,生活,树洞';
 
@@ -80,8 +81,11 @@ export const imgs = [
 ];
 
 // 树洞导语
-export const secretGuide =
-  '在吗？先生？我有好多事情想与你说，你会替我保密的对吧？\\n先生，你在吗？为什么你从来都不会与我说说我没见过的世界啊？\\n先生，我遇到好多问题，但是我不知道能够跟谁去说说，你可以听我说吗？先生。\\n先生我不太开心，也说不上来为什么，呀！你怎么知道我在想什么，可是先生，我放不下啊！\\n先生，你也会不开心的吧，没关系的先生，我会一直在，一直在的。';
+export const secretGuide = `在吗？先生？我有好多事情想与你说，你会替我保密的对吧？
+  \\n先生，你在吗？为什么你从来都不会与我说说我没见过的世界啊？
+  \\n先生，我遇到好多问题，但是我不知道能够跟谁去说说，你可以听我说吗？先生。
+  \\n先生我不太开心，也说不上来为什么，呀！你怎么知道我在想什么，可是先生，我放不下啊！
+  \\n先生，你也会不开心的吧，没关系的先生，我会一直在，一直在的。`;
 
 // 天气
 export const weatherList = [
@@ -109,7 +113,7 @@ export const weatherList = [
   { id: 22, name: '无', icon: 'icon-wu1' },
 ];
 
-// 心情列表
+// 心情
 export const moodList = [
   { id: 1, name: '无感', icon: 'icon-buzhidao' },
   { id: 2, name: '得意', icon: 'icon-deyi' },

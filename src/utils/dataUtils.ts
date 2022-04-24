@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-01-13 11:42:16
  * @LastEditors: 王鹏
- * @LastEditTime: 2022-04-24 20:32:00
+ * @LastEditTime: 2022-04-24 21:24:06
  */
 import { message } from 'antd';
 import { cloneDeep } from 'lodash';
@@ -56,9 +56,9 @@ export const stringRemove = (str: string) => {
 
 /**
  * 阻止冒泡
- * @param {Event} e
+ * @param {any} e
  */
-export const stopPropagation = (e: Event) => {
+export const stopPropagation = (e: any) => {
   e = e || window.event;
   if (e.stopPropagation) {
     // W3C阻止冒泡方法

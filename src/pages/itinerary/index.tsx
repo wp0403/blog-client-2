@@ -3,14 +3,19 @@
  * @version:
  * @Author: WangPeng
  * @Date: 2021-12-29 11:13:12
- * @LastEditors: WangPeng
- * @LastEditTime: 2022-04-24 18:33:36
+ * @LastEditors: 王鹏
+ * @LastEditTime: 2022-04-24 21:15:11
  */
 import React, { useEffect, useState } from 'react';
 import { history, Link } from 'umi';
 import { useSize } from 'ahooks';
 import api from '@/api';
-import { setBg, addLayoutNavStyle, layoutContent } from '@/utils/utils';
+import {
+  setBg,
+  layoutContent,
+  bindHandleScroll,
+  removeScroll,
+} from '@/utils/utils';
 import { getDictObj } from '@/utils/globalDataUtils';
 import { itineraryData } from '@/utils/dataUtils';
 import SysIcon from '@/components/SysIcon';
@@ -73,8 +78,12 @@ const Itinerary = () => {
 
   // 初始化
   useEffect(() => {
-    addLayoutNavStyle();
+    bindHandleScroll();
     setBg(false);
+
+    return () => {
+      removeScroll();
+    };
   }, []);
 
   return (
