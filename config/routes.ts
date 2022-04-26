@@ -3,8 +3,8 @@
  * @version: 1.1.1
  * @Author: 王鹏
  * @Date: 2022-01-22 13:20:17
- * @LastEditors: 王鹏
- * @LastEditTime: 2022-04-24 20:57:14
+ * @LastEditors: WangPeng
+ * @LastEditTime: 2022-04-26 14:44:30
  */
 export default [
   {
@@ -20,6 +20,7 @@ export default [
         name: '首页',
         exact: true,
         component: './home',
+        routes: [{ path: '/home', name: '二级标题' }],
       },
       {
         path: '/classify',

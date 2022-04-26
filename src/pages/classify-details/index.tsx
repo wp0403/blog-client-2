@@ -4,11 +4,11 @@
  * @Author: WangPeng
  * @Date: 2022-01-27 12:36:13
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-04-24 18:27:15
+ * @LastEditTime: 2022-04-26 15:09:21
  */
 import React, { useState, useEffect } from 'react';
 import { useSize } from 'ahooks';
-import { history, Link } from 'umi';
+import { Link } from 'umi';
 import api from '@/api';
 import {
   setBg,

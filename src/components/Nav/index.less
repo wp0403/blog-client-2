@@ -90,7 +90,6 @@
 
       .routeItem_name {
         width: 100%;
-        padding: 0 15px;
         height: 70%;
         display: flex;
         align-items: center;
@@ -114,6 +113,10 @@
           transition: transform 0.5s;
           transform-origin: 100% 0;
         }
+
+        a {
+          padding: 0 15px;
+        }
       }
 
       &:hover {
@@ -125,7 +128,7 @@
 
       .routeItem_sub {
         position: absolute;
-        top: -30px;
+        top: 80px;
         left: 50%;
         transform: translateX(-50%);
         width: 100px;
@@ -151,7 +154,6 @@
           overflow: hidden;
           transition: 0.5s;
           border-radius: 5px;
-          padding: 0 5px;
           cursor: pointer;
 
           &:hover {
@@ -161,6 +163,13 @@
             a {
               color: #dde5eb;
             }
+          }
+
+          a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 5px;
           }
         }
 
@@ -265,23 +274,27 @@
     }
   }
 
+  a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    color: var(--txt-b-pure);
+    text-decoration: none !important;
+  }
+
   .routeItem {
     display: flex;
     flex-direction: column;
 
     .routeItem_name {
       width: 100%;
-      min-height: 40px;
+      height: 40px;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       justify-content: center;
       white-space: nowrap;
-
-      a {
-        color: var(--txt-b-pure);
-        text-decoration: none !important;
-      }
     }
 
     .routeItem_sub {
@@ -298,7 +311,10 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
-        padding-left: 20px;
+
+        a {
+          padding-left: 20px;
+        }
       }
 
       .routeItem_sub_item_active {

@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2021-12-23 16:28:08
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-04-21 16:41:54
+ * @LastEditTime: 2022-04-26 15:13:26
  */
 import React, { useEffect, useRef, useState } from 'react';
 import { useSize } from 'ahooks';
@@ -13,6 +13,7 @@ import {
   bindHandleScroll,
   removeScroll,
   layoutContent,
+  removeLayoutNavStyle,
 } from '@/utils/utils';
 import type { UserDate } from '@/utils/globalDataUtils';
 import { getGlobalUserData } from '@/utils/globalDataUtils';
@@ -41,7 +42,9 @@ const Home = () => {
   // 初始化
   useEffect(() => {
     setBg(true);
+    removeLayoutNavStyle();
     bindHandleScroll();
+    layoutContent.scrollTop = 0;
 
     return () => {
       removeScroll();

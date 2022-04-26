@@ -3,11 +3,11 @@
  * @version:
  * @Author: WangPeng
  * @Date: 2021-12-29 11:13:12
- * @LastEditors: 王鹏
- * @LastEditTime: 2022-04-24 21:15:11
+ * @LastEditors: WangPeng
+ * @LastEditTime: 2022-04-26 15:14:37
  */
 import React, { useEffect, useState } from 'react';
-import { history, Link } from 'umi';
+import { Link } from 'umi';
 import { useSize } from 'ahooks';
 import api from '@/api';
 import {
@@ -15,6 +15,7 @@ import {
   layoutContent,
   bindHandleScroll,
   removeScroll,
+  removeLayoutNavStyle,
 } from '@/utils/utils';
 import { getDictObj } from '@/utils/globalDataUtils';
 import { itineraryData } from '@/utils/dataUtils';
@@ -80,6 +81,7 @@ const Itinerary = () => {
   useEffect(() => {
     bindHandleScroll();
     setBg(false);
+    removeLayoutNavStyle();
 
     return () => {
       removeScroll();
