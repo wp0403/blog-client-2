@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2021-12-29 11:06:42
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-01-26 16:24:17
+ * @LastEditTime: 2022-04-27 00:03:08
  */
 import React, { useEffect, useState, useRef } from 'react';
 import { useSize } from 'ahooks';
@@ -57,9 +57,10 @@ const Secret = () => {
                   <div className={styles.secret_item_content_con_title}>
                     {item.type}-{item.time_str}
                   </div>
-                  <div className={styles.secret_item_content_con_txt}>
-                    {item.content}
-                  </div>
+                  <div
+                    className={styles.secret_item_content_con_txt}
+                    dangerouslySetInnerHTML={{ __html: item.content }}
+                  />
                 </div>
                 <div className={styles.secret_item_content_label}>
                   <SysIcon type="icon-yezi1" className={styles.icon} />
@@ -78,9 +79,10 @@ const Secret = () => {
                   <div className={styles.secret_item_content_con_title}>
                     {item.type}-{item.time_str}
                   </div>
-                  <div className={styles.secret_item_content_con_txt}>
-                    {item.content}
-                  </div>
+                  <div
+                    className={styles.secret_item_content_con_txt}
+                    dangerouslySetInnerHTML={{ __html: item.content }}
+                  />
                 </div>
               </div>
             </>
@@ -98,9 +100,10 @@ const Secret = () => {
                 <div className={styles.secret_item_content_con_title}>
                   {item.type}-{item.time_str}
                 </div>
-                <div className={styles.secret_item_content_con_txt}>
-                  {item.content}
-                </div>
+                <div
+                  className={styles.secret_item_content_con_txt}
+                  dangerouslySetInnerHTML={{ __html: item.content }}
+                />
               </div>
             </div>
           </div>
