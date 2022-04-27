@@ -3,8 +3,8 @@
  * @version:
  * @Author: WangPeng
  * @Date: 2021-12-23 18:13:58
- * @LastEditors: 王鹏
- * @LastEditTime: 2022-04-24 20:16:26
+ * @LastEditors: WangPeng
+ * @LastEditTime: 2022-04-27 23:08:47
  */
 import React, { useState, useEffect } from 'react';
 import { history, Link } from 'umi';
@@ -168,9 +168,9 @@ const Nav = (props: Props) => {
   const pcNav = (
     <div className={styles.nav_pc}>
       <div className={styles.nav_pc_left}>
-        <a className={styles.nav_pc_name} href="https://www.wp-boke.work/">
+        <Link className={styles.nav_pc_name} to="/">
           <img src="/favicon.png" alt="" />
-        </a>
+        </Link>
         <SysIcon
           className={styles.nav_pc_icon}
           type={theme ? 'icon-taiyang' : 'icon-yueliang'}
@@ -188,9 +188,9 @@ const Nav = (props: Props) => {
   const mobileNav = (
     <div className={styles.nav_mobile}>
       <div className={styles.nav_mobile_left}>
-        <a className={styles.nav_mobile_name} href="https://www.wp-boke.work/">
+        <Link className={styles.nav_pc_name} to="/">
           <img src="/favicon.png" alt="" />
-        </a>
+        </Link>
         <SysIcon
           className={styles.nav_mobile_ico}
           type={theme ? 'icon-taiyang' : 'icon-yueliang'}
