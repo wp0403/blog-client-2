@@ -3,8 +3,8 @@
  * @version:
  * @Author: WangPeng
  * @Date: 2022-01-13 11:42:16
- * @LastEditors: 王鹏
- * @LastEditTime: 2022-04-24 21:24:06
+ * @LastEditors: WangPeng
+ * @LastEditTime: 2022-04-29 21:28:35
  */
 import { message } from 'antd';
 import { cloneDeep } from 'lodash';
@@ -180,4 +180,12 @@ export const groupingData = (data, num) => {
   }
 
   return newData;
+};
+
+// 格式化时间
+export const formatDate = (type, date) => {
+  if (type.toLocaleLowerCase() === 'yyyy-mm-dd') {
+    return new Date(date).toLocaleDateString();
+  }
+  return date;
 };

@@ -3,8 +3,8 @@
  * @version: 1.1.1
  * @Author: 王鹏
  * @Date: 2022-01-23 11:24:13
- * @LastEditors: 王鹏
- * @LastEditTime: 2022-04-24 22:10:47
+ * @LastEditors: WangPeng
+ * @LastEditTime: 2022-04-29 21:30:18
  */
 import React, { useEffect, useState } from 'react';
 import { history, withRouter, Link } from 'umi';
@@ -16,7 +16,7 @@ import {
   removeScroll,
   layoutContent,
 } from '@/utils/utils';
-import { stopPropagation } from '@/utils/dataUtils';
+import { stopPropagation, formatDate } from '@/utils/dataUtils';
 import api from '@/api';
 import SysIcon from '@/components/SysIcon';
 import BackTopCom from '@/components/BackTopCom';
@@ -165,7 +165,8 @@ const ClassifyList = (props) => {
             </div>
             <div className={styles.list_item_time}>
               <SysIcon className={styles.icon} type="icon-a-shijianzuijin" />
-              发布于{item.time_str} 最近修改{item.last_edit_time}
+              发布于{formatDate('yyyy-mm-dd', item.time_str)} 最近修改
+              {formatDate('yyyy-mm-dd', item.last_edit_time)}
             </div>
           </div>
           <div className={styles.list_item_desc}>

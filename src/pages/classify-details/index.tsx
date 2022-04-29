@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-01-27 12:36:13
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-04-26 15:09:21
+ * @LastEditTime: 2022-04-29 21:31:34
  */
 import React, { useState, useEffect } from 'react';
 import { useSize } from 'ahooks';
@@ -17,7 +17,7 @@ import {
   removeScroll,
   layoutContent,
 } from '@/utils/utils';
-import { stringReplace } from '@/utils/dataUtils';
+import { stringReplace, formatDate } from '@/utils/dataUtils';
 import LoadingCard from '@/components/LoadingCard';
 import EmptyCard from '@/components/EmptyCard';
 import RanderMarkdown from '@/components/RanderMarkdown';
@@ -144,7 +144,8 @@ const ClassifyDetails = (props: any) => {
               </div>
               <div className={styles.list_item_time}>
                 <SysIcon className={styles.icon} type="icon-a-shijianzuijin" />
-                发布于{data.time_str} 最近修改{data.last_edit_time}
+                发布于{formatDate('yyyy-mm-dd', data.time_str)} 最近修改
+                {formatDate('yyyy-mm-dd', data.last_edit_time)}
               </div>
             </div>
           </div>

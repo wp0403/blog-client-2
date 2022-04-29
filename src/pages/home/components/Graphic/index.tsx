@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-01-11 18:19:11
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-04-24 17:55:45
+ * @LastEditTime: 2022-04-29 21:29:23
  */
 import React, { useState, useEffect } from 'react';
 import { history } from 'umi';
@@ -12,6 +12,7 @@ import { useSize } from 'ahooks';
 import { message } from 'antd';
 import CarouselCom from '@/components/CarouselCom';
 import api from '@/api';
+import { formatDate } from '@/utils/dataUtils';
 import styles from './index.less';
 
 const { home } = api;
@@ -63,7 +64,9 @@ const Graphic = (props) => {
     const txtBox = (item: Item) => (
       <div className={styles.carouselComItem_right}>
         <div className={styles.carouselComItem_title}>{item.title}</div>
-        <div className={styles.carouselComItem_time}>{item.time_str}</div>
+        <div className={styles.carouselComItem_time}>
+          {formatDate('yyyy-mm-dd', item.time_str)}
+        </div>
         <div className={styles.carouselComItem_desc}>
           <div className={styles.desc_content}>{item.desc}</div>
         </div>
