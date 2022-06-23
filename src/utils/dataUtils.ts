@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-01-13 11:42:16
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-04-29 21:28:35
+ * @LastEditTime: 2022-06-23 16:50:53
  */
 import { message } from 'antd';
 import { cloneDeep } from 'lodash';
@@ -183,9 +183,32 @@ export const groupingData = (data, num) => {
 };
 
 // 格式化时间
-export const formatDate = (type, date) => {
-  if (type.toLocaleLowerCase() === 'yyyy-mm-dd') {
-    return new Date(date).toLocaleDateString();
+export const formatDate = (date: any, format: string) => {
+  if (!date) return;
+  if (!format) format = 'yyyy-MM-dd';
+  switch (typeof date) {
+    case 'string':
+      date = new Date(date);
+      break;
+    case 'number':
+      date = new Date(date);
+      break;
   }
-  return date;
+  if (!(date instanceof Date)) return;
+  var dict = {
+    yyyy: date.getFullYear(),
+    M: date.getMonth() + 1,
+    d: date.getDate(),
+    H: date.getHours(),
+    m: date.getMinutes(),
+    s: date.getSeconds(),
+    MM: ('' + (date.getMonth() + 101)).substr(1),
+    dd: ('' + (date.getDate() + 100)).substr(1),
+    HH: ('' + (date.getHours() + 100)).substr(1),
+    mm: ('' + (date.getMinutes() + 100)).substr(1),
+    ss: ('' + (date.getSeconds() + 100)).substr(1),
+  };
+  return format.replace(/(yyyy|MM?|dd?|HH?|ss?|mm?)/g, function () {
+    return dict[arguments[0]];
+  });
 };

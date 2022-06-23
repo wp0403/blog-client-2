@@ -4,7 +4,7 @@
  * @Author: 王鹏
  * @Date: 2022-01-23 11:24:13
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-04-29 21:30:18
+ * @LastEditTime: 2022-06-23 16:51:42
  */
 import React, { useEffect, useState } from 'react';
 import { history, withRouter, Link } from 'umi';
@@ -165,8 +165,8 @@ const ClassifyList = (props) => {
             </div>
             <div className={styles.list_item_time}>
               <SysIcon className={styles.icon} type="icon-a-shijianzuijin" />
-              发布于{formatDate('yyyy-mm-dd', item.time_str)} 最近修改
-              {formatDate('yyyy-mm-dd', item.last_edit_time)}
+              发布于{formatDate(item.time_str, 'yyyy-mm-dd')} 最近修改
+              {formatDate(item.last_edit_time, 'yyyy-mm-dd')}
             </div>
           </div>
           <div className={styles.list_item_desc}>

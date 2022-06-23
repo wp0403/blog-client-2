@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-01-27 12:36:13
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-04-29 21:31:34
+ * @LastEditTime: 2022-06-23 16:51:11
  */
 import React, { useState, useEffect } from 'react';
 import { useSize } from 'ahooks';
@@ -144,8 +144,8 @@ const ClassifyDetails = (props: any) => {
               </div>
               <div className={styles.list_item_time}>
                 <SysIcon className={styles.icon} type="icon-a-shijianzuijin" />
-                发布于{formatDate('yyyy-mm-dd', data.time_str)} 最近修改
-                {formatDate('yyyy-mm-dd', data.last_edit_time)}
+                发布于{formatDate(data.time_str, 'yyyy-mm-dd')} 最近修改
+                {formatDate(data.last_edit_time, 'yyyy-mm-dd')}
               </div>
             </div>
           </div>

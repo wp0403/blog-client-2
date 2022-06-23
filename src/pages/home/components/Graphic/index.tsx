@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-01-11 18:19:11
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-04-29 21:29:23
+ * @LastEditTime: 2022-06-23 16:52:08
  */
 import React, { useState, useEffect } from 'react';
 import { history } from 'umi';
@@ -65,7 +65,7 @@ const Graphic = (props) => {
       <div className={styles.carouselComItem_right}>
         <div className={styles.carouselComItem_title}>{item.title}</div>
         <div className={styles.carouselComItem_time}>
-          {formatDate('yyyy-mm-dd', item.time_str)}
+          {formatDate(item.time_str, 'yyyy-mm-dd')}
         </div>
         <div className={styles.carouselComItem_desc}>
           <div className={styles.desc_content}>{item.desc}</div>
