@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2021-12-29 11:06:42
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-04-27 00:03:08
+ * @LastEditTime: 2022-06-23 16:56:45
  */
 import React, { useEffect, useState, useRef } from 'react';
 import { useSize } from 'ahooks';
@@ -13,7 +13,11 @@ import moment from 'moment';
 import api from '@/api';
 import BackTopCom from '@/components/BackTopCom';
 import SysIcon from '@/components/SysIcon';
-import { stringReplaceP, distinctObjectMap } from '@/utils/dataUtils';
+import {
+  stringReplaceP,
+  distinctObjectMap,
+  formatDate,
+} from '@/utils/dataUtils';
 import { setBg, addLayoutNavStyle } from '@/utils/utils';
 import { getGlobalUserData } from '@/utils/globalDataUtils';
 import { secretGuide } from '@/utils/desc';
@@ -55,7 +59,7 @@ const Secret = () => {
               <div className={styles.secret_item_content}>
                 <div className={styles.secret_item_content_con}>
                   <div className={styles.secret_item_content_con_title}>
-                    {item.type}-{item.time_str}
+                    {item.type}-{formatDate(item.time_str, 'yyyy-MM-dd')}
                   </div>
                   <div
                     className={styles.secret_item_content_con_txt}
@@ -77,7 +81,7 @@ const Secret = () => {
                 </div>
                 <div className={styles.secret_item_content_con}>
                   <div className={styles.secret_item_content_con_title}>
-                    {item.type}-{item.time_str}
+                    {item.type}-{formatDate(item.time_str, 'yyyy-MM-dd')}
                   </div>
                   <div
                     className={styles.secret_item_content_con_txt}
@@ -98,7 +102,7 @@ const Secret = () => {
               </div>
               <div className={styles.secret_item_content_con}>
                 <div className={styles.secret_item_content_con_title}>
-                  {item.type}-{item.time_str}
+                  {item.type}-{formatDate(item.time_str, 'yyyy-MM-dd')}
                 </div>
                 <div
                   className={styles.secret_item_content_con_txt}
