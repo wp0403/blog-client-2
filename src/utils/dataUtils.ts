@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-01-13 11:42:16
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-06-23 16:50:53
+ * @LastEditTime: 2022-06-24 11:26:08
  */
 import { message } from 'antd';
 import { cloneDeep } from 'lodash';
@@ -137,16 +137,45 @@ export const modifyData = (data: any[], type) => {
   return newData.map((item) => item.list).flat(Infinity);
 };
 
+// 格式化时间
+export const formatDate = (date: any, format: string) => {
+  if (!date) return;
+  if (!format) format = 'yyyy-MM-dd';
+  switch (typeof date) {
+    case 'string':
+      date = new Date(date);
+      break;
+    case 'number':
+      date = new Date(date);
+      break;
+  }
+  if (!(date instanceof Date)) return;
+  var dict = {
+    yyyy: date.getFullYear(),
+    M: date.getMonth() + 1,
+    d: date.getDate(),
+    H: date.getHours(),
+    m: date.getMinutes(),
+    s: date.getSeconds(),
+    MM: ('' + (date.getMonth() + 101)).substr(1),
+    dd: ('' + (date.getDate() + 100)).substr(1),
+    HH: ('' + (date.getHours() + 100)).substr(1),
+    mm: ('' + (date.getMinutes() + 100)).substr(1),
+    ss: ('' + (date.getSeconds() + 100)).substr(1),
+  };
+  return format.replace(/(yyyy|MM?|dd?|HH?|ss?|mm?)/g, function () {
+    return dict[arguments[0]];
+  });
+};
+
 // 对旅行日记列表进行处理
 export const itineraryData = (data: any[]) => {
   let newData = [] as any[];
 
   data
-    .sort(
-      (a, b) => +b.timeData.replace(/\//g, '') - +a.timeData.replace(/\//g, ''),
-    )
+    .sort((a, b) => +b.timeData - +a.timeData)
     .forEach((item, index) => {
-      const type = item['timeData'].split('/')[0];
+      const type = item['timeData'].getFullYear();
       const ind = newData.findIndex((item1: any) => item1.type === type);
 
       const newItem = {
@@ -180,35 +209,4 @@ export const groupingData = (data, num) => {
   }
 
   return newData;
-};
-
-// 格式化时间
-export const formatDate = (date: any, format: string) => {
-  if (!date) return;
-  if (!format) format = 'yyyy-MM-dd';
-  switch (typeof date) {
-    case 'string':
-      date = new Date(date);
-      break;
-    case 'number':
-      date = new Date(date);
-      break;
-  }
-  if (!(date instanceof Date)) return;
-  var dict = {
-    yyyy: date.getFullYear(),
-    M: date.getMonth() + 1,
-    d: date.getDate(),
-    H: date.getHours(),
-    m: date.getMinutes(),
-    s: date.getSeconds(),
-    MM: ('' + (date.getMonth() + 101)).substr(1),
-    dd: ('' + (date.getDate() + 100)).substr(1),
-    HH: ('' + (date.getHours() + 100)).substr(1),
-    mm: ('' + (date.getMinutes() + 100)).substr(1),
-    ss: ('' + (date.getSeconds() + 100)).substr(1),
-  };
-  return format.replace(/(yyyy|MM?|dd?|HH?|ss?|mm?)/g, function () {
-    return dict[arguments[0]];
-  });
 };

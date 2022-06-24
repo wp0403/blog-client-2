@@ -3,8 +3,8 @@
  * @version: 1.1.1
  * @Author: 王鹏
  * @Date: 2022-01-22 13:20:17
- * @LastEditors: 王鹏
- * @LastEditTime: 2022-04-05 01:11:04
+ * @LastEditors: WangPeng
+ * @LastEditTime: 2022-06-24 11:34:32
  */
 /**
  * 在生产环境 代理是无法生效的，所以这里没有生产环境的配置
@@ -17,7 +17,7 @@
 export default {
   dev: {
     '/api/': {
-      target: 'http://101.43.203.116/api/',
+      target: 'https://www.wp-boke.work/api/',
       changeOrigin: true,
       pathRewrite: { '^/api': '' },
     },

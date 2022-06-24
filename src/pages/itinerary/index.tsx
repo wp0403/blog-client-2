@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2021-12-29 11:13:12
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-04-26 15:14:37
+ * @LastEditTime: 2022-06-24 11:21:00
  */
 import React, { useEffect, useState } from 'react';
 import { Link } from 'umi';
@@ -18,7 +18,7 @@ import {
   removeLayoutNavStyle,
 } from '@/utils/utils';
 import { getDictObj } from '@/utils/globalDataUtils';
-import { itineraryData } from '@/utils/dataUtils';
+import { itineraryData, formatDate } from '@/utils/dataUtils';
 import SysIcon from '@/components/SysIcon';
 import BackTopCom from '@/components/BackTopCom';
 import LoadingCard from '@/components/LoadingCard';
@@ -116,7 +116,7 @@ const Itinerary = () => {
                     <div className={styles.item_info}>
                       <div className={styles.item_info_top}>
                         <div className={styles.item_info_top_time}>
-                          {v?.timeData || '--'}
+                          {formatDate(v?.timeData, 'yyyy-MM-dd') || '--'}
                         </div>
                         {classType ? (
                           ''
