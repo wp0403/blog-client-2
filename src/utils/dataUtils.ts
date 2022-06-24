@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-01-13 11:42:16
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-06-24 11:26:08
+ * @LastEditTime: 2022-06-24 11:37:52
  */
 import { message } from 'antd';
 import { cloneDeep } from 'lodash';
@@ -175,7 +175,7 @@ export const itineraryData = (data: any[]) => {
   data
     .sort((a, b) => +b.timeData - +a.timeData)
     .forEach((item, index) => {
-      const type = item['timeData'].getFullYear();
+      const type = new Date(item['timeData']).getFullYear();
       const ind = newData.findIndex((item1: any) => item1.type === type);
 
       const newItem = {
