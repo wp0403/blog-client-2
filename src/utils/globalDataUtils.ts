@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-01-18 11:05:40
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-07-08 14:03:43
+ * @LastEditTime: 2022-07-08 14:45:08
  */
 import { history } from 'umi';
 import api from '@/api';
@@ -84,7 +84,7 @@ export const getDictObj = (type: string, id: number): any[] | any => {
   const str = sessionStorage.getItem('dict');
   let dictObj: any = {};
   if (str) {
-    dictObj = JSON.parse(str)[type]?.find((v: any) => +v.id === +id);
+    dictObj = JSON.parse(str)[type]?.find((v: any) => `${v.id}` === `${id}`);
   } else {
     dictObj = null;
   }
