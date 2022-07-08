@@ -27,7 +27,7 @@ const Classify = () => {
         className={styles.classItem_name}
         to={`/classify/list/${obj.id}/${type}`}
       >
-        {obj.classDesc}
+        {obj.value}
       </Link>
     );
   };

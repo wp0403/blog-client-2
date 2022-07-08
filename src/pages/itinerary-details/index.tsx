@@ -4,14 +4,14 @@
  * @Author: WangPeng
  * @Date: 2022-03-10 18:03:32
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-04-18 16:32:28
+ * @LastEditTime: 2022-07-08 14:10:17
  */
 import React, { useEffect, useState } from 'react';
 import { useSize } from 'ahooks';
 import api from '@/api';
 import SysIcon from '@/components/SysIcon';
 import { setBg, addLayoutNavStyle } from '@/utils/utils';
-import { groupingData } from '@/utils/dataUtils';
+import { groupingData, formatDate } from '@/utils/dataUtils';
 import CarouselCustom from '@/components/CarouselCustom';
 import LoadingCard from '@/components/LoadingCard';
 import styles from './index.less';
@@ -124,7 +124,9 @@ const ItineraryDetails = (props) => {
           </div>
           <div className={styles.information_box}>
             <div className={styles.info_top}>
-              <div className={styles.info_top_time}>{detailObj?.timeData}</div>
+              <div className={styles.info_top_time}>
+                {formatDate(detailObj?.timeData, 'yyyy-MM-dd') || '--'}
+              </div>
               {classType !== 2 && classType > 0 ? (
                 <div className={styles.info_top_place}>
                   {detailObj?.place || '地点'}

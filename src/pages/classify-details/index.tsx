@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-01-27 12:36:13
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-06-23 16:57:47
+ * @LastEditTime: 2022-07-08 14:01:12
  */
 import React, { useState, useEffect } from 'react';
 import { useSize } from 'ahooks';
@@ -85,7 +85,7 @@ const ClassifyDetails = (props: any) => {
         className={styles.list_item_type_item}
         to={goClassifyList(obj.id, type)}
       >
-        {obj.classDesc}
+        {obj.value}
       </Link>
     );
   };
@@ -133,12 +133,12 @@ const ClassifyDetails = (props: any) => {
               <div className={styles.list_item_type}>
                 <SysIcon className={styles.icon} type="icon-biaoqian" />
                 {renderLink(
-                  { classDesc: data.classify, id: data.classify_id },
+                  { value: data.classify, id: data.classify_id },
                   'one',
                 )}
                 |
                 {renderLink(
-                  { classDesc: data.classify_sub, id: data.classify_sub_id },
+                  { value: data.classify_sub, id: data.classify_sub_id },
                   'two',
                 )}
               </div>

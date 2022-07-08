@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-01-18 11:05:40
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-04-24 13:57:50
+ * @LastEditTime: 2022-07-08 14:03:43
  */
 import { history } from 'umi';
 import api from '@/api';
@@ -27,9 +27,11 @@ export interface UserDate {
 }
 
 interface Dict {
-  id: string;
-  bowen_class: string;
-  bowen_class_sub: string;
+  bowen_class: any[];
+  bowen_class_sub: any[];
+  weather_list: any[];
+  mood_list: any[];
+  bowen_type: any[];
 }
 
 // 全局博主信息储存
@@ -82,7 +84,7 @@ export const getDictObj = (type: string, id: number): any[] | any => {
   const str = sessionStorage.getItem('dict');
   let dictObj: any = {};
   if (str) {
-    dictObj = JSON.parse(str)[type]?.find((v: any) => v.id === id);
+    dictObj = JSON.parse(str)[type]?.find((v: any) => +v.id === +id);
   } else {
     dictObj = null;
   }

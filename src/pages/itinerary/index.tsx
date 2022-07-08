@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2021-12-29 11:13:12
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-06-24 11:21:00
+ * @LastEditTime: 2022-07-08 14:01:45
  */
 import React, { useEffect, useState } from 'react';
 import { Link } from 'umi';
@@ -140,7 +140,7 @@ const Itinerary = () => {
                                 className={styles.item_info_top_weather_name}
                               >
                                 {getDictObj('weather_list', +v?.weatherId)
-                                  ?.name || '--'}
+                                  ?.value || '--'}
                               </div>
                             </>
                           )}
@@ -153,7 +153,7 @@ const Itinerary = () => {
                                 type={getDictObj('mood_list', +v?.moodId)?.icon}
                               />
                               <div className={styles.item_info_top_mood_name}>
-                                {getDictObj('mood_list', +v?.moodId)?.name ||
+                                {getDictObj('mood_list', +v?.moodId)?.value ||
                                   '--'}
                               </div>
                             </>
