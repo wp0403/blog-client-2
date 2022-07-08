@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2021-12-29 11:04:51
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-07-08 15:58:56
+ * @LastEditTime: 2022-08-26 10:30:26
  */
 import React, { useEffect, useState } from 'react';
 import { history, Link } from 'umi';
@@ -16,11 +16,6 @@ const Classify = () => {
   // 分类列表
   const [classList, setClassList] = useState<any[] | any>([]);
 
-  // 跳转博文列表页
-  const goClassifyList = (obj, type) => {
-    history.push({ pathname: `/classify/list/${obj.id}/${type}` });
-  };
-
   const renderLink = (obj, type) => {
     return (
       <Link
@@ -28,7 +23,7 @@ const Classify = () => {
         className={styles.classItem_name}
         to={`/classify/list/${obj.id}/${type}`}
       >
-        {obj.value}
+        {obj.value || '类别'}
       </Link>
     );
   };

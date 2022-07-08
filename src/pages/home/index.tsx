@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2021-12-23 16:28:08
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-04-26 15:13:26
+ * @LastEditTime: 2022-11-04 17:52:03
  */
 import React, { useEffect, useRef, useState } from 'react';
 import { useSize } from 'ahooks';
@@ -15,7 +15,7 @@ import {
   layoutContent,
   removeLayoutNavStyle,
 } from '@/utils/utils';
-import type { UserDate } from '@/utils/globalDataUtils';
+import type { User } from '@/utils/globalDataUtils';
 import { getGlobalUserData } from '@/utils/globalDataUtils';
 import { scrollTo } from '@/utils/elementUtils';
 import Typewriter from '@/components/Typewriter';
@@ -33,7 +33,7 @@ const Home = () => {
   // 样式类型
   const [classType, setClassType] = useState<number>(1);
   // 博主信息
-  const userData = getGlobalUserData() as UserDate;
+  const userData = getGlobalUserData() as User;
 
   const goAbout = () => {
     const aboutMeTop = aboutMeDom.current.offsetTop;
@@ -64,17 +64,17 @@ const Home = () => {
       {classType === 1 ? (
         <div className={styles.header}>
           <div className={styles.title_mobile}>
-            {userData?.title || '世人万千，再难遇我'}
+            {userData?.siteInfo?.home_title || '世人万千，再难遇我'}
           </div>
         </div>
       ) : (
         <div className={styles.header}>
           <div className={styles.title}>
-            {userData?.title || '世人万千，再难遇我'}
+            {userData?.siteInfo?.home_title || '世人万千，再难遇我'}
           </div>
           <Typewriter
             data={
-              userData?.desc ||
+              userData?.siteInfo?.home_desc ||
               '先挑起清风明月、杨柳依依和草长莺飞，少年郎的肩头，本就应当满是美好的事物啊。'
             }
             startTime={300}

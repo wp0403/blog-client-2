@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2021-12-29 11:06:42
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-06-23 16:56:45
+ * @LastEditTime: 2022-11-04 17:57:48
  */
 import React, { useEffect, useState, useRef } from 'react';
 import { useSize } from 'ahooks';
@@ -252,15 +252,15 @@ const Secret = () => {
           <div className={styles.left}>
             <div className={styles.time}>{time}</div>
             <div className={styles.left_con}>
-              {stringReplaceP(authorData?.secret_guide || secretGuide).map(
-                (item, index) => (
-                  <p key={index}>{item}</p>
-                ),
-              )}
+              {stringReplaceP(
+                authorData?.siteInfo?.secret_guide || secretGuide,
+              ).map((item, index) => (
+                <p key={index}>{item}</p>
+              ))}
             </div>
             <div className={styles.left_bottom}>
               <div className={styles.left_bottom_border} />
-              {authorData?.userName || '于风里读诗'}
+              {authorData?.username || '于风里读诗'}
             </div>
           </div>
           <div className={styles.right} ref={right}>

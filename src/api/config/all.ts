@@ -3,8 +3,8 @@
  * @version:
  * @Author: WangPeng
  * @Date: 2021-12-27 15:32:24
- * @LastEditors: 王鹏
- * @LastEditTime: 2022-01-23 00:49:15
+ * @LastEditors: WangPeng
+ * @LastEditTime: 2022-11-04 17:47:37
  */
 // 获取公网ip
 export const _getIp = {
@@ -24,14 +24,14 @@ export const _getUserData = {
   method: 'get',
 };
 
-// 获取字典列表
-export const _getDictList = {
-  url: '/api/getDictList',
+// 获取博主信息
+export const _getUserDetails = {
+  url: '/api/getUserDetails',
   method: 'get',
 };
 
-// 获取博文列表
-export const _getBowenList = {
-  url: '/api/getBowenList',
+// 获取字典列表
+export const _getDictList = {
+  url: '/api/getDictList',
   method: 'get',
 };

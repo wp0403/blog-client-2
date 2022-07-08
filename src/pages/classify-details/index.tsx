@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-01-27 12:36:13
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-07-08 14:01:12
+ * @LastEditTime: 2022-10-25 16:19:46
  */
 import React, { useState, useEffect } from 'react';
 import { useSize } from 'ahooks';
@@ -147,19 +147,24 @@ const ClassifyDetails = (props: any) => {
                 发布于{formatDate(data.time_str, 'yyyy-MM-dd')} 最近修改
                 {formatDate(data.last_edit_time, 'yyyy-MM-dd')}
               </div>
+              <div className={styles.list_item_type}>
+                <SysIcon className={styles.icon} type="icon-a-gerenyonghu" />
+                {data?.userInfo?.name}
+              </div>
             </div>
           </div>
           <div className={styles.content}>
-            {data.storage_type === 'md' && (
+            {data.storage_type === '1' && (
               <RanderMarkdown markdown={data.content} />
             )}
-            {data.storage_type === 'html' && (
+            {data.storage_type === '2' && (
               <div
                 dangerouslySetInnerHTML={{
                   __html: data?.content ? stringReplace(data.content) : '暂无',
                 }}
               />
             )}
+            {data.storage_type === '3' && data.content}
           </div>
           <div className={styles.footer}>
             <Permit />

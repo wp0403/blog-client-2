@@ -4,26 +4,39 @@
  * @Author: WangPeng
  * @Date: 2022-01-18 11:05:40
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-07-08 16:02:44
+ * @LastEditTime: 2022-11-04 17:49:50
  */
-import { history } from 'umi';
 import api from '@/api';
 
 const { all } = api;
-
-export interface UserDate {
-  id: string;
-  bokePath: string;
-  userName: string;
-  title: string;
-  desc: string;
-  qq: string;
-  weixin: string;
-  email: string;
-  about: string;
-  aboutTags: string;
+interface UserSite {
+  id: number;
+  author_id: string;
+  home_title: string;
+  home_desc: string;
+  home_about: string;
+  personal_label: string;
   secret_guide: string;
   about_page: string;
+}
+
+export interface User {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+  phone: string;
+  website: string;
+  create_time: any;
+  last_edit_time: any;
+  state: number;
+  role_id: number;
+  qq: string;
+  weixin: string;
+  github: string;
+  img: string;
+  uid: string;
+  siteInfo: UserSite;
 }
 
 interface Dict {
@@ -34,13 +47,8 @@ interface Dict {
   bowen_type: any[];
 }
 
-// 全局博主信息储存
-let globalUserDate: UserDate | null = {} as UserDate;
-// 字典缓存
-let globalDictList: Dict | null = {} as Dict;
-
 // 设置博主信息缓存
-export const setGlobalUserDate = (globalUserDate: UserDate | null) => {
+export const setGlobalUserDate = (globalUserDate: User | null) => {
   sessionStorage.setItem('userDate', JSON.stringify(globalUserDate));
 };
 // 设置字典信息缓存
@@ -49,30 +57,18 @@ export const setGlobalDict = (globalDictList: Dict | null) => {
 };
 
 // 获取博主信息缓存
-export const getGlobalUserData = (): UserDate | null => {
-  const str = sessionStorage.getItem('userDate');
-  if (str) {
-    globalUserDate = JSON.parse(str);
-  } else {
-    globalUserDate = null;
-  }
-  return globalUserDate;
+export const getGlobalUserData = (): User | null => {
+  return JSON.parse(sessionStorage.getItem('userDate') || '');
 };
 // 获取字典信息缓存
 export const getGlobalDict = (): Dict | null => {
-  const str = sessionStorage.getItem('dict');
-  if (str) {
-    globalDictList = JSON.parse(str);
-  } else {
-    globalDictList = null;
-  }
-  return globalDictList;
+  return JSON.parse(sessionStorage.getItem('dict') || '');
 };
 // 根据type获取字典
 export const getOnlyDictObj = (type: string): any[] | any => {
   let onlyDict: any = [];
-  if (globalDictList) {
-    onlyDict = globalDictList[type];
+  if (getGlobalDict()) {
+    onlyDict = getGlobalDict()![type];
   } else {
     onlyDict = null;
   }
@@ -81,8 +77,8 @@ export const getOnlyDictObj = (type: string): any[] | any => {
 // 根据type和id获取字典对象
 export const getDictObj = (type: string, id: number): any[] | any => {
   let dictObj: any = {};
-  if (globalDictList) {
-    dictObj = globalDictList[type]?.find((v: any) => `${v.id}` === `${id}`);
+  if (getGlobalDict()) {
+    dictObj = getGlobalDict()![type]?.find((v: any) => `${v.id}` === `${id}`);
   } else {
     dictObj = null;
   }
@@ -91,25 +87,21 @@ export const getDictObj = (type: string, id: number): any[] | any => {
 
 // 判断是否需要重新获取
 export const isFlagGetGlobalData = () => {
-  const list = [getGlobalUserData()];
-
-  return list.every((item) => item);
+  return sessionStorage.getItem('userDate') && sessionStorage.getItem('dict');
 };
 
 // 初始化获取全局资源
 export const initGlobalData = async (obj: any) => {
   const { id = null, fun } = obj;
-  await all._getUserData({ params: { id } }).then((res) => {
+  await all._getUserDetails({ params: { id } }).then((res) => {
     if (res.data.code === 200) {
-      globalUserDate = res.data?.data;
+      setGlobalUserDate(res.data?.data);
     }
-    setGlobalUserDate(globalUserDate);
   });
-  await all._getDictList({ params: { id } }).then((res) => {
+  await all._getDictList().then((res) => {
     if (res.data.code === 200) {
-      globalDictList = res.data.data;
+      setGlobalDict(res.data.data);
     }
-    setGlobalDict(globalDictList);
   });
   await fun(true);
 };

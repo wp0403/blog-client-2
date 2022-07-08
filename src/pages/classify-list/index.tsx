@@ -4,7 +4,7 @@
  * @Author: 王鹏
  * @Date: 2022-01-23 11:24:13
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-06-23 16:58:05
+ * @LastEditTime: 2022-10-25 16:19:12
  */
 import React, { useEffect, useState } from 'react';
 import { history, withRouter, Link } from 'umi';
@@ -174,7 +174,7 @@ const ClassifyList = (props) => {
           </div>
           <div className={styles.list_item_author}>
             <div className={styles.list_item_author_border} />
-            {item.author}
+            {item?.userInfo?.name}
           </div>
         </div>
       </div>

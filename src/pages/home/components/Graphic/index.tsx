@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-01-11 18:19:11
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-06-23 16:58:13
+ * @LastEditTime: 2022-10-25 16:39:44
  */
 import React, { useState, useEffect } from 'react';
 import { history } from 'umi';
@@ -24,9 +24,12 @@ interface Item {
   time_str: string;
   last_edit_time: string;
   img: string;
-  author: string;
   classify: string;
   classifyId: string | number;
+  userInfo: {
+    id: string;
+    name: string;
+  };
 }
 
 const Graphic = (props) => {

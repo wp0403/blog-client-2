@@ -34,7 +34,7 @@ const LayoutPage = (props: any) => {
     typeof children === 'undefined' ? null : children;
 
   // 判断当前的路由是否重定向
-  const Authorized = () => {
+  const Authorized: any = () => {
     if (checkAuth !== '403' && checkAuth !== '404') {
       return childrenRender;
     } else if (checkAuth === '403') {

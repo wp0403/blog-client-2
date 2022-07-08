@@ -4,19 +4,19 @@
  * @Author: WangPeng
  * @Date: 2021-12-29 11:03:48
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-03-15 16:42:04
+ * @LastEditTime: 2022-11-04 17:53:34
  */
 import React, { useEffect, useState } from 'react';
 import { useSize } from 'ahooks';
 import { setBg, layoutContent, addLayoutNavStyle } from '@/utils/utils';
-import type { UserDate } from '@/utils/globalDataUtils';
+import type { User } from '@/utils/globalDataUtils';
 import { getGlobalUserData } from '@/utils/globalDataUtils';
 import styles from './index.less';
 import RanderMarkdown from '@/components/RanderMarkdown';
 import BackTopCom from '@/components/BackTopCom';
 
 const About = () => {
-  const userData = getGlobalUserData() as UserDate;
+  const userData = getGlobalUserData() as User;
 
   // 获取当前窗口大小
   const size = useSize(document.body);
@@ -41,7 +41,7 @@ const About = () => {
   return (
     <div className={styles.about}>
       <div className={classType ? styles.content_mobile : styles.content}>
-        <RanderMarkdown markdown={userData.about_page} />
+        <RanderMarkdown markdown={userData?.siteInfo?.about_page} />
       </div>
       <BackTopCom visibilityHeight={100} target={() => layoutContent} />
     </div>
