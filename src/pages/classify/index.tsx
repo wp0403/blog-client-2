@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2021-12-29 11:04:51
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-04-24 18:02:22
+ * @LastEditTime: 2022-07-08 15:39:08
  */
 import React, { useEffect, useState } from 'react';
 import { history, Link } from 'umi';
@@ -24,6 +24,7 @@ const Classify = () => {
   const renderLink = (obj, type) => {
     return (
       <Link
+        key={obj.id}
         className={styles.classItem_name}
         to={`/classify/list/${obj.id}/${type}`}
       >
@@ -43,7 +44,7 @@ const Classify = () => {
           <div className={styles.classListItem} key={item.id}>
             <div className={styles.classItem}>{renderLink(item, 'one')}</div>
             <div className={styles.classItem_subList}>
-              {item.children?.map((ite) => renderLink(ite, 'two'))}
+              {item?.children?.map((ite) => renderLink(ite, 'two'))}
             </div>
           </div>
         ))}
