@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2022-01-18 11:05:40
  * @LastEditors: WangPeng
- * @LastEditTime: 2022-07-08 14:45:08
+ * @LastEditTime: 2022-07-08 15:53:50
  */
 import { history } from 'umi';
 import api from '@/api';
@@ -70,10 +70,9 @@ export const getGlobalDict = (): Dict | null => {
 };
 // 根据type获取字典
 export const getOnlyDictObj = (type: string): any[] | any => {
-  const str = sessionStorage.getItem('dict');
   let onlyDict: any = [];
-  if (str) {
-    onlyDict = JSON.parse(str)[type];
+  if (getGlobalDict()) {
+    onlyDict = getGlobalDict()![type];
   } else {
     onlyDict = null;
   }
@@ -81,10 +80,9 @@ export const getOnlyDictObj = (type: string): any[] | any => {
 };
 // 根据type和id获取字典对象
 export const getDictObj = (type: string, id: number): any[] | any => {
-  const str = sessionStorage.getItem('dict');
   let dictObj: any = {};
-  if (str) {
-    dictObj = JSON.parse(str)[type]?.find((v: any) => `${v.id}` === `${id}`);
+  if (getGlobalDict()) {
+    dictObj = getGlobalDict()![type]?.find((v: any) => `${v.id}` === `${id}`);
   } else {
     dictObj = null;
   }
